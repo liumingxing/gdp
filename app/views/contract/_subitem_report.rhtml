@@ -1,0 +1,43 @@
+<table class="ft" border="1" width=700px;>
+<tr>
+	<th width=175px>摘要名称：</th>
+	<td width=200px><%= text_field 'subitem', 'name', :validate=>"required:true", :title=>"摘要名称"%></td>
+	<th width=175px>送审日期：</th>
+	<td width=200px><%= text_field 'subitem', 'trial_date', :onfocus=>"WdatePicker()"%></td>
+</tr>
+
+
+<tr>
+	<th>送审金额：</th>
+	<td><%= text_field 'subitem', 'trial_amount'%>元</td>
+	<th>审核日期：</th>
+	<td><%= text_field 'subitem', 'validate_date', :onfocus=>"WdatePicker()"%></td>
+</tr>
+
+<tr>
+	<th>审定金额：</th>
+	<td><%= text_field 'subitem', 'validate_amount'%>元</td>
+	<th>回扣预付款：</th>
+	<td><%= text_field 'subitem', 'advance_rebate'%>元</td>
+</tr>
+
+<tr>
+	<th>扣保留金：</th>
+	<td><%= text_field 'subitem', 'buckle_retention'%>元</td>
+	<th>其他扣款：</th>
+	<td><%= text_field 'subitem', 'other_charged'%>元</td>
+</tr>
+
+<tr>
+    <th>止上月已完成：</th>
+	<td></td>
+	<th>经手人：</th>
+	<td><%= text_field 'subitem', 'principal'%></td>
+</tr>
+
+<tr>
+	<th>备注：</th>
+	<td colspan=3><%= text_area 'subitem', 'memo', :rows=>5, :cols=>60%></td>
+</tr>
+
+</table>

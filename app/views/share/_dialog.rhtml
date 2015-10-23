@@ -1,0 +1,40 @@
+<style>
+.ui-dialog .ui-dialog-content {
+    background:none repeat scroll 0 0 transparent;
+    border:0 none;
+    overflow:auto;
+    padding: 2px;
+}
+</style>
+
+<div id="dialog-modal" title="插入分项指标" style="display:none;">
+	<div style="width:600px; height:400px">
+	   <iframe SCROLLING="yes" height="490px" width="590px" frameborder="0"  id="template" name="template" ></iframe>
+	</div>
+</div>
+
+<script>
+var flag = 0;
+function show_dialog(url, title)
+{
+        if (title != undefined)
+        {
+            $("#dialog-modal").attr("title", title);
+        }
+        
+		if (flag == 0)
+		{
+		  $("#dialog-modal").dialog({modal:true, width:600, height:400, resizable:false});
+		  flag = 1;
+		}
+		else
+		  $("#dialog-modal").dialog("open");
+		
+		template.location = url;
+}
+
+function close_dialog()
+{
+    $('#dialog-modal').dialog('close')
+}
+</script>

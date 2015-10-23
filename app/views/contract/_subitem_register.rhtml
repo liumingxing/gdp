@@ -1,0 +1,49 @@
+<table class="ft" border="1">
+<tr>
+	<th width=100px>合同金额：</th>
+	<td width=200px><%= text_field 'subitem', 'amount', :validate=>"required:true", :title=>"合同金额", :size=>10%>元</td>
+	<th width=100px>甲方：</th>
+	<td width=200px><%= text_field 'subitem', 'part_a', :size=>10%></td>
+</tr>
+
+<tr>
+	<th>乙方：</th>
+	<td><%= text_field 'subitem', 'part_b', :size=>10%></td>
+	<th>丙方：</th>
+	<td><%= text_field 'subitem', 'part_c', :size=>10%></td>
+</tr>
+
+<tr>
+	<th>开工时间：</th>
+	<td><%= text_field 'subitem', 'start_date', :onfocus=>"WdatePicker({maxDate:'#F{$dp.$D(\\\'subitem_complete_date\\\')}'})", :size=>10%></td>
+	<th>竣工时间：</th>
+	<td><%= text_field 'subitem', 'complete_date', :onfocus=>"WdatePicker({minDate:'#F{$dp.$D(\\\'subitem_start_date\\\')}'})", :size=>10%></td>
+</tr>
+
+<tr>
+	<th>止付比率：</th>
+	<td><%= text_field 'subitem', 'pay_rate', :size=>10%>%</td>
+	<th>合同止付金额：</th>
+	<td><%= text_field 'subitem', 'stop_payment_amount', :size=>10%>元</td>
+</tr>
+
+<tr>
+	<th>合同范围：</th>
+	<td colspan=3><%= text_area 'subitem', 'contract_scope', :rows=>5, :cols=>60%></td>
+</tr>
+
+<tr>
+	<th>质量要求：</th>
+	<td colspan=3><%= text_area 'subitem', 'quality_standard', :rows=>5, :cols=>60%></td>
+</tr>
+
+<tr>
+	<th>付款方式：</th>
+	<td colspan=3><%= text_area 'subitem', 'paymethod', :rows=>5, :cols=>60%></td>
+</tr>
+
+<tr>
+	<th>备注：</th>
+	<td colspan=3><%= text_area 'subitem', 'comment', :rows=>5, :cols=>60%></td>
+</tr>
+</table>

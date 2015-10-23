@@ -1,0 +1,535 @@
+*{margin:0; padding:0;}
+
+body, p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size:   13px;
+}
+
+#client
+{
+ height:93%;
+ width:100%;
+ overflow:auto;
+ padding:5px;
+}
+
+SELECT
+{
+    FONT-SIZE: 8pt
+    COLOR: #000000
+}
+
+A { 
+	color: darkblue
+} 
+
+FORM
+{
+    PADDING-RIGHT: 1px;
+    PADDING-LEFT: 1px;
+    PADDING-BOTTOM: 1px;
+    MARGIN: 4px;
+    PADDING-TOP: 1px
+}
+
+TR.clsTrHeader
+{
+    COLOR: midnightblue;
+    /*BACKGROUND-COLOR: #c4c9e1*/
+    background: #ccc url(/img/default-bg-reverse.gif) repeat-x;
+    height:20
+}
+
+.clsTdzHeader{
+     COLOR: midnightblue;
+    /*BACKGROUND-COLOR: #c4c9e1*/
+    background: #ccc url(/img/default-bg-reverse.gif) repeat-x;
+    height:20
+}
+
+TR.clsTrHeader1
+{
+    COLOR: midnightblue;
+    /*BACKGROUND-COLOR: #c4c9e1*/
+    background: #ccc url(/img/default-bg.gif) repeat-x;
+    height:20
+}
+
+TR.TrDark
+{
+    
+    BACKGROUND-COLOR: white
+}
+TR.TrLight
+{
+   
+    BACKGROUND-COLOR: #edebea
+}
+
+
+
+TD.stripbar{
+    COLOR: midnightblue;
+    background: #ccc url(/img/tab_stripes.jpg) repeat-x;
+    height:20
+}
+
+.clsBar
+{
+    FONT-SIZE: 12px;
+    BORDER-BOTTOM: gold thin solid;
+    BACKGROUND-COLOR: white
+}
+.clsLogo
+{
+    MARGIN: 0px;
+    WIDTH: 100%;
+    HEIGHT: 4px;
+    BACKGROUND-COLOR: #5d6ab0
+}
+.clsFooter
+{
+    MARGIN-TOP: 0.3cm;
+    WIDTH: 100%;
+    BACKGROUND-COLOR: white
+}
+.clsContentTable
+{
+    MARGIN: 0px;
+    WIDTH: 100%;
+    HEIGHT: 83%;
+    BORDER-COLLAPSE: collapse;
+}
+UNKNOWN
+{
+    MARGIN-TOP: 0.1cm;
+    WIDTH: 100%;
+    HEIGHT: 79%;
+    BACKGROUND-COLOR: whitesmoke
+}
+.clsContentListTable
+{
+    MARGIN-TOP: 0.1cm;
+    WIDTH: 100%;
+    BORDER-COLLAPSE: collapse
+}
+.clsTaskFrameTable
+{
+    MARGIN: 0cm;
+    WIDTH: 100%;
+    BORDER-COLLAPSE: collapse
+}
+.clsTrContext
+{
+    BORDER-RIGHT: silver thin solid;
+    BORDER-TOP: silver thin solid;
+    BORDER-LEFT: silver thin solid;
+    BORDER-BOTTOM: silver thin solid
+}
+.clsSubBar
+{
+    BACKGROUND-COLOR: lightsteelblue
+}
+.TabStyleClass
+{
+    PADDING-RIGHT: 0px;
+    PADDING-LEFT: 0px;
+    PADDING-BOTTOM: 0px;
+    COLOR: black;
+    BORDER-TOP-STYLE: none;
+    PADDING-TOP: 0px;
+    BORDER-RIGHT-STYLE: none;
+    BORDER-LEFT-STYLE: none;
+    BACKGROUND-COLOR: white;
+    BORDER-BOTTOM-STYLE: none
+}
+.TitleStyleClass
+{
+    PADDING-RIGHT: 0px;
+    PADDING-LEFT: 0px;
+    PADDING-BOTTOM: 0px;
+    COLOR: black;
+    BORDER-TOP-STYLE: none;
+    PADDING-TOP: 0px;
+    BORDER-RIGHT-STYLE: none;
+    BORDER-LEFT-STYLE: none;
+    BACKGROUND-COLOR: #dddddd;
+    BORDER-BOTTOM-STYLE: none
+}
+.HighlightTitleStyleClass
+{
+    PADDING-RIGHT: 0px;
+    PADDING-LEFT: 0px;
+    FONT-WEIGHT: bold;
+    PADDING-BOTTOM: 0px;
+    COLOR: white;
+    BORDER-TOP-STYLE: none;
+    PADDING-TOP: 0px;
+    BORDER-RIGHT-STYLE: none;
+    BORDER-LEFT-STYLE: none;
+    BACKGROUND-COLOR: gold;
+    BORDER-BOTTOM-STYLE: none
+}
+A
+{
+    TEXT-DECORATION: none
+}
+A:hover
+{
+    TEXT-DECORATION: underline
+}
+.clsTdDark
+{
+    BACKGROUND-COLOR: lightgrey
+}
+.clsTdLight
+{
+    BACKGROUND-COLOR: floralwhite
+}
+.clsTdHead
+{
+}
+.clsTreeDiv
+{
+    BORDER-RIGHT: thin groove;
+    BORDER-TOP: thin groove;
+    OVERFLOW: auto;
+    BORDER-LEFT: thin groove;
+    WIDTH: 100%;
+    BORDER-BOTTOM: thin groove;
+    HEIGHT: 100%
+}
+.clsTreeTitle
+{
+    BACKGROUND-COLOR: linen
+}
+.tdcsshead
+{
+    BORDER-RIGHT: black 1pt solid;
+    BORDER-TOP: black 1pt solid;
+    BORDER-LEFT: black 1pt solid;
+    BORDER-BOTTOM: black 1pt solid;
+    BACKGROUND-COLOR: white
+}
+.tdcsstwo
+{
+    BORDER-RIGHT: black 1pt solid;
+    PADDING-RIGHT: 1.5pt;
+    BORDER-TOP: black 1pt solid;
+    PADDING-LEFT: 1.5pt;
+    PADDING-BOTTOM: 1.5pt;
+    BORDER-LEFT: black 1pt solid;
+    PADDING-TOP: 1.5pt;
+    BORDER-BOTTOM: black 1pt solid;
+    BACKGROUND-COLOR: white
+}
+.tdcssfour
+{
+    BORDER-RIGHT: black 1pt solid;
+    PADDING-RIGHT: 1.5pt;
+    BORDER-TOP: black 1pt solid;
+    PADDING-LEFT: 1.5pt;
+    PADDING-BOTTOM: 1.5pt;
+    BORDER-LEFT: black 1pt solid;
+    PADDING-TOP: 1.5pt;
+    BORDER-BOTTOM: black 1pt solid;
+    BACKGROUND-COLOR: white
+}
+
+.tdcsssum
+{
+    BORDER-RIGHT: black 1pt solid;
+    PADDING-RIGHT: 1pt;
+    BORDER-TOP: black 1pt solid;
+    PADDING-LEFT: 1pt;
+    PADDING-BOTTOM: 1pt;
+    BORDER-LEFT: black 1pt solid;
+    PADDING-TOP: 1pt;
+    BORDER-BOTTOM: black 1pt solid;
+    BACKGROUND-COLOR: ivory
+}
+.tdcssthree
+{
+    BORDER-RIGHT: black 1pt solid;
+    PADDING-RIGHT: 1pt;
+    BORDER-TOP: black 1pt solid;
+    PADDING-LEFT: 1pt;
+    PADDING-BOTTOM: 1pt;
+    BORDER-LEFT: black 1pt solid;
+    PADDING-TOP: 1pt;
+    BORDER-BOTTOM: black 1pt solid;
+    BACKGROUND-COLOR: white
+}
+.tdcssone
+{
+    BORDER-RIGHT: black 1pt solid;
+    PADDING-RIGHT: 1pt;
+    BORDER-TOP: black 1pt solid;
+    PADDING-LEFT: 1pt;
+    PADDING-BOTTOM: 1pt;
+    BORDER-LEFT: black 1pt solid;
+    PADDING-TOP: 1pt;
+    BORDER-BOTTOM: black 1pt solid;
+    BACKGROUND-COLOR: white
+}
+.clsMainToolbar
+{
+    FONT-SIZE: 11pt;
+    COLOR: #ffffff;
+    BACKGROUND-COLOR: #c4c0cb
+}
+.clsSelectedToolTab
+{
+    COLOR: #dedbe2;
+    BACKGROUND-COLOR: #2c2932;
+    TEXT-DECORATION: none
+}
+.clsToolTabs:active
+{
+    COLOR: #70687f;
+    BACKGROUND-COLOR: #ffffff;
+    TEXT-DECORATION: none
+}
+.clsNavbar
+{
+    COLOR: #70687f;
+    BACKGROUND-COLOR: #ffffff
+}
+.clsAlight
+{
+    COLOR: white
+}
+.clsAdark
+{
+    COLOR: darkblue
+}
+.clsPopu
+{
+    BACKGROUND-COLOR: #edebea
+}
+.clsLightColorOfTask
+{
+    COLOR: blue
+
+}
+
+.xsltTable
+{
+  	border-width: 1px;
+	border-style: solid;
+	border-color: #000000 #000000 #000000 #000000 ;
+	border-collapse: collapse;
+}
+
+.xsltTr
+{
+/*
+    BORDER-RIGHT: black 1pt solid;
+    PADDING-RIGHT: 1pt;
+    BORDER-TOP: black 1pt solid;
+    PADDING-LEFT: 1pt;
+    PADDING-BOTTOM: 1pt;
+    BORDER-LEFT: black 1pt solid;
+    PADDING-TOP: 1pt;
+    BORDER-BOTTOM: black 1pt solid;
+	*/
+
+}
+
+.xsltFloatTempTr
+{
+
+    background: #FFFFA6;
+}
+
+.popTable
+{
+	border-collapse: collapse;
+}
+.clsCellStore
+{
+	border-width: 1px;
+	border-style: solid;
+	border-color: #000000 #000000 #000000 #000000 ;
+	border-collapse: collapse;
+	background: window;
+}
+
+.clsFloatCellStore
+{
+	border-width: 1px;
+	border-style: solid;
+	border-color: #000000 #000000 #000000 #000000 ;
+	border-collapse: collapse;
+	background: #FFFFA8;
+}
+
+.clsCellNoStore
+{
+	border-width: 1px;
+	border-style: solid;
+	border-color: #000000 #000000 #000000 #000000 ;
+	border-collapse: collapse;
+	background: buttonface;
+}
+SPAN.switch 
+{
+	cursor: hand;
+	margin-left: 5px;
+	text-decoration: underline;
+	background-color: #99CCFF;
+}
+
+table.list, table.ft {
+	BORDER-COLLAPSE: collapse;
+	font-size: 12px;
+	margin: 2px;
+	border-color: #999999; 
+}
+
+table.ft{margin-bottom: 10px;}
+
+table.list tr, table.ft tr{
+	height: 22px;
+}
+
+table.list td, table.ft td {
+    padding: 2px 4px 2px 4px;
+    /*border-color: #999999; */
+}
+
+tr.head{
+	height: 22px;
+}
+
+/*
+tr.head td,tr.head th {border-color: gray; }
+*/
+
+table.ft th
+{
+    padding: 2px 4px 2px 4px;
+    text-align: left;
+    font-weight: normal;
+    background-color: #BBBBBB;
+}
+
+table.ft td{background-color: white;}
+
+div.show_detail table tr th
+{
+    height: 32px;
+}
+
+/* message box */
+#message{border:#82acdc 1px solid;z-index:1000;position:absolute; display:none;background:#fff; bottom:0; right:0; overflow:hidden;}
+#message .msgtitlebar{border:1px solid #fff;border-bottom:none;width:100%;height:22px;background:#c8e6f7; color:#444444;font-size:14px;overflow:hidden;color:#1f336b;}
+#message_close{float:right;padding:5px 0 5px 0;width:16px;line-height:12px;color:red;font-size:12px;font-weight:bold;text-align:center;cursor:pointer;overflow:hidden;}
+#message_close a {background:url(/img/close.gif) no-repeat left center;padding:0 0 0 7px;text-decoration:none;}
+#message_close a:hover {background:url(/img/close_over.gif) no-repeat left center;padding:0 0 0 7px;}
+#message .msgtitle{padding:0px 0 0px 5px;width:100px;line-height:20px; font-weight:bold;text-align:left;overflow:hidden;}
+#message .msg_content_container{height:auto;font-size:12px;}
+#message .msg_ok {background:url(/img/success.gif) no-repeat 5px 20px; color:#209201;}
+#message .msg_err {background:url(/img/failure.gif) no-repeat 5px 20px; color:#e00404;}
+#message_content{margin:0 5px 0 40px;border:#b9c9ef 0px solid;padding:10px 0 10px 5px;font-size:12px;text-align:left;overflow:hidden;}
+
+
+/*--for jquery validate----------------*/
+/*
+.error_msg_container{clear:both;border:#B0B0B0 1px solid;width:500px;background:#FFFF99;}
+.error_msg_container ol{list-style:none;padding:0 10px;}
+.error_msg_container ol li{background:url(/img/small_squarey.gif) no-repeat left center;padding-left:12px;border-bottom:0px solid #CCCCCC;height:20px;line-height:20px;}
+.error_msg_container em{color:red;font-style:normal;}
+.error_msg_container .tip_title{cursor:pointer;height:30px;line-height:30px;padding:0 40px;color:red;background:url(/img/collapse_up.gif)  no-repeat 20px center;}
+.error_msg_container .to_open{background:url(/img/collapse_down.gif)  no-repeat 20px center !important;}
+.checkform_error{border:1px dotted red;}
+label.checkform_error{cursor:pointer;border:0;}
+*/
+
+.required_star{color:red;font-weight:bold;}
+.autowrap {white-space:normal !important;}
+/* special css for biz */
+.txt:hover, .txt:focus {
+    background:#F5F9FD none repeat scroll 0 0;
+    border-color:#3399CC;
+    border-style:groove;
+}
+
+.error_msg_container{clear:both;border:#B0B0B0 0px solid;width:400px;padding:0 10px;color:red;}
+.error_msg_container ol{list-style:none;}
+.error_msg_container ol li{background:url(/img/small_squarey.gif) no-repeat left center;padding-left:12px;border-bottom:0px solid #CCCCCC;height:20px;line-height:20px;}
+.error_msg_container em{color:red;font-style:normal;}
+.checkform_error{border:1px dotted red;}
+label.checkform_error{cursor:pointer;border:0;}
+
+ .fck_author
+ {
+    text-align: center;
+ }
+
+ .fck_body, .fck_body p
+ {
+    font-size: 14px;
+    line-height: 1.6em;
+    margin-bottom: 10px;
+ }
+ 
+ .fck p
+ {
+    margin: 0px;
+ }
+ 
+ .submit_div
+ {
+    text-align: center;
+ }
+ 
+ .lmx_table td
+ {
+    margin: 0px;
+    padding: 0px;
+ }
+ 
+ .lmx_table .selected_cell
+ {
+    background-color: #FFCCCC;
+ }
+ 
+  
+ .lmx_table input, .lmx_table textarea, .lmx_table select
+ {  
+    margin: 1px 2px 1px 2px;
+    background: url(/img/required_bg.png) repeat-x top !important;
+    background-color: #FFFADE !important;
+ }
+ 
+ .ruler_table
+ {
+    width:99%;
+    height:100%;
+    background-color:lightsteelblue;
+    border-collapse:collapse;
+    text-align:center;
+    border-color:gray;
+    border:1px solid gray;
+    table-layout: fixed;
+ }
+
+ .ruler
+ {
+    border: 1px solid gray;
+ }
+ 
+#jd_shadow{z-index:999;position:absolute;background-color:#000000;filter:alpha(opacity=25);-moz-opacity:0.25;opacity:0.25;}
+#jd_dialog{z-index:1000;position:absolute;}
+#jd_dialog_s{position:absolute;background-color:#000000;filter:alpha(opacity=40);-moz-opacity:0.4;opacity:0.4;}
+#jd_dialog_m{position:absolute;}
+#jd_dialog_m_h{float:left;width:100%;height:30px;cursor:move;}
+#jd_dialog_m_h_l{float:left;color:black;font-weight:bold;padding-top:7px;padding-left:5px;}
+#jd_dialog_m_h_r{float:right;color:black;padding-top:7px;padding-right:5px;cursor:pointer;}
+#jd_dialog_m_b{float:left;}
+#jd_dialog_m_b_1{position:absolute;alpha(opacity=0);-moz-opacity:0.0;opacity:0.0;z-index:900;}
+#jd_dialog_m_b_2{position:absolute;z-index:899;}
+#jd_dialog_m_t{float:left;width:100%;height:40px;padding-top:10px;text-align:center;}
+.jd_dialog_m_t_s{padding-left:10px;}
+ 

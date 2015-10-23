@@ -1,0 +1,103 @@
+<%= error_messages_for 'project' %>
+
+<table class="ft" border="1" width=700px>
+<!--[form:project]-->
+<tr>
+	<th>项目名称</th>
+	<td><%= text_field 'project', 'name', :validate=>"required:true", :title=>"项目名称" %></td>
+	<th>负责人</th>
+	<td><%= select("project", "fzr_id", User.find(:all).collect{|p| [p.name, p.id]}, {:include_blank=>true}, {:validate=>"required:true", :title=>"负责人"} )%></td>
+</tr>
+<tr>	
+	<th>工程地点</th>
+	<td><%= text_field 'project', 'gcdd'  %></td>
+	<th>建筑类型</th>
+	<td><%= select("project", "jzlx", Dictionary.find_by_name('建筑类型').items.collect{|p| [p.name, p.name]}, {:include_blank=>true} )%></td>
+</tr>
+
+<tr>
+	<th>结构类型</th>
+	<td><%= select("project", "jglx", Dictionary.find_by_name('结构类型').items.collect{|p| [p.name, p.name]}, {:include_blank=>true} )%></td>
+	<th>建筑形状</th>
+	<td><%= select("project", "jzxz", Dictionary.find_by_name('建筑形状').items.collect{|p| [p.name, p.name]}, {:include_blank=>true} )%></td>
+</tr>
+
+<tr>
+	<th>装修标准</th>
+	<td><%= select("project", "zxbz", Dictionary.find_by_name('装修标准').items.collect{|p| [p.name, p.name]}, {:include_blank=>true} )%></td>
+	<th>屋面形式</th>
+	<td><%= select("project", "wmxs", Dictionary.find_by_name('屋面形式').items.collect{|p| [p.name, p.name]}, {:include_blank=>true} )%></td>
+</tr>
+
+<tr>
+	<th>基础形式</th>
+	<td><%= select("project", "jcxs", Dictionary.find_by_name('基础形式').items.collect{|p| [p.name, p.name]}, {:include_blank=>true} )%></td>
+	<th>外墙保温</th>
+	<td><%= select("project", "wqbw", Dictionary.find_by_name('外墙保温').items.collect{|p| [p.name, p.name]}, {:include_blank=>true} )%></td>
+</tr>
+
+<tr>
+	<th>外墙装饰</th>
+	<td><%= select("project", "wqzs", Dictionary.find_by_name('外墙装饰').items.collect{|p| [p.name, p.name]}, {:include_blank=>true} )%></td>
+	<th>外窗类型</th>
+	<td><%= select("project", "wclx", Dictionary.find_by_name('外窗类型').items.collect{|p| [p.name, p.name]}, {:include_blank=>true} )%></td>
+</tr>
+
+<tr>
+	<th>建筑面积</th>
+	<td><%= text_field 'project', 'jzmj', :validate=>"number:true", :title=>"建筑面积"  %>平方米</td>
+	<th>地上面积</th>
+	<td><%= text_field 'project', 'dsmj', :validate=>"number:true", :title=>"地上面积"   %>平方米</td>
+</tr>
+
+<tr>
+	<th>地下面积</th>
+	<td><%= text_field 'project', 'dxmj', :validate=>"number:true", :title=>"地下面积"   %>平方米</td>
+	<th>占地面积</th>
+	<td><%= text_field 'project', 'zdmj' , :validate=>"number:true", :title=>"占地面积"  %>平方米</td>
+</tr>
+
+<tr>
+	<th>建筑总层数</th>
+	<td><%= text_field 'project', 'zcs', :validate=>"number:true", :title=>"建筑总层数" %>层</td>
+	<th>地上层数</th>
+	<td><%= text_field 'project', 'dscs', :validate=>"number:true", :title=>"地上层数"  %>层</td>
+</tr>
+
+<tr>
+	<th>地下层数</th>
+	<td><%= text_field 'project', 'dxcs', :validate=>"number:true", :title=>"地下层数"  %>层</td>
+	<th>标准层高</th>
+	<td><%= text_field 'project', 'bzcg', :validate=>"number:true", :title=>"标准层高"  %>米</td>
+</tr>
+
+<tr>
+	<th>立项批准文号</th>
+	<td><%= text_field 'project', 'lxpw'  %></td>
+	<th>概算造价</th>
+	<td><%= text_field 'project', 'gszj', :validate=>"number:true", :title=>"概算造价"  %>万元</td>
+</tr>
+
+<tr>
+	<th>建设单位</th>
+	<td><%= text_field 'project', 'jsdw'  %></td>
+	<th>设计单位</th>
+	<td><%= text_field 'project', 'sjdw'  %></td>
+</tr>
+
+<tr>
+	<th>监理单位</th>
+	<td><%= text_field 'project', 'jldw'  %></td>
+	<th>审计单位</th>
+	<td><%= text_field 'project', 'sjdw'  %></td>
+</tr>
+
+<tr>
+	<th>综合描述</th>
+	<td colspan=3><%= text_area 'project', 'zhms', :rows=>5  %></td>
+</tr>
+
+
+<!--[eoform:project]-->
+
+</table>

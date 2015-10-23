@@ -1,0 +1,92 @@
+<%= path "资金支付"%>
+
+<table  height=100% width=100%>
+    <tr>
+        <td valign="top">
+            <% if params[:tree] %>
+                <div class="clsTreeDiv" style="height:100%">
+                <script>
+                <% project = Project.find(session[:pid])%>
+                 var data={"-1_0":"text:<%=project.name%>;hint:<%=project.name%>",
+                 <% nodes = Hygh.find(:all, :conditions=>"project_id = #{session[:pid]} and itemtype = 1")%>
+                 <% nodes.each do |t| %>
+                     "<%=t.parent_id||0%>_<%=t.id%>":"text:<%=t.name.gsub("\n", '\n')%>;url:/fund/pay/<%=t.id%>?tree=tree",
+                 <% end%>
+                    "-100":"100"}
+                </script>
+                    
+                <%= render :partial => "share/tree", :locals => {:array=>[], :usecheckbox => false, :expandlevel => 3} %>
+                </div>
+            <% end %>
+        </td>
+        <td valign="top">
+            <img src="/img/attach.png" border=0/>表示合同
+            <table id="table" class="list" border="1" width=98%>
+              <tr class="head">
+                <th></th>
+                <th>合同名称</th>
+                <th>接转上月欠款数</th>
+                <th>本月审定支付</th>
+                <th>本月实际应付</th>
+                <th>本月实际支付</th>
+                <th>本月实际欠款数</th>
+                <th>止上月累计审定支付</th>
+                <th>止上月累计实际支付</th>
+                <th>累计审定支付</th>
+                <th>累计实际支付</th>
+              </tr>
+            <%sum1=sum2=sum3=sum4=sum5=sum6=sum7=sum8=sum9=sum10=sum11=sum12=sum13=sum14=sum15=0%>  
+            <% for contract in @contracts %>
+              <%= color_row %>
+                <td><% if contract.iscontract == 1%><img src="/img/attach.png" border=0/><% end %></td>
+                <td><%= link_to contract.name, :action=>"plan_detail", :id=>contract %></td>
+                <td align="right"><%= money contract.audit_pay_before_this_month - contract.pay_before_this_month %></td>
+                <td align="right"><%= money contract.audit_pay_of_this_month %></td>
+                <td align="right"><%= money contract.audit_pay_before_this_month - contract.pay_before_this_month + contract.audit_pay_of_this_month%></td>
+                <td align="right"><%= money contract.pay_of_this_month%></td>
+                <td align="right"><%= money contract.audit_pay_before_this_month - contract.pay_before_this_month + contract.audit_pay_of_this_month - contract.pay_of_this_month%></td>
+                <td align="right"><%= money contract.audit_pay_before_this_month%></td>
+                <td align="right"><%= money contract.pay_before_this_month%></td>
+                <td align="right"><%= money contract.total_audit_amount%></td>
+                <td align="right"><%= money contract.total_pay_amount%></td>
+              </tr>
+              
+              <% sum1 += contract.audit_pay_before_this_month - contract.pay_before_this_month%>
+              <% sum2 += contract.audit_pay_of_this_month%>
+              <% sum3 += contract.audit_pay_before_this_month - contract.pay_before_this_month + contract.audit_pay_of_this_month%>
+              <% sum4 += contract.pay_of_this_month%>
+              <% sum5 += contract.audit_pay_before_this_month - contract.pay_before_this_month + contract.audit_pay_of_this_month - contract.pay_of_this_month%>
+              <% sum6 += contract.audit_pay_before_this_month%>
+              <% sum7 += contract.pay_before_this_month%>
+              <% sum8 += contract.total_audit_amount%>
+              <% sum9 += contract.total_pay_amount%>
+            <% end %>
+            
+            
+              <tr>
+                <th colspan=2>--合计</th>
+                <th align="right"><%= money sum1%></th>
+                <th align="right"><%= money sum2%></th>
+                <th align="right"><%= money sum3%></th>
+                <th align="right"><%= money sum4%></th>
+                <th align="right"><%= money sum5%></th>
+                <th align="right"><%= money sum6%></th>
+                <th align="right"><%= money sum7%></th>
+                <th align="right"><%= money sum8%></th>
+                <th align="right"><%= money sum9%></th>
+              </tr>
+            </table>
+            
+            <%= will_paginate @contracts %>
+         </td>
+     </tr>
+ </table>
+ 
+<script>
+    <% if !params[:tree]%>
+        add_link("显示导航", "/fund/pay?tree=true")
+    <% else %>
+        add_link("关闭导航", "/fund/pay")
+    <% end %>
+</script>
+ 

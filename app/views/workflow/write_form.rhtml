@@ -1,0 +1,242 @@
+<%= stylesheet_link_tag "tab.webfx.css" %>
+<%= javascript_include_tag 'tabpane' %>
+<%= javascript_include_tag 'jquery_dialog' %>
+<%= javascript_include_tag 'fckeditor' %>
+
+<% if @state_name%>
+<%= path "当前处理状态——#{@state_name}"%>
+<% end %>
+
+<style>
+.ui-dialog .ui-dialog-content {
+    background:none repeat scroll 0 0 transparent;
+    border:0 none;
+    overflow:auto;
+    padding: 2px;
+}
+</style>
+
+<%=@style%>
+
+<% form_tag({:action => 'update_form', :id=>@flow, :formid=>params[:formid]}, {:enctype => "multipart/form-data"}) do%>
+  <div class="tab-pane" id="processflow">
+    <div class="tab-page" id="a1">
+      <h2 class="tab">表单</h2>
+      <div id="flow_ibuild" >
+        <div style="text-align:left; vertical-align:top; margin:10px;">
+        <%= @html %>
+        </div>
+        <div style="margin:20px;">
+            <a href="#" onclick="add_file()">添加附件</a>
+            <div id="files">
+              <% files = instance_eval("@#{@flow.formtable.code.downcase}").files%>
+              <%='<table width=300px style="margin-left:10px">' if files.size > 0%>
+              <% for @file in files%>
+                <tr>
+                  <td>
+                    <%= link_to @file['path'], url_for_file_column('file', 'path'), {:target=>"_blank"} %>
+                  </td>
+                  <td>
+                    <%= @file.uploader%>
+                  </td>
+                  <td>
+                    <%= @file.created_at.to_date%>
+                  </td>
+                  <td>
+                    <%= link_to image_tag("/img/del.gif",:border => 0,:title => "删除附件"),"#",:class => "delete_file",:file_id => @file.id%>
+                  </td>
+                </tr>
+              <% end %>
+              <%='</table>' if files.size > 0%>
+            </div>
+            <br/>
+            <a href="#" onclick="selecter_department_users({select_num:'n',callback_fn:'select_users_yuezhi'})">添加阅知</a>
+            <div id='yuezhi_div' style="padding-left: 10px;">
+            
+            </div>
+            <%= hidden_field_tag "yuezhi_ids"%>
+            <%= hidden_field_tag "yuezhi_names"%>
+            <input id="overtime_users_number"  readonly style="display:none"/>
+            <br/>
+            处理意见：<br/><%= text_area_tag :point, "", :rows=>5, :cols=>50%><br/>
+            <br/>
+            <% if @flow.flow_type == "任意流"%>
+              <div id='next_user_div'>
+                下一步转交给 <%= text_field_tag "next_user", "", :size=>50, :onfocus=>"selecter_department_users({select_num:1,callback_fn:'select_users_next_step'})"%> 审批
+                        <%= hidden_field_tag "next_user_ids"%>
+              </div>
+              <%= check_box_tag 'stop_transfer', 1, false, :onclick=>"if ($('#stop_transfer').attr('checked')) {$('#next_user_div').hide(); $('#next_user_ids').val(''); $('#next_user').val('')} else{$('#next_user_div').show();}"%>审批结束，不再往下步传递
+            </br>
+            <% end %>
+            
+            <% formback = WorkflowFormback.find(:first, :conditions=>"flow_id=#{@flow.id} and form_id='#{params[:formid]}'")%>
+            <% if !formback %>
+                <% if @flow.flow_type == "固定流" && @state.select_next == "1"%>
+                        请选择下步操作：
+                     <select id="next_step_select" name="next_step" onchange="step_change()">
+                      <% for trasit in @state.trasits%>
+                        <option value="<%= trasit.to.name%>"><%= trasit.to.name%></option>
+                      <% end %>
+                      <% if @historys && !@state_name.index("(")%>
+                        <option value="回退">回退</option>
+                      <% end %>
+                    </select>
+                <% end %>
+              <%= hidden_field_tag "back"%>
+              <span id="back_to">
+                回退至：
+                <select id='back_step_select' name="back_step">
+                  <% for history in @historys.collect{|h| h.state_name}.uniq%>
+                    <option value='<%=history%>'><%= history%></option>
+                  <% end if @historys%>
+                </select>
+                <%= check_box_tag "back_method", "1", true%>处理后直接跳回本状态
+              </span>
+    
+              <span id="hq">
+              </span>
+            <% else %>
+              下步将会自动转到：<%= formback.state%>
+            <% end %>
+            <br/>
+            <input value="确定" type="submit" class="submit"/>
+            <br/>
+          </div>
+        </div>
+    </div>
+    <% if @flow.has_bigtext %>
+      <div class="tab-page" id="a1">
+        <h2 class="tab">正文</h2>
+        <div id="flow_context">
+          <%= fckeditor_textarea(@flow.formtable.code.downcase, "_content",  :toolbarSet => 'WorkFlow', :width => '100%', :height => '500px') %>
+        </div>
+      </div>
+    <% end %>
+    <% if @historys %>
+      <div class="tab-page" id="a3">
+        <h2 class="tab">处理历史记录</h2>
+        <div id="show_history">
+          <table class='list' border="1" width=98%>
+            <tr class="head">
+              <th>处理人</th>
+              <th>处理时间</th>
+              <th>状态</th>
+              <th>意见</th>
+            </tr>
+            <% @historys.each_with_index{|history, index| %>
+              <%= color_row%>
+              <td><%=User.find(history.user_id).truename%></td>
+              <td align='center'><%=history.process_time.to_formatted_s(:db)%></td>
+              <td><%= history.state_name%></td>
+              <td><%= history.point%></td>
+              </tr>
+            <% } %>
+          </table>
+          <br/>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+
+<script>
+  setupAllTabs();
+  add_tab_button("/img/iconBack.png", "返回", "/workflow/mywaiting_form");  
+  
+  function select_users_next_step(data)
+  {
+       var ids = '';
+       var names = '';
+       for (var i=0; i<data.length; i++)
+       {
+          if (i<data.length-1)
+          {
+            ids += data[i].user_id + ","
+            names += data[i].user_name + ","
+          }
+          else
+          {
+            ids += data[i].user_id
+            names += data[i].user_name
+          }
+       }
+       $("#next_user_ids").val(ids);
+       $("#next_user").val(names);
+  }
+  function select_users_yuezhi(data)
+  {
+       var ids = '';
+       var names = '';
+       for (var i=0; i<data.length; i++)
+       {
+          if (i<data.length-1)
+          {
+            ids += data[i].user_id + ","
+            names += data[i].user_name + ","
+          }
+          else
+          {
+            ids += data[i].user_id
+            names += data[i].user_name
+          }
+       }
+       $("#yuezhi_ids").val(ids);
+       $("#yuezhi_names").val(names);
+       $("#yuezhi_div").html("<span style='color:red'>" + names + "</span>")
+  }
+  //选择经办人回调函数
+  function select_users_jbr(data){
+       var result = '';
+       for (var i=0; i<data.length; i++)
+       {
+          if (i<data.length-1)
+            result += data[i].user_name + ","
+          else
+            result += data[i].user_name
+       }
+       $('#jbr').val(result);
+  }
+    
+  function step_change()
+  {
+    <% hq_steps = ''
+    for trasit in @state.trasits
+      hq_steps += trasit.to.name + "," if trasit.to.huiqian == "1"
+    end if @flow.flow_type == "固定流"
+    %>
+    var hq_steps = "<%=hq_steps%>";
+    var value = $('#next_step_select').val();
+    if (hq_steps.indexOf(value + ",") != -1)
+    {
+      $("#hq").html("经办人：<input id='jbr' name='jbr' style='width:300px' onfocus='selecter_department_users({select_num:\"n\",callback_fn:\"select_users_jbr\"})'/>")
+    }
+    else
+    {    
+      $("#hq").html("");
+    }
+    
+    if (value == "回退")
+    {
+      $("#back_to").show();
+      $("#back").val("1")
+    }
+    else
+    {
+      $("#back_to").hide();
+      $("#back").val("0")
+    }
+  }
+  step_change();
+</script>
+
+<script>
+  var file_num = 0;
+  function add_file()
+  {
+    file_num += 1;
+    
+    $("#files").append('<input name="attach' + file_num + '[path_temp]" type="hidden" /><input name="attach'+file_num+'[path]" size="30" type="file" /><br>')
+  }
+</script>
+

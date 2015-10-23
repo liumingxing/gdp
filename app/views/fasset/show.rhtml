@@ -1,0 +1,15 @@
+<%=@table.to_s(:style)%>
+
+<%= @table.to_s(:show, @asset) %>
+
+<script>
+  add_tab_button("/img/iconBack.png", "返回", "/fasset/list?form=<%=params[:form]%>");  
+  add_tab_button("/img/iconPrint.png", "打印", 'javascript:print();'); 
+  function print()
+  {
+    window.open("/fasset/print/<%=params[:id]%>?form=<%=params[:form]%>");
+  }
+  <% @items.each_with_index{|item, index|%>
+    $('#float<%=@float_index%>').before("<%=@table.float_row_to_s(@float_index, index+1, :show, item).to_s.delete("\n")%>")
+  <% } %>
+</script>

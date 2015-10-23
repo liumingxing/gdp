@@ -1,0 +1,13 @@
+<%= javascript_include_tag 'Grid/GridE' %>
+
+<%= path $BUDGET_TYPE[params[:t]] + "书"%>
+<%= right_text "当前版本号:#{Project.find(session[:pid]).current_version(params[:t]).text}"%>
+
+
+<style>
+#client{padding:0px;}
+</style>
+
+<div style="width:100%;height:100%;" id='grid'> 
+  <bdo layout_url="/xml/gridstyle_ggymain.xml" Data_Url="/budget/get_data?t=<%=params[:t]%>" Upload_Url="/budget/upload_tzgh"> </bdo>
+</div>

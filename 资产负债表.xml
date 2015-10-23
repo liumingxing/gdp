@@ -1,0 +1,526 @@
+<tables>
+  <styles>
+    <style border-bottom='1px solid black' background-color='white' word-wrap='break-word' id='s1' color='black' border-right='1px solid black' font='13px 宋体' text-align='left' vertical-align='middle' border-left='1px solid black' border-top='1px solid black'/>
+    <style border-bottom='1px solid black' word-wrap='break-word' background-color='buttonface' border-right='1px solid black' color='black' id='s2' font='13px 宋体' vertical-align='middle' text-align='left' border-left='1px solid black' border-top='1px solid black'/>
+    <style border-bottom='1px solid black' background-color='buttonface' word-wrap='break-word' color='black' border-right='1px solid black' id='s3' font='13px 宋体' text-align='center' vertical-align='middle' border-left='1px solid black' border-top='1px solid black'/>
+    <style border-bottom='1px solid black' word-wrap='break-word' background-color='white' border-right='1px solid black' color='black' id='s4' font='13px 宋体' vertical-align='middle' text-align='center' border-left='1px solid black' border-top='1px solid black'/>
+    <style border-bottom='1px solid black' word-wrap='break-word' background-color='white' border-right='1px solid black' color='black' id='s5' font='13px 宋体' vertical-align='middle' text-align='right' border-left='1px solid black' border-top='1px solid black'/>
+    <style border-bottom='1px solid black' background-color='buttonface' word-wrap='break-word' color='black' border-right='1px solid black' id='s6' font='13px 宋体' text-align='right' vertical-align='middle' border-left='1px solid black' border-top='1px solid black'/>
+  <style border-bottom='1px solid black' word-wrap='break-word' background-color='buttonface' border-right='1px solid black' color='black' id='s7' font='bold 13px 宋体' vertical-align='middle' text-align='center' border-left='1px solid black' border-top='1px solid black'/><style border-bottom='1px solid black' background-color='buttonface' word-wrap='break-word' color='black' border-right='1px solid black' id='s8' font='bold 13px 宋体' text-align='left' vertical-align='middle' border-left='1px solid black' border-top='1px solid black'/></styles>
+  <table name='资产负债表' code='zcfz' class='lmx_table' style='border: 0px solid black;border-collapse:collapse;table-layout: fixed;'>
+  <col width='170px'/>
+  <col width='120px'/>
+  <col width='120px'/>
+  <col width='180px'/>
+  <col width='120px'/>
+  <col width='120px'/>
+  <tr height='30px'>
+    <td class='s7' store='false'>
+       资产 
+    </td>
+    <td class='s7' store='false'>
+       期末余额 
+    </td>
+    <td class='s7' store='false'>
+       年初余额 
+    </td>
+    <td class='s7' store='false'>
+       负债和所有者权益 
+    </td>
+    <td class='s7' store='false'>
+       期末余额 
+    </td>
+    <td class='s7' store='false'>
+       年初余额 
+    </td>
+  </tr>
+  <tr height='30px'>
+    <td class='s8' store='false'>
+       流动资产： 
+    </td>
+    <td class='s8' store='false'/>
+    <td class='s8' store='false'/>
+    <td class='s8' store='false'>
+       流动负债： 
+    </td>
+    <td class='s8' store='false'/>
+    <td class='s8' store='false'/>
+  </tr>
+  <tr height='30px'>
+    <td class='s2' store='false'>
+       　货币资金 
+    </td>
+    <td title='货币资金-期末' class='s5' type='float' dot='2' thousand='true'/>
+    <td title='货币资金-年初' class='s5' type='float' dot='2' thousand='true'>
+    </td>
+    <td class='s2' store='false'>
+       　短期借款 
+    </td>
+    <td title='短期借款-期末' class='s5' type='float' dot='2' thousand='true'/>
+    <td title='短期借款-年初' class='s5' type='float' dot='2' thousand='true'/>
+  </tr>
+  <tr height='30px'>
+    <td class='s2' store='false'>
+       　交易性金融资产 
+    </td>
+    <td title='交易性金融资产-期末' class='s5' type='float' dot='2' thousand='true'/>
+    <td title='交易性金融资产-年初' class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s2' store='false'>
+       　交易性金融负债 
+    </td>
+    <td title='交易性金融负债-期末' class='s5' type='float' dot='2' thousand='true'/>
+    <td title='交易性金融负债-年初' class='s5' type='float' dot='2' thousand='true'/>
+  </tr>
+  <tr height='30px'>
+    <td class='s2' store='false'>
+       　应收票据 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s2' store='false'>
+       　应付票据 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+  </tr>
+  <tr height='30px'>
+    <td class='s2' store='false'>
+       　应收账款 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s2' store='false'>
+       　应付账款 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+  </tr>
+  <tr height='30px'>
+    <td class='s2' store='false'>
+       　预付款项 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s2' store='false'>
+       　预收款项 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+  </tr>
+  <tr height='30px'>
+    <td class='s2' store='false'>
+       　应收利息 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s2' store='false'>
+       　应付职工薪酬 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+  </tr>
+  <tr height='30px'>
+    <td class='s2' store='false'>
+       　应收股利 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s2' store='false'>
+       　应交税费 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+  </tr>
+  <tr height='30px'>
+    <td class='s2' store='false'>
+       　其他应收款 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s2' store='false'>
+       　应付利息 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+  </tr>
+  <tr height='30px'>
+    <td class='s2' store='false'>
+       　存货 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s2' store='false'>
+       　应付股利 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+  </tr>
+  <tr height='30px'>
+    <td class='s2' store='false'>
+       　一年内到期的非流动资产 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s2' store='false'>
+       　其他应付款 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+  </tr>
+  <tr height='30px'>
+    <td class='s2' store='false'>
+       　其他流动资产 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s2' store='false'>
+       　一年内到期的非流动负债 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+  </tr>
+  <tr height='30px'>
+    <td class='s3' store='false'>
+       流动资产合计 
+    </td>
+    <td class='s5' store='true' type='float' dot='2' thousand='true'/>
+    <td class='s5' store='true' type='float' dot='2' thousand='true'/>
+    <td class='s2' store='false'>
+       　其他流动负债 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+  </tr>
+  <tr height='30px'>
+    <td class='s8' store='false'>
+       非流动资产： 
+    </td>
+    <td class='s6' store='false' type='float' dot='2' thousand='true'/>
+    <td class='s6' store='false' type='float' dot='2' thousand='true'/>
+    <td class='s3' store='false'>
+       流动负债合计 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+  </tr>
+  <tr height='30px'>
+    <td class='s2' store='false'>
+       　可供出售金融资产 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s8' store='false'>
+       非流动负债： 
+    </td>
+    <td class='s2' store='false' type='float' dot='2' thousand='true'/>
+    <td class='s2' store='false' type='float' dot='2' thousand='true'/>
+  </tr>
+  <tr height='30px'>
+    <td class='s2' store='false'>
+       　持有至到期投资 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s2' store='false'>
+       　长期借款 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+  </tr>
+  <tr height='30px'>
+    <td class='s2' store='false'>
+       　长期应收款 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s2' store='false'>
+       　应付债券 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+  </tr>
+  <tr height='30px'>
+    <td class='s2' store='false'>
+       　长期股权投资 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s2' store='false'>
+       　长期应付款 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+  </tr>
+  <tr height='30px'>
+    <td class='s2' store='false'>
+       　投资性房地产 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s2' store='false'>
+       　专项应付款 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+  </tr>
+  <tr height='30px'>
+    <td class='s2' store='false'>
+       　固定资产 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s2' store='false'>
+       　预计负债 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+  </tr>
+  <tr height='30px'>
+    <td class='s2' store='false'>
+       　在建工程 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s2' store='false'>
+       　递延所得税负债 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+  </tr>
+  <tr height='30px'>
+    <td class='s2' store='false'>
+       　工程物资 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s2' store='false'>
+       　其他非流动负债 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+  </tr>
+  <tr height='30px'>
+    <td class='s2' store='false'>
+       　固定资产清理 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s3' store='false'>
+       非流动负债合计 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+  </tr>
+  <tr height='30px'>
+    <td class='s2' store='false'>
+       　生产性生物资产 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s3' store='false'>
+       负债合计 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+  </tr>
+  <tr height='30px'>
+    <td class='s2' store='false'>
+       　油气资产 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s8' store='false'>
+       所有者权益（或股东权益）： 
+    </td>
+    <td class='s2' store='false' type='float' dot='2' thousand='true'/>
+    <td class='s2' store='false' type='float' dot='2' thousand='true'/>
+  </tr>
+  <tr height='30px'>
+    <td class='s2' store='false'>
+       　无形资产 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s2' store='false'>
+       　实收资本（或股本） 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+  </tr>
+  <tr height='30px'>
+    <td class='s2' store='false'>
+       　开发支出 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s2' store='false'>
+       　资本公积 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+  </tr>
+  <tr height='30px'>
+    <td class='s2' store='false'>
+       　商誉 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s2' store='false'>
+       　减：库存股 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+  </tr>
+  <tr height='30px'>
+    <td class='s2' store='false'>
+       　长期待摊费用 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s2' store='false'>
+       　盈余公积 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+  </tr>
+  <tr height='30px'>
+    <td class='s2' store='false'>
+       　递延所得税资产 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s2' store='false'>
+       　未分配利润 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+  </tr>
+  <tr height='30px'>
+    <td class='s2' store='false'>
+       　其他非流动资产 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s3' store='false'>
+       所有者权益（或股东权益）合计 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+  </tr>
+  <tr height='30px'>
+    <td class='s3' store='false'>
+       非流动资产合计 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s3' store='false'/>
+    <td class='s6' store='false' type='float' dot='2' thousand='true'/>
+    <td class='s6' store='false' type='float' dot='2' thousand='true'/>
+  </tr>
+  <tr height='30px'>
+    <td class='s3' store='false'>
+       资产总计 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s3' store='false'>
+       负债和所有者权益（或股东权益）总计 
+    </td>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+    <td class='s5' type='float' dot='2' thousand='true'/>
+  </tr>
+</table>
+  <script type='common'>function v(name)
+{
+  val = $(&quot;input[name=&apos;zcfz[&quot;+name+&quot;]&apos;]&quot;).val();
+  num = parseFloat(val)
+  if (isNaN(num))
+    return 0;
+  else
+    return num;
+}</script><script type='calc'>//流动资产合计
+var sum = 0; 
+for(var i=3; i&lt;=13; i++) 
+{ sum += v(&apos;B&apos; + i)}
+$(&quot;input[name=&apos;zcfz[B14]&apos;]&quot;).val(sum);
+
+sum = 0; 
+for(var i=3; i&lt;=13; i++) 
+{ sum += v(&apos;C&apos; + i)}
+  $(&quot;input[name=&apos;zcfz[C14]&apos;]&quot;).val(sum);
+
+//非流动资产合计
+var sum = 0; 
+for(var i=16; i&lt;=32; i++) 
+{ sum += v(&apos;B&apos; + i); }
+$(&quot;input[name=&apos;zcfz[B33]&apos;]&quot;).val(sum);
+
+sum = 0; 
+for(var i=16; i&lt;=32; i++) 
+{ sum += v(&apos;C&apos; + i); }
+$(&quot;input[name=&apos;zcfz[C33]&apos;]&quot;).val(sum);
+
+//资产合计
+$(&quot;input[name=&apos;zcfz[B34]&apos;]&quot;).val( v(&apos;B14&apos;) + v(&apos;B33&apos;) );
+
+$(&quot;input[name=&apos;zcfz[C34]&apos;]&quot;).val( v(&apos;C14&apos;) + v(&apos;C33&apos;) );
+
+//流动负债合计
+var sum = 0; 
+for(var i=3; i&lt;=14; i++) 
+{ sum += v(&apos;E&apos; + i); }
+$(&quot;input[name=&apos;zcfz[E15]&apos;]&quot;).val(sum);
+
+sum = 0; 
+for(var i=3; i&lt;=14; i++) 
+{ sum += v(&apos;F&apos; + i); }
+$(&quot;input[name=&apos;zcfz[F15]&apos;]&quot;).val(sum);
+
+//非流动负债合计
+var sum = 0; 
+for(var i=17; i&lt;=23; i++) 
+{ sum += v(&apos;E&apos; + i); }
+$(&quot;input[name=&apos;zcfz[E24]&apos;]&quot;).val(sum);
+
+sum = 0; 
+for(var i=17; i&lt;=23; i++) 
+{ sum += v(&apos;F&apos; + i); }
+$(&quot;input[name=&apos;zcfz[F24]&apos;]&quot;).val(sum);
+
+//负债合计
+$(&quot;input[name=&apos;zcfz[E25]&apos;]&quot;).val( v(&apos;E24&apos;) + v(&apos;E15&apos;) );
+
+$(&quot;input[name=&apos;zcfz[F25]&apos;]&quot;).val( v(&apos;F24&apos;) + v(&apos;F15&apos;) );
+
+//所有者权益合计
+var sum = 0; 
+for(var i=27; i&lt;=31; i++) 
+{ sum += v(&apos;E&apos; + i); }
+$(&quot;input[name=&apos;zcfz[E32]&apos;]&quot;).val(sum);
+
+sum = 0; 
+for(var i=27; i&lt;=31; i++) 
+{ sum += v(&apos;F&apos; + i); }
+$(&quot;input[name=&apos;zcfz[F32]&apos;]&quot;).val(sum);
+
+//负债和所有者权益合计
+$(&quot;input[name=&apos;zcfz[E34]&apos;]&quot;).val( v(&apos;E25&apos;) + v(&apos;E32&apos;) );
+$(&quot;input[name=&apos;zcfz[F34]&apos;]&quot;).val( v(&apos;F25&apos;) + v(&apos;F32&apos;) );</script><script type='audit'>if ($(&quot;input[name=&apos;zcfz[B34]&apos;]&quot;).val() != $(&quot;input[name=&apos;zcfz[E34]&apos;]&quot;).val())
+{
+  alert(&quot;资产期末余额与负债和所有者权益期末余额不等，请检查。&quot;)
+  return false;
+}
+
+if ($(&quot;input[name=&apos;zcfz[C34]&apos;]&quot;).val() != $(&quot;input[name=&apos;zcfz[F34]&apos;]&quot;).val())
+{
+  alert(&quot;资产年初余额与负债和所有者权益年初余额不等，请检查。&quot;)
+  return false;
+}</script><script type='init'>last = Anon.find(:last)
+if last
+  3.upto(34) do |i|
+    @form[&quot;C#{i}&quot;] = last[&quot;B#{i}&quot;] rescue nil
+    @form[&quot;F#{i}&quot;] = last[&quot;E#{i}&quot;] rescue nil
+  end
+  
+end</script>
+</tables>

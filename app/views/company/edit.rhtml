@@ -1,0 +1,12 @@
+<%= path "修改公司信息"%>
+
+<% form_tag :action => 'update', :id => @company do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag '保存' %>
+<% end %>
+
+<script>
+  add_tab_button("/img/iconBack.png", "返回", "/company/list");  
+  add_submit("保存");
+</script>
+

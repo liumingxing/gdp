@@ -1,0 +1,34 @@
+<Grid>
+  <Cfg id='Calc4' MainCol='name'/>
+  <Cols>
+  	<C Name='name' Type='Text' Width='120'/>
+    <C Name='data' Type='Int' Width='120'/>
+    <C Name='Result' Type='Int' 
+	    Formula='data*data-1'/>
+  </Cols>
+  <Def>
+    <D Name='Tree' Calculated='1' 
+       dataFormula='sum()' 
+       ResultFormula='sum()' 
+       dataFormat='0.00'/>
+  </Def>
+  <Body>
+    <B>
+      <I Def='Tree' name='a'>
+        <I data='10' name='a'/>
+        <I data='-5' name='a'/>
+      </I>
+      <I Def='Tree' name='a'>
+        <I Def='Tree' name='a'>
+          <I data='0' name='a'/>
+          <I data='8' name='a'/>
+        </I>
+        <I data='5' name='a'/>
+        <I data='-1' name='a'/>
+      </I>
+    </B>
+  </Body>
+  <Foot>
+    <I Def='Tree'/>
+  </Foot>
+</Grid>

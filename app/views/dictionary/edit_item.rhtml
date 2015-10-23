@@ -1,0 +1,10 @@
+<%= path "条目管理：#{DictionaryItem.find(params[:id]).name}"%>
+
+<% form_tag :action => 'update_item', :id=>params[:id] do %>
+  <%= render :partial => 'item_form' %>
+  <%= submit_tag "保存", :class=>"submit" %>
+<% end %>
+
+<script> 
+  add_tab_button("/img/iconBack.png", "返回代码字典列表", "/dictionary/items/<%=@item.dictionary_id%>");    
+</script>

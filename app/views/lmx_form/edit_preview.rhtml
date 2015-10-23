@@ -1,0 +1,9 @@
+<%= @table.to_s(:style)  %>
+<% form_tag :action=>"create_dynamic_form", :id=>params[:id] do%>
+    <%= @table.to_s(:edit, @form) %>
+    <%= submit_tag "保存"%>
+<% end %>
+
+<script>
+  add_tab_button("/img/iconBack.png", "返回", "/lmx_form/list");  
+</script>

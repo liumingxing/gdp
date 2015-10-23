@@ -1,0 +1,35 @@
+<%= stylesheet_link_tag "tab.webfx.css" %>
+<%= javascript_include_tag 'tabpane' %>
+
+<% form_tag :action=>"save_script", :id=>params[:id] do%>
+    <div class="tab-pane" id="script">
+        <div class="tab-page" id="init">
+          <h2 class="tab">初始化事件（后台）</h2>
+          <div id="s_common" >
+            <%= text_area_tag "init", @init, :rows=>14, :cols=>68%>
+          </div>
+        </div>
+        <div class="tab-page" id="common">
+          <h2 class="tab">公共脚本</h2>
+          <div id="s_common" >
+            <%= text_area_tag "common", @common, :rows=>14, :cols=>68%>
+          </div>
+        </div>
+        <div class="tab-page" id="calc">
+          <h2 class="tab">运算脚本</h2>
+          <div id="s_calc" >
+            <%= text_area_tag "calc", @calc, :rows=>14, :cols=>68%>
+          </div>
+        </div>
+        <div class="tab-page" id="audit">
+          <h2 class="tab">审核脚本</h2>
+          <div id="s_audit" >
+            <%= text_area_tag "audit", @audit, :rows=>14, :cols=>68%>
+          </div>
+        </div>
+    </div>
+    <div class="submit_div">
+        <%= submit_tag "保存"%>
+        <%= button_to_function "关闭", "window.parent.close_dialog();"%>
+    </div>
+<% end %>

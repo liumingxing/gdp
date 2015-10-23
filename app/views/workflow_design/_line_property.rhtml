@@ -1,0 +1,29 @@
+<% form_remote_tag( :update=>"property", :url=>"/workflow_design/set_line_property/#{@workflow.id}") do %>
+                    <%= hidden_field_tag "from", params[:from]%>
+                    <%= hidden_field_tag "to", params[:to]%>
+                    <table class="ft" border="1">
+                        <tr>
+                            <th>出发状态</th>
+                            <td>
+                                <%= @element.attributes["from"]%>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>目的状态</th>
+                            <td>
+                                <%= @element.attributes["to"]%>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>流转条件</th>
+                            <td><%= text_area_tag 'condition', @element.attributes["condition"], :rows=>4, :cols=>30 %></td>
+                        </tr>
+                        
+                    </table>
+                    <%= submit_tag "更新"%>
+                    <%=link_to '删除', {:action=>"delete_line", :id=>@workflow.id, :from=>@element.attributes["from"], :to=>@element.attributes["to"]}, :confirm => "确认删除吗?"%>
+<% end %>
+
+<% if notice%>
+<script>$("#server_response").text('<%=notice%>')</script>
+<% end%>

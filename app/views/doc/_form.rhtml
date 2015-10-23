@@ -1,0 +1,19 @@
+<%= error_messages_for 'doc' %>
+
+<table class="ft" border="1">
+<!--[form:doc]-->
+<tr>
+	<th>资料描述</th>
+	<td><%= text_field 'doc', 'name', :validate=>"required:true", :title=>"资料描述"  %></td>
+</tr>
+
+<tr>
+	<th>选择文件</th>
+	<td>
+	   <%= file_column_field "doc", "path", :validate=>"required:true", :title=>"文件" %>
+	</td>
+</tr>
+
+<!--[eoform:doc]-->
+
+</table>

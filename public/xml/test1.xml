@@ -1,0 +1,16 @@
+<Grid>
+  <Cfg id='Calc1'/>
+  <Cols>
+    <C Name='Data' Type='Int'/>
+    <C Name='Result' Type='Int' 
+       Formula='Data*Data-1'/>
+  </Cols>
+  <Body>
+    <B>
+      <I Data='10'/>
+      <I Data='-5'/>
+      <I Data='0'/>
+      <I Data='134'/>
+    </B>
+  </Body>
+</Grid>

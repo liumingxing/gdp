@@ -1,0 +1,39 @@
+<?xml version='1.0' ?>
+<Grid>
+	<Cfg id='grid' ExportType='Expanded,Outline' Editing='1'  StandardFilter='2' SearchExpand='1'  Undo='1' 
+		Sorting='0' MainCol='name' MaxHeight='1'  MaxWidth='1' ConstWidth='1' IdNames='id' IdChars='0123456789' 
+		NumberId='1' LastId='1' AppendId='1' ShowDeleted='0' DateStrings='1' Adding='1' FullId='1' CaseSensitiveId='0' />
+		<Cols>
+			<C Name='flag' CanEdit='0' Width='20' Type='Html' Background='#D5EAFE' />
+			<C Name='name' CanEdit='0' Width='250' Type='Text'/>
+			<C Name='fzr'  CanEdit='0' Width='60' Type='Enum' Enum='' EnumKeys='' IconAlign='Right' CanEdit='0' />
+			<C Name='jzgcf' CanEdit='0' Type='Float' Width='80' Format='0.00' />
+			<C Name='sbgzf' CanEdit='0' Type='Float' Format='0.00'/>
+			<C Name='azgcf' CanEdit='0' Type='Float' Format='0.00'/>
+			<C Name='qtfy' CanEdit='0' Type='Float'  Format='0.00'/>
+			<C Name='Sum'  CanEdit='0' Type='Float' Width='80' Formula='jzgcf+sbgzf+azgcf+qtfy' Format='0.00'/>
+			<C Name='unit' CanEdit='0' Type='Enum' Width='80' Enum='|m2|m|kg|m3|t|个|台|元|座' EnumKeys='|m2|m|kg|m3|t|个|台|元|座'  IconAlign='Right'/>
+			<C Name='num'  CanEdit='0' Type='Float'/>
+			<C Name='jjzb' CanEdit='0' Type='Float'  Format='0.00' Formula='Sum/(num == 0 ? 1 : num)' />
+			<C Name='state' CanEdit='1' Type='Enum' Width='80' Enum='|编制中|审核中|审核通过|审核未通过' EnumKeys='|编制中|审核中|审核通过|审核未通过' Width='80' IconAlign='Right'/>
+			<C Name='shyj' CanEdit='1'  Type='Lines' Width='200'  AcceptEnters='1' RelWidth='1'/>
+		</Cols>
+		<Def>
+	        <D Name='R' Kind='Data'  Title='新费用项' jzgcf='0' sbgzf='0' azgcf='0' qtfy='0'/>
+			<D Name='Node'  CanDrag='1' AcceptChild='1' CanEdit='1' CDef='R' AcceptDef='R' Calculated='1' 
+				SumFormula='sum()' jzgcfFormula='sum()' sbgzfFormula='sum()' azgcfFormula='sum()' qtfyFormula='sum()' 
+				 ProjectHtmlPrefix='&lt;B>' ProjectHtmlPostfix='&lt;/B>'/>
+		</Def>
+		<Root CDef='Node' AcceptDef='Node' />
+		<Header name='工程费用名称' jzgcf='建筑工程费' sbgzf='设备购置费' azgcf='安装工程费' qtfy='其他费用' Sum='合计' fzr='负责人' unit='单位' num='数量' jjzb='经济指标' state='状态' flag=' ' shyj='审核意见' />
+		<Head>
+			<I Kind='Filter' name='' fzr=''  fzrButton='Defaults' fzrDefaults='|*RowsVariable|*FilterOff'/>
+		</Head>
+		<Foot>
+			<I Kind='Space' RelHeight='100'/>
+			<I Def='Node' name='合计' ProjectCanEdit='0'  CanEdit='0' CanSelect='0' CanDrag='0' CanDelete='0' CanCopy='0'/>
+		</Foot>
+		<Toolbar Styles='1' Visible='1' Space='-1' Cells='Print,Export,ExpandAll,CollapseAll,Undo,Redo,ZoomIn,ZoomOut,ZoomFit,Columns'/>
+		<MenuCfg ShowDeleted='1' AutoSort='0' AutoUpdate='1' Separator1='0' MouseHover='1' ShowDrag='1' ShowPanel='1' ShowIcons='1'/>
+		<Panel Copy='1' Move='0' Select='1' Delete='1'/>
+</Grid>

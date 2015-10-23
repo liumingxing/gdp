@@ -1,0 +1,9 @@
+<% form_tag :action => 'update_participate', :id=>params[:id] do %>
+    <table class="ft">
+    <% for user in User.find(:all)%>
+        <tr><td><%= check_box_tag "project[user_ids][]", user.id, @project.user_ids.include?(user.id)%><%=user.name%></td></tr>
+      <% end %>
+    </table>  
+    
+    <%= submit_tag "保存" %> | <a href="javascript:history.back(); ">返回</a>
+<% end %>

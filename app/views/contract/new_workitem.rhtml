@@ -1,0 +1,10 @@
+<%= path "新建" + $CONTRACT_OPERATE[params[:t]]%>
+
+<% form_tag :action => 'create_workitem', :id => params[:id], :itemtype=>params[:t] do %>
+  <%= render :partial => "form_workitem" %>
+  <%= submit_tag "保存"%>
+<% end %>
+
+<script>
+  add_tab_button("/img/iconBack.png", "返回", "/contract/show/<%=params[:id]%>");  
+</script>

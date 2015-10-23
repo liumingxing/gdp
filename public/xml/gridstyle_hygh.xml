@@ -1,0 +1,34 @@
+<?xml version='1.0' ?>
+<Grid>
+   <Cfg ExportType='Expanded,Outline' StandardFilter='2' Sorting='0' Undo='1' 
+   id='grid1' SearchExpand='1'  MainCol='name' MaxHeight='1'  MaxWidth='1' ConstWidth='1' IdNames='id' 
+   IdChars='0123456789' NumberId='1' LastId='1' AppendId='1' ShowDeleted='0' DateStrings='1' Adding='1'
+    FullId='1' CaseSensitiveId='0' />
+     <Cols>
+         <C Name='sn' Width='150' Type='Text'/>
+         <C Name='name' Type='Text' Width='300' />
+         <C Name='fzr' Type='Enum' Enum='|胡欣|刘岚|刘明星' EnumKeys='|10306506|10306507|10306748' IconAlign='Right' width='90' />
+         <C Name='mbcb' Width='100' Type='Float' Format='0.00'/>
+         <C Name='nkcb' Width='100' Type='Float' Format='0.00'/>
+         <C Name='itemtype' Width='80' Type='Enum' Enum='|分类|子项' EnumKeys='|1|2' Changed='1' CanEdit='0'/>
+         <C Name='isht' Width='80' Type='Bool' />
+         <C Name='iszb' Width='80' Type='Bool' />
+         <C Name='contractscope' Width='35' RelWidth='1' Type='Text' CanFilter='0' />
+     </Cols>
+     <Def>
+         <D Name='R' DefParent='ClassNode' DefEmpty='LeafClassNode' Kind='Data' CanDrag='1' AcceptChild='0' CanFilter='1' CanEdit='1' ItemType='1' mbcbCost='0' TargetContractCost='0' nkcbFormula='sum()' />
+         <D Name='ClassNode' CanDrag='1' AcceptChild='1' CanFilter='1' CanEdit='1'   CDef='R' AcceptDef='ClassNode,LeafClassNode,LeafNode' Calculated='1' mbcbFormula='sum()' nkcbFormula='sum()' />
+         <D Name='LeafClassNode' CanDrag='1' AcceptChild='1' CanFilter='1' CanEdit='1'  ClassName='新合同分类' CDef='LeafClassNode' AcceptDef='LeafClassNode,LeafNode' Calculated='0' mbcbFormula='sum()' nkcbFormula='sum()' />
+         <D Name='LeafNode' CanDrag='1' AcceptChild='0' CanFilter='1' mbcbCanEdit='0'  CanEdit='1' AcceptDef='LeafNode' />
+     </Def>
+     <Foot>
+         <I Kind='Space' RelHeight='100'/>
+         <I Def='Node' name='合计'/>
+     </Foot>
+     <Root Def='LeafClassNode' CDef='LeafClassNode' AcceptDef='ClassNode,LeafClassNode' />
+     <Header name='合同名称' sn='编号' contractscope='范围' fzr='负责人' itemtype='项类型' mbcb='目标成本' isht='是否合同' iszb='是否招标' nkcb='内控成本'/>
+     <Head><I Kind='Filter' ClassName=''/></Head>
+     <Toolbar Styles='1' Space='-1' Visible='1' Cells='Reload,Print,Export,Undo,Redo,ExpandAll,CollapseAll,Columns'/>
+     <MenuCfg ShowDeleted='0' AutoSort='0' AutoUpdate='0' Separator1='0' MouseHover='1' ShowDrag='1' ShowPanel='1' ShowIcons='0'/>
+     <Panel Copy='0' Move='0' Select='1' Delete='1'/>
+</Grid>

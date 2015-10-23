@@ -1,0 +1,32 @@
+<script>
+propsGrid.setSource({
+                
+                单元格名称: '<%= @table.get_cell_attribute(@row, @col, "name")%>',
+                单元格描述: '<%= @table.get_cell_attribute(@row, @col, "title")%>',
+                文本: '<%= @table.get_cell_attribute(@row, @col, "text")%>',
+                单元格类型: '<%= type_str @table.get_cell_attribute(@row, @col, "type")%>',
+                选择项: '<%= @table.get_cell_attribute(@row, @col, "data") %>',  
+                存储到数据库:  '<%= bool_str @table.get_cell_attribute(@row, @col, "store")%>',
+                必填:   '<%= bool_str @table.get_cell_attribute(@row, @col, "notnull")%>',
+                只读: '<%= bool_str @table.get_cell_attribute(@row, @col, "readonly")%>',
+                显示千分位: '<%= bool_str @table.get_cell_attribute(@row, @col, "thousand")%>',
+                保留小数位: <%= @table.get_cell_attribute(@row, @col, "dot")||0%>,
+                前置字符串: '<%= @table.get_cell_attribute(@row, @col, "prefix")%>',
+                后置字符串: '<%= @table.get_cell_attribute(@row, @col, "postfix")%>',
+                前景色: '<%= @table.get_cell_attribute(@row, @col, "color")%>',
+                背景色: '<%= @table.get_cell_attribute(@row, @col, "background-color")%>',
+                字体: '<%= @table.get_cell_attribute(@row, @col, "font")%>',
+                水平对齐: '<%= align_str @table.get_cell_attribute(@row, @col, "text-align")%>',
+                垂直对齐: '<%= align_str @table.get_cell_attribute(@row, @col, "vertical-align")%>',
+                自动折行: '<%= bool_str @table.get_cell_attribute(@row, @col, "word-wrap")%>',
+                背景图片: '<%= @table.get_cell_attribute(@row, @col, "background-image")%>',
+                上边框: '<%= @table.get_cell_attribute(@row, @col, "border-top")%>',
+                右边框: '<%= @table.get_cell_attribute(@row, @col, "border-right")%>',
+                下边框: '<%= @table.get_cell_attribute(@row, @col, "border-bottom")%>',
+                左边框: '<%= @table.get_cell_attribute(@row, @col, "border-left")%>'
+            });
+ 
+row_height = '<%= @table.row_height(@row) %>';
+col_width  = '<%= @table.col_width(@col) %>';
+floatMenu.setChecked(<%= if @table.float_row?(@row) then "true" else "false" end %>)
+</script>

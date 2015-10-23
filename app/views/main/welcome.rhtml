@@ -1,0 +1,13 @@
+<%= javascript_include_tag 'mootools-1.2.4' %>
+<%= javascript_include_tag 'dumbchat' %>
+
+<div style="text-align:center; padding-top: 50px;">
+    <h1>欢迎登录<%= SystemConfig.find(:first).title%></h1>
+</div>
+
+<div style="text-align:center;">
+    <% c = Message.count_of(current_user.id)%>
+    <% if c > 0%>
+        您有<%= link_to c, :controller=>"message", :action=>"list" %>封未读消息
+    <% end %>
+</div>

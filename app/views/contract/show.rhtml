@@ -1,0 +1,111 @@
+<%= javascript_include_tag 'splitter' %>
+
+<%= path @contract.name + "管理"%>
+
+
+<style>
+form{margin:0px; padding:0px;}
+.ajax_form
+{
+    background-color:#ffe;
+    margin-bottom: 6px;
+}
+
+.ajax_form td
+{
+    padding: 2px;
+}
+
+.MySplitter {
+	height: 100%;
+	width: 100%;
+}
+
+.TopPane {
+	overflow: auto;
+	height: 200px;
+	min-height: 100px;
+	max-height: 500px;
+	padding: 4px;
+}
+
+.BottomPane {
+	
+	overflow: auto;
+}
+
+.MySplitter .hsplitbar {
+	height: 6px;
+	background: #cca url(/img/hgrabber.gif) no-repeat center;
+}
+.MySplitter .hsplitbar.active, #MySplitter .hsplitbar:hover {
+	background: #e88 url(/img/hgrabber.gif) no-repeat center;
+}
+
+.tab-pane{height: 96%;}
+.tab-page{height: 98%;}
+</style>
+
+<script>
+ 
+$().ready(function() {
+	$(".MySplitter").splitter({
+		type: "h", 
+		sizeTop: true,	/* use height set in stylesheet */
+		accessKey: "P"
+	});
+	
+	
+});
+</script>
+
+<%= stylesheet_link_tag "tab.webfx.css" %>
+<%= javascript_include_tag 'tabpane' %>
+
+
+<div class="tab-pane" id="processflow">
+    <% for c_item in Dictionary.find_by_name("合同操作").items%>
+    <div class="tab-page" id="<%= c_item.code %>">
+      <h2 class="tab">&nbsp;<%= c_item.name %>&nbsp;</h2>
+      <div style="height:100%;">
+            <div class="MySplitter">
+            	<div class="TopPane">
+                    <%= link_to "新增", :action=>"new_workitem", :id=>@contract, :t=>c_item.code%>
+                    <table id="table_<%=c_item.code%>" class="list" border="1" width=98%>
+                      <tr class="head">
+                        <th>编号</th>
+                        <th>名称</th>
+                        <th>创建人</th>
+                        <th>创建时间</th>
+                        <th>查看范围</th>
+                        <th>完成状态</th>
+                        <th colspan=3>操作</th>
+                      </tr>
+                      <% workitems = Workitem.find(:all, :conditions=>"contract_id = #{@contract.id} and itemtype = '#{c_item.code}'")%>
+                      <% for item in workitems%>
+                        <%= color_row(item.id)%>
+                            <td><%=item.sn%></td>
+                            <td><%= link_to_remote item.name, :update=>"detail_#{c_item.code}", :url=>{:action=>"work_item_detail", :id=>item.id, :t=>c_item.code}%></td>
+                            <td><%=item.user.name%></td>
+                            <td><%=item.created_at.to_date%></td>
+                            <td><%=item.scope%></td>
+                            <td><%={1=>"完成", 0=>"未完成"}[item.finished]%></td>
+                            <td><%= link_to "修改", :action=>"edit_workitem", :id=>item%></td>
+                            <td><%= link_to '删除', { :action => 'destroy_workitem', :id => item }, :confirm => '确认删除本记录吗?', :method => :post %></td>
+                        </tr>
+                      <% end %>
+                    </table>
+            	</div>
+            	<div class="BottomPane" id="detail_<%=c_item.code%>">
+            		
+            	</div>
+            </div>
+      </div>
+    </div>
+    <% end %>
+    <div class="tab-page" id="a2">
+      <h2 class="tab">&nbsp;台账&nbsp;</h2>
+      <div>
+      </div>
+    </div>
+</div>    

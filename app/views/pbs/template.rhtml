@@ -1,0 +1,23 @@
+<%= javascript_include_tag 'Grid/GridE' %>
+<%= stylesheet_link_tag "/javascripts/Grid/Office/Grid.css" %>
+
+<style>
+#client{padding:0px;}
+</style>
+
+<% form_tag({:action => 'import_xml'}, :multipart => true) do %>
+  <%= file_field_tag "template" %>
+  <%= submit_tag "导入模板" %>
+<% end %>
+<div style="width:98%;height:100%;" id='grid'> 
+  <bdo layout_url="/pbs/get_style" Data_Url="/pbs/get_template_data" Upload_Url="/pbs/upload_data"> </bdo>
+</div>
+
+<script>
+add_link("导出模板", "/pbs/export_xml")
+function save()
+{
+    Grids["treegrid"].Save();
+}
+add_tab_button("/img/iconSave.png", "保存", "javascript:save()");  
+</script>

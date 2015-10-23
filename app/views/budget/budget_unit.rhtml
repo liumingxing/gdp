@@ -1,0 +1,70 @@
+<% if !params[:readonly]%>
+<div style="margin:4px;">
+<a href="#" onclick="JqueryDialog.Open1('插入分项指标', '/budget/insert_fxzb/<%=@budget.id%>', 650, 400);">插入分项指标</a>
+</div>
+<% end %>
+
+<table id="table" class="list" border="1" width=99%>
+  <tr class="head">
+    <th>名称</th>
+    <% if @budget.feetype == "工程费用"%>
+        <th>估算依据</th>
+    <% end %>
+    <th>单位</th>
+    <th>数量</th>
+    <% if @budget.feetype == "工程费用"%>
+        <th>单价</th>
+    <% else %>
+        <th>单价（或费率）</th>
+    <% end%>
+    <% if @budget.feetype == "工程费用"%>
+        <th>系数</th>
+    <% end%>
+    <th>合计</th>
+    <th>费用类型</th>
+    <th>备注</th>
+    <% if !params[:readonly]%>
+    <th colspan=3>操作</th>
+    <% end %>
+  </tr>
+  
+<% for unit in @budget.units %>
+  <%= color_row %>
+    <td><%=h unit.name %></td>
+    <% if @budget.feetype == "工程费用"%>
+        <td><%=h unit.basis %></td>
+    <% end %>
+    <td><%=h unit.unit %></td>
+    <td align='right'><%=h unit.num %></td>
+    <td align='right'><%=h money unit.price %></td>
+    <% if @budget.feetype == "工程费用"%>
+        <td align='right'><%=h money unit.rate %></td>
+    <% end %>
+    <td align='right'><%=h money unit.num.to_f * unit.price * unit.rate.to_f %></td>
+    <td><%=h unit.feetype %></td>
+    <td><%=h unit.desc %></td>
+    <% if !params[:readonly]%>
+    <td align='center'><%= link_to_remote "修改", :update=>"form_div", :url=>{:action=>"edit_unit", :id=>unit}%></td>
+    <td align='center'><%= link_to_remote "删除", :update=>"detail", :confirm => '确认删除本记录吗?', :url=>{:action=>"delete_unit", :id=>unit}%></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+<div id="form_div">
+</div>
+
+<% if @budget.children.size == 0 && !params[:readonly]%>
+    <br/>
+    <%= link_to_remote "添加", :update=>"form_div", :url=>{:action=>"add_unit", :id=>@budget}%>
+<% end %>
+
+<% if params[:add]%>
+<script>
+var grid = Grids["grid"];
+grid.SetValue(_lastRow, "jzgcf", <%= @budget.unit_sum("建筑工程费")%>, 1);
+grid.SetValue(_lastRow, "azgcf", <%= @budget.unit_sum("安装工程费")%>, 1);
+grid.SetValue(_lastRow, "sbgzf", <%= @budget.unit_sum("设备购置费")%>, 1);
+grid.SetValue(_lastRow, "qtfy", <%= @budget.unit_sum("其他费")%>, 1);
+</script>
+<% end %>

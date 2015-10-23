@@ -1,0 +1,11 @@
+<%= path "新增投资控制模板"%>
+
+<% form_tag :action => 'create' do %>
+  <%= render :partial => 'form' %>
+<% end %>
+
+
+<script>
+add_tab_button("/img/iconBack.png", "返回", "/tztemplate/index"); 
+add_submit("保存");
+</script>

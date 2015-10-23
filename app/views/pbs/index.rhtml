@@ -1,0 +1,31 @@
+<%= path "单项工程"%>
+
+<table id="table" class="list" border="1" width=700px>
+  <tr class="head">
+    <th width=30%>建筑名称</th>
+    <th width=30%>单项类型</th>
+    <th colspan=3>操作</th>
+  </tr>
+  
+<% for pbs in @pbs %>
+  <%= color_row %>
+    <td><%=h pbs.name %></td>
+    <td><%=h pbs.pbstype %></td>
+    <td><%= link_to "设置pbs", :action=>"set_pbs", :id=>pbs%></td>
+    <td><%= link_to "编辑指标", :action=>"set_price", :id=>pbs%></td>
+    <td><%= link_to "设置属性值", :action=>"set_property", :id=>pbs%></td>
+  </tr>
+<% end %>
+</table>
+
+
+<%= will_paginate @pbs %>
+
+
+
+<script>
+  add_tab_button("/img/iconNew.png", "添加", "/pbs/new");   
+  add_dynamic_button("/img/iconEdit.png", "修改", "/pbs/edit/");
+  add_sep();
+  add_dynamic_delete_button("/pbs/destroy/");  
+</script>

@@ -1,0 +1,32 @@
+        <%= @table.to_s(:style)  %>
+            
+            <table class='ruler_table' >
+                <tr>
+                    <td height="25px" width="30px" class="ruler"></td>
+                    <% 1.upto(@table.cols_count) do |i|%>
+                        <td width="<%=@table.col_width(i)%>" class="ruler"><%=('A'[0]-1+i).chr%></td>
+                    <% end %>
+                    <td class="ruler"></td>
+                </tr>
+                <tr>
+                    <td width="30px" height="<%= @table.row_height(1) %>" class="ruler <%='floatrow' if @table.float_row?(1)%>">1</td>
+                    <td align="left" valign="top" colspan="<%=@table.cols_count+1%>" rowspan="<%=@table.rows_count+1%>">
+                        <%= @table.to_s(:design) %>
+                    </td>
+                </tr>
+                <% 2.upto(@table.rows_count) do |i|%>
+                <tr>
+                    <td height="<%= @table.row_height(i) %>" class="ruler <%='floatrow' if @table.float_row?(i)%>"><%=i%></td>
+                </tr>
+                <% end %>
+                <tr>
+                    <td  class="ruler"></td>
+                </tr>
+            </table>
+
+            <% if refresh %>
+            <script>
+                parseform();
+                select_area(rect_row1, rect_col1, rect_row2, rect_col2);
+            </script>
+            <% end %>

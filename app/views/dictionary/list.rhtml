@@ -1,0 +1,24 @@
+<%= path "字典维护"%>
+
+<table class="list" id="table" width=400px border=1>
+  <tr class="head">
+    <th>字典名称</th>
+    <th colspan=2>操作</th>
+  </tr>
+<% for dictionary in @dictionaries %>
+  <%= color_row(dictionary.id)%>
+    <td><%=h dictionary.name %></td>
+    <td align="center"><%= link_to '条目管理', :action => 'items', :id => dictionary %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= will_paginate @dictionaries%>
+<br />
+
+
+<script>
+  add_tab_button("/img/iconNew.png", "添加", "/dictionary/new/");   
+  add_sep();
+  add_dynamic_delete_button("/dictionary/destroy/");   
+</script>

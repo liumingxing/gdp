@@ -1,0 +1,24 @@
+<%= error_messages_for 'role' %>
+
+<table class="ft" border="1">
+<!--[form:role]-->
+<tr>
+	<td>建筑名称</td>
+	<td><%= text_field 'pbs', 'name', :validate=>"required:true", :title=>"建筑"  %></td>
+</tr>
+
+<tr>
+	<td>单项类型</td>
+	<td><%= select("pbs", "pbstype", Dictionary.find(2).items.collect {|p| [ p.name, p.name ] }, { :include_blank => true })  %></td>
+</tr>
+<!--[eoform:role]-->
+
+</table>
+
+<br/>
+请选择权限:
+<table class=list>
+  <% for right in Right.find(:all)%>
+    <tr><td><%= check_box_tag "role[right_ids][]", right.id, @role.right_ids.include?(right.id)%><%=right.name%></td></tr>
+  <% end %>
+</table>

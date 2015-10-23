@@ -1,0 +1,27 @@
+<%= path "权限列表"%>
+
+<table id="table" class="list" border="1" width=500px>
+  <tr class="head">
+    <th>名称</th>
+    <th>描述</th>
+    <th colspan=3>操作</th>
+  </tr>
+  
+<% for right in @rights %>
+  <%= color_row %>
+    <td><%=h right.name %></td>
+    <td><%=h right.description %></td>
+    
+    <td><%= link_to '修改', :action => 'edit', :id => right %></td>
+    <td><%= link_to '删除', { :action => 'destroy', :id => right }, :confirm => '确认删除本记录吗?', :method => :post %></td>
+  </tr>
+<% end %>
+</table>
+
+
+<%= will_paginate @rights %>
+
+<br />
+
+<%= link_to '新建', :action => 'new' %>
+

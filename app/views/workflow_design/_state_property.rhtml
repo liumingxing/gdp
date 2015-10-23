@@ -1,0 +1,70 @@
+<% form_remote_tag( :update=>"property", :url=>"/workflow_design/set_state_property/#{@workflow.id}") do %>
+                    <table class="ft" border="1">
+                        <tr>
+                            <th>状态名称</th>
+                            <td>
+                                <% if %w(开始 结束).include?(@element.attributes["name"]) %>
+                                    <%= text_field_tag 'name', @element.attributes["name"], :disabled=>"disable" %>
+                                <% else %>
+                                    <%= text_field_tag 'name', @element.attributes["name"]%>
+                                <% end %>
+                                <font color="red">*</font>
+                                <%= hidden_field_tag 'oldname', @element.attributes["name"]%>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>限制方式</th>
+                            <td>
+                            <select id="limit_type" name='limit_type' onchange="$('#limit_div').load('/workflow_design/limit/<%=@workflow.id%>?t='+$('#limit_type').val() + '&state=' + $('#name').val()); ">
+                                 <%= options_for_select [["权限", "right"], ["固定人", "fix_user"], ["启动时选择人", "select_user"]], @element.attributes["limit_type"]%>
+                            </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>限制</th>
+                            <td><div id="limit_div">
+                            <% if @element.attributes["limit_type"] == 'fix_user'%>
+                                <select id='limit' name='limit'>
+                                    <%= options_for_select User.find(:all).collect{|u| [u.name, u.id]}, @element.attributes["limit"].to_i%>
+                                </select>
+                            <% elsif @element.attributes["limit_type"] == 'select_user'%>
+                                无
+                            <% else %>
+                                <select id='limit' name='limit'>
+                                    <option value=''></option>
+                                    <%= options_for_select [%w(分管领导 分管领导), %w(发起人 发起人)] + Right.find(:all).collect{|r| [r.name, r.name]}, @element.attributes["limit"]%>
+                                </select>
+                            <% end %>
+                            </div></td>
+                        </tr>
+                        <tr>
+                            <td colspan=2>
+                                <%=check_box_tag 'same_department', "1", @element.attributes["same_department"] == "1"%>与发起人同部门
+                                <%=check_box_tag 'select_next', "1", @element.attributes["select_next"] == "1" %>自选下步操作
+                                <%=check_box_tag 'huiqian', "1", @element.attributes["huiqian"] == "1" %>会签
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>进入事件</th>
+                            <td><%= text_area_tag 'enter', @element.attributes["enter"], :rows=>4, :cols=>23 %></td>
+                        </tr>
+                        <tr>
+                            <th>离开事件</th>
+                            <td><%= text_area_tag 'leave', @element.attributes["leave"], :rows=>4, :cols=>23 %></td>
+                        </tr>
+                    </table>
+                    <%= submit_tag "更新"%>  
+                    <%=link_to '删除', {:action=>"delete_state", :id=>@workflow.id, :name=>@element.attributes["name"]}, :confirm => "确认删除吗?"%>
+<% end %>
+
+<% if alert%>
+<script>alert('<%=alert%>');</script>
+<% end %>
+
+<% if notice%>
+<script>$("#server_response").text('<%=notice%>')</script>
+<% end%>
+
+<% if script%>
+<script><%= script %></script>
+<% end %>

@@ -1,0 +1,79 @@
+<%= path "设置工作流表单及关联表"%>
+
+<script>
+function upload(formid)
+{
+    tag = $("#" + formid)
+    
+    if (tag.attr("opened"))
+    {
+        tag.hide();
+        tag.attr("opened", false);
+    }
+    else
+    {
+        tag.show();
+        tag.attr("opened", true);   
+    }
+}
+</script>
+
+<div>
+  <% if @states.size > 0%>
+    <% form_tag(:action => 'uploadinterface', :id=>@workflow.id) do %>
+                设置到所有状态：
+                <select name="form">
+                    <%= options_for_select LmxForm.find(:all).collect{|f| [f.name, f.id]}%>
+                </select>
+                <%= submit_tag '保存' %>
+    <% end%>
+    <table class="list" border="1" width=72%>
+    <tr class="clsTrHeader">
+        <th width=30%>状态</th>
+        <th width=20%>查看权限</th>
+        <th width=10%>查看界面</th>
+        <th width=40%>上传界面</th>
+    </tr>
+      <% @states.each_with_index{|state, index|%>
+          <%index += 1%>
+          <%=color_row(index)%>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;<%=state.attributes["name"]%></td>
+            <td><%={"right"=>"权限", "fix_user"=>"固定人", "select_user"=>"选择人"}[state.attributes["limit_type"]]%> - <%=state.attributes["limit"]%></td>
+            <td>
+                <% interface = WorkflowInterface.find(:first, :conditions=>"flow_id = #{@workflow.id} and state_name='#{state.attributes["name"]}'")%>
+                <%= link_to interface.form.name, {:controller=>"lmx_form", :action=>"edit_preview", :id=>@workflow}, {:target=>"_blank"} if interface%>
+            </td>
+            <td>
+            <a href="javascript:upload('form<%=@workflow.id%><%=state.attributes["name"]%>')">设置</a>
+            <% form_tag({:action => 'uploadinterface', :id => @workflow},{:enctype=>"multipart/form-data", :style=>"display:none", :id=>"form"+@workflow.id.to_s+state.attributes["name"]}) do%>
+                <select name="form">
+                    <%= options_for_select LmxForm.find(:all).collect{|f| [f.name, f.id]}%>
+                </select>
+                <%= hidden_field_tag 'name', state.attributes["name"]%>
+                <%= submit_tag '保存' %>
+            <% end%>
+            </td>
+          </tr>
+        <% }%>
+     </table>
+     <br/>
+   <% end %>
+   <% if  !@workflow.ischild %>
+        <% if (!@workflow.formtable)%>
+              <a href="javascript:upload('form<%=@workflow.id%>')">生成关联表</a> 
+              <% form_tag({:action => 'upload_formtable', :id => @workflow},{:style=>"display:none", :id=>"form"+@workflow.id.to_s}) do %>
+                 <select name="form">
+                    <%= options_for_select LmxForm.find(:all).collect{|f| [f.name, f.id]}%>
+                 </select>
+                 <%= submit_tag '生成' %>
+              <% end %>
+        <% else %>
+              <%=link_to("删除关联表", {:action=>"delete_formtable", :id=>@workflow.id}, :style=>"color:red")%>
+        <% end%>
+  <% end %>
+</div>
+
+<script>
+  add_tab_button("/img/iconBack.png", "返回", "/workflow_design/list");  
+</script>
+

@@ -1,0 +1,54 @@
+<table class="ft" border="1" width=700px;>
+<tr>
+	<th width=175px>摘要名称：</th>
+	<td width=200px><%= text_field 'subitem', 'name', :validate=>"required:true", :title=>"摘要名称"%></td>
+	<th width=175px>申报单位：</th>
+	<td width=200px><%= text_field 'subitem', 'proposed_company'%></td>
+</tr>
+
+<tr>
+	<th>专业：</th>
+	<td><%= select 'subitem', 'special', Dictionary.find_by_name("公司专业").items.collect{|i| [i.name, i.name]}, {:include_blank=>true}%></td>
+	<th>变更原因：</th>
+	<td><%= text_field 'subitem', 'change_reason'%></td>
+</tr>
+
+<tr>
+	<th>变更类型：</th>
+	<td><%= select 'subitem', 'change_type', Dictionary.find_by_name("变更类型").items.collect{|i| [i.name, i.name]}, {:include_blank=>true}%></td>
+	<th>估算金额：</th>
+	<td><%= text_field 'subitem', 'estimate_amount'%></td>
+</tr>
+
+<tr>
+	<th>送审日期：</th>
+	<td><%= text_field 'subitem', 'trial_date', :onfocus=>"WdatePicker()"%></td>
+	<th>送审金额：</th>
+	<td><%= text_field 'subitem', 'trial_amount'%>元</td>
+</tr>
+
+<tr>
+	<th>审核日期：</th>
+	<td><%= text_field 'subitem', 'validate_date', :onfocus=>"WdatePicker()"%></td>
+	<th>审定金额：</th>
+	<td><%= text_field 'subitem', 'validate_amount'%>元</td>
+</tr>
+
+<tr>
+	<th>经手人：</th>
+	<td><%= text_field 'subitem', 'principal'%></td>
+	<th>生效时间：</th>
+	<td><%= text_field 'subitem', 'effective_date', :onfocus=>"WdatePicker()"%></td>
+</tr>
+
+<tr>
+	<th>变更内容概要：</th>
+	<td colspan=3><%= text_area 'subitem', 'change_summary', :rows=>5, :cols=>60%></td>
+</tr>
+
+<tr>
+	<th>备注：</th>
+	<td colspan=3><%= text_area 'subitem', 'memo', :rows=>5, :cols=>60%></td>
+</tr>
+
+</table>

@@ -1,0 +1,24 @@
+<%= error_messages_for 'role' %>
+
+<table class="ft" border="1">
+<!--[form:role]-->
+<tr>
+	<td>角色名称</td>
+	<td><%= text_field 'role', 'name', :validate=>"required:true", :title=>"角色名称"  %></td>
+</tr>
+
+<tr>
+	<td>描述</td>
+	<td><%= text_field 'role', 'description'  %></td>
+</tr>
+<!--[eoform:role]-->
+
+</table>
+
+<br/>
+请选择权限:
+<table class=list>
+  <% for right in Right.find(:all)%>
+    <tr><td><%= check_box_tag "role[right_ids][]", right.id, @role.right_ids.include?(right.id)%><%=right.name%></td></tr>
+  <% end %>
+</table>

@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
+<!--
+ * FCKeditor - The text editor for Internet - http://www.fckeditor.net
+ * Copyright (C) 2003-2009 Frederico Caldeira Knabben
+ *
+ * == BEGIN LICENSE ==
+ *
+ * Licensed under the terms of any of the following licenses at your
+ * choice:
+ *
+ *  - GNU General Public License Version 2 or later (the "GPL")
+ *    http://www.gnu.org/licenses/gpl.html
+ *
+ *  - GNU Lesser General Public License Version 2.1 or later (the "LGPL")
+ *    http://www.gnu.org/licenses/lgpl.html
+ *
+ *  - Mozilla Public License Version 1.1 or later (the "MPL")
+ *    http://www.mozilla.org/MPL/MPL-1.1.html
+ *
+ * == END LICENSE ==
+ *
+ * Smileys (emoticons) dialog window.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="robots" content="noindex, nofollow" />
+	<style type="text/css">
+		.Hand
+		{
+			cursor: pointer;
+			cursor: hand;
+		}
+	</style>
+	<script src="common/fck_dialog_common.js" type="text/javascript"></script>
+	<script type="text/javascript">
+
+var dialog	= window.parent ;
+var oEditor = dialog.InnerDialogLoaded() ;
+
+window.onload = function ()
+{
+	// First of all, translate the dialog box texts
+	oEditor.FCKLanguageManager.TranslatePage(document) ;
+
+	dialog.SetAutoSize( true ) ;
+}
+
+function insertBidkeywords( param )
+{
+	oEditor.FCKUndo.SaveUndoStep() ;
+
+	var oImg = oEditor.FCK.InsertElement( 'span' ) ;
+	oImg.className = param.value ;
+	oImg.innerHTML = '{#' + param.getAttribute('cnname') + '#}' ;
+
+	// For long smileys list, it seams that IE continues loading the images in
+	// the background when you quickly select one image. so, let's clear
+	// everything before closing.
+	document.body.innerHTML = '' ;
+
+	dialog.Cancel() ;
+}
+
+function over(td)
+{
+	td.className = 'LightBackground Hand' ;
+}
+
+function out(td)
+{
+	td.className = 'DarkBackground Hand' ;
+}
+	</script>
+</head>
+<body style="overflow: hidden">
+<table width="100%" border="1">
+  <tr>
+    <th scope="col">&nbsp;</th>
+    <th scope="col">序号&nbsp;</th>
+    <th scope="col">参数名称&nbsp;</th>
+  </tr>
+  <tr>
+    <td>&nbsp;<input name="canshuitem" type="radio" value="project_name" cnname="项目名称" onClick="insertBidkeywords(this);" checked /></td>
+    <td>&nbsp;1</td>
+    <td>&nbsp;项目名称</td>
+  </tr>
+  <tr>
+    <td>&nbsp;<input name="canshuitem" type="radio" value="project_code" cnname="项目编号" onClick="insertBidkeywords(this);" /></td>
+    <td>&nbsp;2</td>
+    <td>&nbsp;项目编号</td>
+  </tr>
+  <tr>
+    <td>&nbsp;<input name="canshuitem" type="radio" value="open_addr" cnname="开标地点" onClick="insertBidkeywords(this);" /></td>
+    <td>&nbsp;3</td>
+    <td>&nbsp;开标地点</td>
+  </tr>
+  <tr>
+    <td>&nbsp;<input name="canshuitem" type="radio" value="project_time" cnname="开标时间" onClick="insertBidkeywords(this);" /></td>
+    <td>&nbsp;4</td>
+    <td>&nbsp;开标时间</td>
+  </tr>
+  <tr>
+    <td>&nbsp;<input name="canshuitem" type="radio" value="evaluation_time" cnname="评标时间" onClick="insertBidkeywords(this);" /></td>
+    <td>&nbsp;5</td>
+    <td>&nbsp;评标时间</td>
+  </tr>
+  <tr>
+    <td>&nbsp;<input name="canshuitem" type="radio" value="pingfenbiaozhun" cnname="评分标准" onClick="insertBidkeywords(this);" /></td>
+    <td>&nbsp;6</td>
+    <td>&nbsp;评分标准</td>
+  </tr>
+  <tr>
+    <td>&nbsp;<input name="canshuitem" type="radio" value="pingfenxize" cnname="评标细则" onClick="insertBidkeywords(this);" /></td>
+    <td>&nbsp;7</td>
+    <td>&nbsp;评标细则</td>
+  </tr>
+  <tr>
+    <td>&nbsp;<input name="canshuitem" type="radio" value="toubiaogeshi" cnname="投标格式" onClick="insertBidkeywords(this);" /></td>
+    <td>&nbsp;8</td>
+    <td>&nbsp;投标格式</td>
+  </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,10 @@
+<%= path "修改日志过滤器"%>
+
+<% form_tag :action => 'update', :id => @logfilter do %>
+  <%= render :partial => 'form' %>
+<% end %>
+
+<script>
+  add_submit("保存");
+  add_tab_button("/img/iconBack.png", "返回", "/logfilter/list");  
+</script>

@@ -1,0 +1,33 @@
+<table class="ft" border="1" width=700px;>
+<tr>
+	<th width=175px>摘要名称：</th>
+	<td width=200px><%= text_field 'subitem', 'name', :validate=>"required:true", :title=>"摘要名称"%></td>
+	<th width=175px>描述：</th>
+	<td width=200px><%= text_field 'subitem', 'desc'%></td>
+</tr>
+
+<tr>
+	<th>送审日期：</th>
+	<td><%= text_field 'subitem', 'trial_date', :onfocus=>"WdatePicker()"%></td>
+	<th>送审金额：</th>
+	<td><%= text_field 'subitem', 'trial_amount'%>元</td>
+</tr>
+
+<tr>
+	<th>结算日期：</th>
+	<td><%= text_field 'subitem', 'clearing_date', :onfocus=>"WdatePicker()"%></td>
+	<th>结算金额：</th>
+	<td><%= text_field 'subitem', 'clearing_amount'%>元</td>
+</tr>
+
+<tr>
+	<th>经手人：</th>
+	<td colspan=3><%= text_field 'subitem', 'principal'%></td>
+</tr>
+
+<tr>
+	<th>备注：</th>
+	<td colspan=3><%= text_area 'subitem', 'memo', :rows=>5, :cols=>60%></td>
+</tr>
+
+</table>

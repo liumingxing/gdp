@@ -1,0 +1,76 @@
+<%= error_messages_for 'company' %>
+
+<table class="ft" border="1">
+<!--[form:company]-->
+<tr>
+	<th>企业名称</th>
+	<td><%= text_field 'company', 'name', :validate=>"required:true", :title=>"企业名称"  %></td>
+</tr>
+
+<tr>
+	<th>系统别名</th>
+	<td><%= text_field 'company', 'alias'  %></td>
+</tr>
+
+<tr>
+	<th>公司性质</th>
+	<td><%= select 'company', 'company_type', Dictionary.find_by_name('公司类型').items.collect{|item| [item.name, item.name]}%></td>
+</tr>
+
+<tr>
+	<th>所在省份</th>
+	<td><%= select 'company', 'area', Area.provinces.collect{|p| [p.text, p.text]}  %></td>
+</tr>
+
+<tr>
+	<th>地址</th>
+	<td><%= text_field 'company', 'address', :validate=>"required:true", :title=>"地址"  %></td>
+</tr>
+
+<tr>
+	<th>联系人</th>
+	<td><%= text_field 'company', 'linker' %></td>
+</tr>
+
+<tr>
+	<th>联系电话</th>
+	<td><%= text_field 'company', 'telephone' %></td>
+</tr>
+
+<tr>
+	<th>传真</th>
+	<td><%= text_field 'company', 'fax' %></td>
+</tr>
+
+<tr>
+	<th>公司主页</th>
+	<td><%= text_field 'company', 'homepage'  %></td>
+</tr>
+
+<tr>
+	<th>注册资金</th>
+	<td><%= text_field 'company', 'register_fund'  %>（万元）</td>
+</tr>
+
+<tr>
+	<th>邮编</th>
+	<td><%= text_field 'company', 'post_code'  %></td>
+</tr>
+
+<tr>
+	<th>资质等级</th>
+	<td><%= text_field 'company', 'grade'  %></td>
+</tr>
+
+<tr>
+	<th>工商注册号</th>
+	<td><%= text_field 'company', 'business_number'  %></td>
+</tr>
+
+<tr>
+	<th>公司简介</th>
+	<td><%= text_area 'company', 'desc', :rows=>6, :cols=>50  %></td>
+</tr>
+<!--[eoform:company]-->
+
+</table>

@@ -1,0 +1,9 @@
+<%= path "修改名称"%>
+
+<% form_tag :action => 'update', :id => @doc do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Edit' %>
+<% end %>
+
+<%= link_to 'Show', :action => 'show', :id => @doc %> |
+<%= link_to 'Back', :action => 'list' %>

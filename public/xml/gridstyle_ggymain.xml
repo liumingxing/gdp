@@ -1,0 +1,34 @@
+<Grid>
+	<Cfg Editing='0' ExportType='Expanded,Outline' StandardFilter='2' Sorting='0' id='grid' 
+		SearchExpand='1'  MainCol='name' MaxHeight='1'  MaxWidth='1' ConstWidth='0' IdNames='id' 
+		IdChars='0123456789' NumberId='1' LastId='1' AppendId='1' ShowDeleted='0' DateStrings='1' 
+		Adding='1' FullId='1' CaseSensitiveId='0' />
+    <Cols>
+		<C Name='name' Width='250' Type='Text'/>
+        <C Name='userid' CanFilter='1' Type='Enum' Enum='|胡欣|刘岚|刘明星' EnumKeys='|10306506|10306507|10306748' IconAlign='Right' VisibleLap='1' Visible='0' />
+        <C Name='jzgcf' Width='80' Type='Float' Format='0.00'/>
+        <C Name='azgcf' Width='80' Type='Float' Format='0.00'/>
+        <C Name='sbgzf' Width='80' Type='Float' Format='0.00'/>
+        <C Name='qtfy' Width='80' Type='Float' Format='0.00'/>
+        <C Name='Sum' Width='80'  Type='Float' Formula='jzgcf + sbgzf + azgcf + qtfy' Format='0.00'/>
+        <C Name='unit' Width='80' Type='Text'/>
+        <C Name='num'  Width='80' Type='Float'/>
+    `   <C Name='jjzb' Width='80' Type='Float' RelWidth='0' Format='0.00' Formula='Sum/(num == 0 ? 1 : num)'/>
+        <C Name='state' Type='Text' Width='80'/>
+        <C Name='shyj' CanEdit='0' Type='Lines' Width='200'  AcceptEnters='1' RelWidth='1'/>
+	</Cols>
+	<Def>
+			<D Name='Node'  CanDrag='1' AcceptChild='1' CanEdit='1' CDef='R' AcceptDef='R' Calculated='1' 
+				SumFormula='sum()' jzgcfFormula='sum()' sbgzfFormula='sum()' azgcfFormula='sum()' qtfyFormula='sum()' 
+				 ProjectHtmlPrefix='&lt;B>' ProjectHtmlPostfix='&lt;/B>'/>
+	</Def>
+	<Header name='工程费用名称' jzgcf='建筑工程费' sbgzf='设备购置费' azgcf='安装工程费' qtfy='其他费用' Sum='合计' userid='负责人' state='状态' unit='单位' num='数量' jjzb='经济指标' shyj='审核意见'/> 
+	<Head><I Kind='Filter' Title=''/></Head>
+	<Foot>
+		<I Def='Node' name='合计' ProjectCanEdit='0'  CanEdit='0' CanSelect='0' CanDrag='0' CanDelete='0' CanCopy='0'/>
+		
+	</Foot>
+	<Toolbar Styles="1" Space="-1" Cells="Repaint,Print,Export,Undo,Redo,Sort,Calc,ExpandAll,CollapseAll,ZoomIn,ZoomOut,ZoomFit,Columns"/>
+	<MenuCfg ShowDeleted="0" AutoSort="0" AutoUpdate="1" Separator1="0" MouseHover="1" ShowDrag="1" ShowPanel="1" ShowIcons="0"/>
+	<Panel Copy="0" Move="0" Select="0" Delete="0"/>
+</Grid>

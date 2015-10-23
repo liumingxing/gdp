@@ -1,0 +1,35 @@
+<%= path "版本管理"%>
+
+<% form_tag :action=>"compare_version", :t=>params[:t] do%>  
+<table id="table" class="list" border="1" width=100%>
+  <tr class="head">
+    <th></th>
+    <th>流水号</th>
+    <th>状态</th>
+    <th>名称</th>
+    <th>创建人</th>
+    <th>创建时间</th>
+    <th>操作</th>
+  </tr>
+
+<% for version in @versions %>
+  <%= color_row(version.id) %>
+    <td align="center"><%=check_box_tag "version[]", version.id%></td>
+    <td><%=h version.id %></td>
+    <td><%=h "当前版本" if version.current == 1 %></td>
+    <td><%=h version.text%></td>
+    <td><%=h version.creator%></td>
+    <td><%=h version.created_at.to_s(:db)%></td>
+    <td><%= link_to "设为当前版本", :action=>"set_current_version", :id=>version, :t=>params[:t] if version.current != 1%></td>
+  </tr>
+<% end %>
+</table>
+
+
+<%= submit_tag "比较"%>
+
+<% end %>
+
+<script>
+  add_dynamic_button("/img/iconEdit.png", "修改", "/budget/edit_version/");
+</script>

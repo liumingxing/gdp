@@ -1,0 +1,10 @@
+<%=@table.to_s(:style)%>
+
+<% form_tag :action => 'update', :id=>params[:id], :form=>params[:form], :order=>params[:order] do%>
+  <%= @table.to_s(:edit, @asset) %>
+  <%= submit_tag "保存" %>
+<% end %>
+
+<script>
+  add_tab_button("/img/iconBack.png", "返回", "/asset/list?form=<%=params[:form]%>");  
+</script>

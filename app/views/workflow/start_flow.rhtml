@@ -1,0 +1,19 @@
+<%= path "发起流程"%>
+<table id="table" class="list" border="1" width=60%>
+    <tr class="head">
+        <th width=70%>流程名称</th>
+        <th>操作</th>
+    </tr>
+    <% @flows.each_with_index{|flow, index|%>
+    <tr>
+        <td><%= flow.name%> <%= "(任意流)" if flow.class == LmxForm%></td>
+        <td align="center">
+        <%= button_to "发起", "/workflow/write_form?flowid=#{flow.id}"%>
+        </td>
+    </tr>
+    <% } %>
+</table>
+
+<div class="submit_div">
+<%= will_paginate @flows%>
+</div>

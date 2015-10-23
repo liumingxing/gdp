@@ -1,0 +1,28 @@
+<%= path "我的消息"%>
+
+<table id="table" class="list" border="1" width=800px>
+  <tr class="head">
+    <th>发送人</th>
+    <th width=160px>发送时间</th>
+    <th>标题</th>
+    <th width=50%>内容</th>
+  </tr>
+  
+<% for message in @messages %>
+  <%= color_row(message.id) %>
+    <td><%= link_to message.sender, :action=>"show", :id=>message %></td>
+    <td><%=h message.created_at.to_s(:db) %></td>
+    <td><%=h message.title %></td>
+    <td><%=h truncate(message.text) %></td>
+  </tr>
+<% end %>
+</table>
+
+
+<%= will_paginate @messages %>
+
+<script>
+add_tab_button("/img/iconNew.png", "添加", "/message/new/");   
+add_sep();
+add_dynamic_delete_button("/message/destroy/");   
+</script>

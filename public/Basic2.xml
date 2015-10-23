@@ -1,0 +1,14 @@
+<Grid>
+<Cfg id='Simple2'/>
+<Cols>
+      <C Name='Col1'/>
+</Cols>
+<Body>
+<B>
+<I Col1='Val1'/>
+<I Col1='Val2'/>
+<I Col1='Val3'/>
+<I Col1='Val4'/>
+</B>
+</Body>
+</Grid>

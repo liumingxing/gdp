@@ -1,0 +1,134 @@
+<%= javascript_include_tag "jquery/jquery.treeview.js" %>
+<%= stylesheet_link_tag "jquery/jquery.treeview.css" %>
+<%
+  def get_subdep(dep)
+      tree_html = "<li><img src='/stylesheets/jquery/images/checkbox0.gif' class='checkthis check0' depid='#{dep.id}'/><span>#{dep.name}</span>"
+      has_sub_node = false
+      if params[:select_type] != "dep" #默认选择人员，列出人员
+      if dep.users.size>0
+          tree_html << "<ul>"
+          has_sub_node = true
+          dep.users.each do |u|
+              next if u.resign
+              tree_html << "<li><img src='/stylesheets/jquery/images/checkbox0.gif' class='checkthis check0' userid='#{u.id}'/><span>#{u.name}</span></li>"
+          end
+      end
+      end
+      if dep.children.size > 0
+          tree_html << "<ul>" if !has_sub_node
+          has_sub_node = true
+          dep.children.each do |d|
+              tree_html << get_subdep(d)
+          end
+      end
+      tree_html << "</ul>" if has_sub_node
+      tree_html << "</li>"
+  end
+%>
+
+<% if @departments.size > 0 %>
+<div><input type="button" id="btn_select" value="确定" class="buttonsave" /></div>
+<ul id="select_users">
+    <% for dep in @departments%>
+        <%=get_subdep(dep)%>
+    <% end %>
+</ul>
+<% end %>
+
+<script type="text/javascript">
+  jQuery(document).ready(function(){
+    $("#select_users").treeview({
+		animated: "fast",
+		collapsed: true,
+		unique: true,
+		//persist: "cookie",
+		toggle: function() {
+			window.console && console.log("%o was toggled", this);
+		}
+	});
+    $('#select_users > li > div').trigger('click');
+    //处理选中与否
+    $('img.checkthis').live('click', function(){
+       var cked = 0;
+       //被点击，完全选中或完全不选中
+       if($(this).hasClass('check1')){
+         $(this).addClass('check0');
+         $(this).removeClass('check1');
+         $(this).removeClass('check2');
+         cked = 0;
+         this.src = '/stylesheets/jquery/images/checkbox0.gif';
+       }else{
+         $(this).removeClass('check0');
+         $(this).addClass('check1');
+         $(this).removeClass('check2');
+         cked = 1;
+         this.src = '/stylesheets/jquery/images/checkbox1.gif';
+       }
+       //修改下级子节点的选中状态，和本节点一致
+       $(this).siblings('ul').find('img.checkthis').each(function(){
+         $(this).removeClass('check0');
+         $(this).removeClass('check1');
+         $(this).removeClass('check2');
+         if(cked==1){
+           $(this).addClass('check1');
+           this.src = '/stylesheets/jquery/images/checkbox1.gif';
+         }else{
+           $(this).addClass('check0');
+           this.src = '/stylesheets/jquery/images/checkbox0.gif';
+         }
+       });
+       //对于上级节点,通过查询子节点的选中情况来决定其选中状态
+       $(this).parent('li').parents('li').each(function(){
+           var cnt_unchecked = $(this).find('img.check0').length;
+           var cnt_checked = $(this).find('img.check1').length;
+           var chkbox = $(this).children('img.checkthis');
+           if(cnt_unchecked > 0 && cnt_checked > 0){
+             chkbox.removeClass('check0');
+             chkbox.removeClass('check1');
+             chkbox.addClass('check2');
+             chkbox.attr('src', '/stylesheets/jquery/images/checkbox2.gif');
+           }else if(cnt_unchecked==0){
+               chkbox.removeClass('check0');
+               chkbox.addClass('check1');
+               chkbox.removeClass('check2');
+               chkbox.attr('src', '/stylesheets/jquery/images/checkbox1.gif');
+           }else if(cnt_checked==0){
+               chkbox.addClass('check0');
+               chkbox.removeClass('check1');
+               chkbox.removeClass('check2');
+               chkbox.attr('src', '/stylesheets/jquery/images/checkbox0.gif');
+           }
+       });
+    }) ;
+
+    //处理确定按钮的点击事件
+    $('#btn_select').click(function(){
+      var duoxuan = <%= (params[:select_num] && params[:select_num]=="n" ? "true":"false") %>;
+      var checkeds = $('#select_users img.check1[<%= params[:select_type] == "dep" ? "depid" : "userid"%>]');
+      if(checkeds.length == 0){
+          alert('没有选中任何项目！请选择...');
+          return false;
+      }
+      if (!duoxuan && checkeds.length > 1){
+          alert('只能选择一个');
+          return false;
+      }
+      var items = [];
+      var i=0;
+      checkeds.each(function(){
+        <% if params[:select_type] == "dep" %>
+          items[i++] = {dep_id:$(this).attr('depid'), dep_name:$(this).next('span').text()};
+        <% else %>
+          items[i++] = {user_id:$(this).attr('userid'), user_name:$(this).next('span').text()};
+        <% end %>
+      });
+
+      <% if params[:callback_fn] %>
+        eval('parent.<%= params[:callback_fn]%>(items)');
+      <% end%>
+      parent.JqueryDialog.Close();
+      return items;
+    });
+  });
+
+</script>

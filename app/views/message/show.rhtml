@@ -1,0 +1,13 @@
+<%= path "阅读消息"%>
+
+发送人：<%= @message.sender %></br>
+发送时间：<%= @message.created_at.to_s(:db)%></br>
+标题：<%= @message.title %></br>
+</br>
+<div class="fck_body">
+<%= @message.text %>
+</div>
+
+<script>
+  add_tab_button("/img/iconBack.png", "返回", "/message/list");  
+</script>

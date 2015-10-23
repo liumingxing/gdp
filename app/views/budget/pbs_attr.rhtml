@@ -1,0 +1,20 @@
+<% form_tag :action=>"save_pbs_attr", :id=>params[:id].split('$').last do%>
+    <table class="ft" border="1" width=500px>
+    <% for property in @pbs.propertys%>
+        <% validate=''%>
+        <% validate="required:true" if property.need == 1%>
+        <tr>
+            <th width=100px><%= property.name%>：</th>
+            <td>
+                <% if property.input_mode == "s_textbox"%>
+                    <%= text_field_tag "property[#{property.name}]", @property[property.name], :validate=>validate, :title=> property.name%> &nbsp;&nbsp;<%= property.unit%></td>
+                <% elsif property.input_mode == "dropdownli"%>
+                    <select name="property[<%=property.name%>]">
+                        <%= options_for_select property.options.split("\n").collect{|o| [o, o]}, @property[property.name]%>
+                    </select>
+                <% end %>
+        </tr>
+    <% end %>
+    </table>
+    <%= submit_tag "保存"%>
+<% end %>

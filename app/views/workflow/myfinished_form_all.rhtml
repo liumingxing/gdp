@@ -1,0 +1,15 @@
+<%= path "请选择一种流程"%>
+<table class="list" id="table" width="70%"  border="1">
+    <tr class="head">
+        <th width=70%>流程名称</th>
+        <th>操作</th>
+    </tr>
+    <% @flows.each_with_index{|flow, index|%>
+    <tr>
+        <td><%= flow.name%> <%= "(任意流)" if flow.class == LmxForm%></td>
+        <td align="center">
+        <%= link_to "查看", :action=>"myfinished_form", :id=>flow.id%>
+        </td>
+    </tr>
+    <% } %>
+</table>

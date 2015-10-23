@@ -1,0 +1,25 @@
+<% form_tag :action => 'create_plan', :id=>params[:id] do %>
+  <table class="ft" border="1" width=500px>
+    <tr>
+    	<th width=100px>本月：</th>
+    	<td><%= text_field "plan1", 'plan_amount' %> 元</td>
+    </tr>
+    <tr>
+    	<th><%= (Time.new.month+1)%12 %>月：</th>
+    	<td><%= text_field 'plan2', 'plan_amount'  %> 元</td>
+    </tr>
+    <tr>
+    	<th><%= (Time.new.month+2)%12 %>月：</th>
+    	<td><%= text_field 'plan3', 'plan_amount'  %> 元</td>
+    </tr>
+    <tr>
+    	<th><%= (Time.new.month+3)%12 %>月：</th>
+    	<td><%= text_field 'plan4', 'plan_amount'  %> 元</td>
+    </tr>
+    </table>
+  
+  <div class="submit_div">
+  <%= submit_tag "保存" %> &nbsp;&nbsp;&nbsp; 
+  <a href="#" onclick="window.parent.close_dialog()">取消</a>
+  </div>
+<% end %>

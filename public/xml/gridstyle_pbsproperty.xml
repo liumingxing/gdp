@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<Grid>
+   <Cfg id='treegrid' SearchExpand='1' Undo='1' MainCol='name' MaxHeight='1'  MaxWidth='1' ConstHeight='1' 
+   ConstWidth='1' IdChars='0123456789' NumberId='1' LastId='1' AppendId='1' ShowDeleted='0' DateStrings='1' 
+   Adding='1' FullId='1' IdNames='id' CaseSensitiveId='0'/>
+   <LeftCols>
+      <C Width='250' Type='Text' CanEdit='0'/>
+   </LeftCols>
+   <Cols>
+      <C Name="name" Type="Text" Width="200" /> 
+      <C Name="unit" Type="Enum" Enum="|m2|m" EnumKeys="|m2|m" Width="100" /> 
+      <C Name="datatype" Type="Enum" Enum="|数字|字符串|日期|布尔" EnumKeys="|数字|长名称|日期|布尔" Width="100" /> 
+      <C Name="input_mode" Type="Enum" Enum="|单行输入|多行输入|下拉单选" EnumKeys="|s_textbox|m_textbox|dropdownlist" Width="100" /> 
+      <C Name="need" Type="Bool" Width="100" /> 
+      <C Name="options" Type="Lines" Width="300"  AcceptEnters="1"/> 
+    </Cols>
+    <Def>
+       <D Name="Node" CanDrag="0" AcceptChild="0" CanEdit="1"  /> 
+    </Def>
+    <Header name="属性项名称" unit="计量单位" datatype="值类型" input_mode="编辑方式" need="必填项" options="属性值" /> 
+    <Toolbar Styles='1' Cells='Save,Add,Reload,Repaint,Print,Export,ExpandAll,CollapseAll,Undo,Redo,Sort'/>
+    <MenuCfg ShowDeleted='0' AutoSort='0' AutoUpdate='1' Separator1='0' MouseHover='1' ShowDrag='1' ShowPanel='1' ShowIcons='0'/>
+    <Panel Copy='1' Move='0' Select='1' Delete='1'/>
+</Grid>

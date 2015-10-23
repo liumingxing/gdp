@@ -1,0 +1,71 @@
+<style>
+body{padding:4px;}
+</style>
+
+<% if params[:id]%>
+    <%= link_to '新建' + {1=>"合同", 2=>"费用"}[params[:t].to_i], {:action => 'new', :category_id => params[:id], :t=>params[:t]}, {:target=>"content"} %>
+<% end %>
+<a href="#" onclick="edit()">修改</a>
+
+<% if @list_type.to_i == 1%>        
+    <%= javascript_include_tag "swfobject" %>
+    <table id="table" class="list" border="1" width=100%>
+      <tr class="head">
+        <th>合同名称</th>
+        <th>合同额</th>
+        <th>支付款</th>
+        <th>结算额</th>
+        <th>计划开始时间</th>
+        <th>计划完成时间</th>
+        <th>合同类型</th>
+        <th colspan=3>操作</th>
+      </tr>
+      
+    <% for contract in @contracts %>
+      <%= color_row(contract.id) %>
+        <td><%= link_to contract.name, {:action=>"show", :id=>contract}, {:target=>"content"} %></td>
+        <td align="right"><%= money contract.contract_amount  %></td>
+        <td align="right"><%= money contract.pay_amount %></td>
+        <td align="right"><%= money contract.clearing_amount %></td>
+        <td><%=h contract.begintime.to_date if contract.begintime%></td>
+        <td><%=h contract.endtime.to_date   if contract.endtime%></td>
+        <td><%=h contract.contracttype %></td>
+        <td><%=link_to_remote "阶段状态", :update=>"chart", :url=>{:controller=>"chart", :action=>"make_chart", :type=>"bar", :title=>"#{contract.name}阶段查看", :y_title=>"金额", :labels=>%w(合同额 变更金额 已完成量 结算额 累计支付额 保修款).join("_"), :bars=>"阶段查看", :data1=>[contract.contract_amount, contract.change_amount, contract.total_complete, contract.clearing_amount, contract.pay_amount, contract.warranty_amount].join("_")}%></td>
+        <td><%= link_to "资料管理", {:controller=>"doc", :action=>"list", :t=>"contract", :contract_id=>contract.id}, {:target=>"_parent"}%></td>
+        <td><%= link_to '删除', { :action => 'destroy', :id => contract }, :confirm => '确认删除本记录吗?', :method => :post %></td>
+      </tr>
+    <% end %>
+    </table>
+<% else %>
+    <table id="table" class="list" border="1" width=100%>
+      <tr class="head">
+        <th>费用项名称</th>
+        <th>费用项金额</th>
+        <th>公司名称</th>
+        <th colspan=3>阶段状态</th>
+      </tr>
+      <% for contract in @contracts %>
+        <%= color_row(contract.id)%>
+            <td><%= contract.name%></td>
+            <td align="right"><%= money contract.contract_amount%></td>
+            <td><%= contract.company_name%></td>
+            <td><%= link_to "资料管理", {:controller=>"doc", :action=>"list", :t=>"feiyong", :contract_id=>contract.id}, {:target=>"_parent"}%></td>
+            <td><%= link_to '删除', { :action => 'destroy', :id => contract }, :confirm => '确认删除本记录吗?', :method => :post %></td>
+        </tr>
+      <% end %>
+<% end %>
+
+<div id="chart" style="text-align:center">
+    
+</div>
+
+<script>
+function edit()
+{
+    var path = geturl("/contract/edit/", "table", false);
+    if (path != undefined)
+    {
+        window.parent.location = path;
+    }
+}
+</script>

@@ -1,0 +1,10 @@
+<%= path "修改" + $CONTRACT_OPERATE[@workitem.itemtype]%>
+
+<% form_tag :action => 'update_workitem', :id => @workitem do %>
+  <%= render :partial => "form_workitem" %>
+  <%= submit_tag "保存"%>
+<% end %>
+
+<script>
+  add_tab_button("/img/iconBack.png", "返回", "/contract/show/<%=@workitem.contract_id%>");  
+</script>

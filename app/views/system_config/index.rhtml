@@ -1,0 +1,35 @@
+
+<% form_tag({:action => 'update'}, :multipart => true) do %>
+<table class="ft" border="1" width="700px">
+  <tr>
+    <th>OA系统标题</th>
+    <td><%= text_field "config", 'title', :size=>40%></td>
+  </tr> 
+  <tr>
+    <th>Logo图片</th>
+    <td><%= file_field "config", "logo", :size=>40%></td>
+  </tr>
+  <tr>
+    <th>登陆次数</th>
+    <td><%= text_field "config", 'visitedtimes', :size=>40%></td>
+  </tr> 
+  
+  <tr>
+    <th>公司地址</th>
+    <td><%= text_field "config", 'address', :size=>40%></td>
+  </tr> 
+  <tr>
+    <th>公司总机电话</th>
+    <td><%= text_field "config", 'telephone', :size=>40%></td>
+  </tr>
+</table>
+<% end %>
+
+<br>
+
+<%= button_to "清空临时文件", "/system_config/clear_session" %>
+<%=button_to "删除LOGO", "/system_config/delete"%>
+
+<script>
+  add_submit("保存");
+</script>

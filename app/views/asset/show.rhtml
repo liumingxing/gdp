@@ -1,0 +1,12 @@
+<%=@table.to_s(:style)%>
+
+<%= @table.to_s(:show, @asset) %>
+
+<script>
+  add_tab_button("/img/iconBack.png", "返回", "/asset/list?form=<%=params[:form]%>");  
+  add_tab_button("/img/iconPrint.png", "打印", 'javascript:print();'); 
+  function print()
+  {
+    window.open("/asset/print/<%=params[:id]%>?form=<%=params[:form]%>");
+  }
+</script>

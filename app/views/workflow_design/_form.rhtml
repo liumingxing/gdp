@@ -1,0 +1,24 @@
+<%= error_messages_for 'workflow' %>
+
+<table class="ft" border="1">
+<!--[form:workflow]-->
+<tr>
+	<th>工作流名称</th>
+	<td><%= text_field 'workflow', 'name'  %></td>
+</tr>
+
+<tr>
+	<th>工作流类型</th>
+	<td><%= select 'workflow', 'flow_type', [%w(固定流 固定流), %w(任意流 任意流)]  %></td>
+</tr>
+
+<tr>
+    <td colspan=2 style="text-align:center">
+        <%= check_box 'workflow', 'ischild'%>子流程
+        <%= check_box 'workflow', 'has_bigtext'%>有正文域
+    </td>
+</tr>
+
+<!--[eoform:workflow]-->
+
+</table>

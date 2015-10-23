@@ -1,0 +1,78 @@
+<%= path "动态成本"%>
+
+<table  height=100% width=100%>
+    <tr>
+        <td valign="top">
+            <% if params[:tree] %>
+                <div class="clsTreeDiv" style="height:100%">
+                <script>
+                <% project = Project.find(session[:pid])%>
+                 var data={"-1_0":"text:<%=project.name%>;hint:<%=project.name%>",
+                 <% nodes = Hygh.find(:all, :conditions=>"project_id = #{session[:pid]} and itemtype = 1")%>
+                 <% nodes.each do |t| %>
+                     "<%=t.parent_id||0%>_<%=t.id%>":"text:<%=t.name.gsub("\n", '\n')%>;url:/analysis/dynamic/<%=t.id%>?tree=tree",
+                 <% end%>
+                    "-100":"100"}
+                </script>
+                    
+                <%= render :partial => "share/tree", :locals => {:array=>[], :usecheckbox => false, :expandlevel => 3} %>
+                </div>
+            <% end %>
+        </td>
+        <td valign="top">
+        
+            <% sum1 = sum2 = sum3 = sum4 = sum5 = sum6 = 0%>
+            <table class="list" id="table" border="1" width=99%>
+              <tr class="head">
+                <th>合同名称</th>
+                <th>目标值</th>
+                <th>合同金额</th>
+                <th>结算额</th>
+                <th>招标控制额</th>
+                <th>执行控制额</th>
+                <th>结算控制额</th>
+                <th>状态</th>
+              </tr>
+              
+            <% for contract in @contracts %>
+              <%= color_row %>
+                <td><%= contract.name%></td>
+                <td align="right"><%=h money contract.target_amount %></td>
+                <td align="right"><%=h money contract.contract_amount %></td>
+                <td align="right"><%=h money contract.clearing_amount %></td>
+                <td align="right"><%=h money contract.target_amount - contract.contract_amount %></td>
+                <td align="right"><%=h money contract.contract_amount - contract.clearing_amount %></td>
+                <td align="right"><%=h money contract.target_amount - contract.clearing_amount%></td>
+                <td><%= contract.state %></td>
+              </tr>
+              
+              <% sum1 += contract.target_amount.to_f %>
+              <% sum2 += contract.contract_amount.to_f %>
+              <% sum3 += contract.clearing_amount.to_f %>
+              <% sum4 += contract.target_amount - contract.contract_amount %>
+              <% sum5 += contract.contract_amount - contract.clearing_amount %>
+              <% sum6 += contract.target_amount - contract.clearing_amount %>
+            <% end %>
+            
+                <tr>
+                    <th>--合计</th>
+                    <th align="right"><%= money sum1 %></th>
+                    <th align="right"><%= money sum2 %></th>
+                    <th align="right"><%= money sum3 %></th>
+                    <th align="right"><%= money sum4 %></th>
+                    <th align="right"><%= money sum5 %></th>
+                    <th align="right"><%= money sum6 %></th>
+                    <th></th>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<script>
+    <% if !params[:tree]%>
+        add_link("显示导航", "/analysis/dynamic?tree=true")
+    <% else %>
+        add_link("关闭导航", "/analysis/dynamic")
+    <% end %>
+</script>

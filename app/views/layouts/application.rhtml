@@ -1,0 +1,99 @@
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title><%= SystemConfig.find(:first).title %></title>
+    <%#= stylesheet_link_tag "scaffold" %>
+    <%= stylesheet_link_tag "main" %>
+    <%= stylesheet_link_tag "openbravo/#{current_user.style||'Blue'}/Main/Main_Manual" %>
+    <%= stylesheet_link_tag "lmx_#{current_user.style || 'Blue'}" %>
+    <%= stylesheet_link_tag "jquery-ui/jquery-ui.css" %>
+    
+    <%= javascript_include_tag :defaults %>
+    <%= javascript_include_tag 'my97/WdatePicker.js' %>
+    <%= javascript_include_tag "jquery/jquery.metadata.js" %>
+    <%= javascript_include_tag 'jquery/jquery.validate.js' %>
+
+    <script language="javascript">
+      function setNotice(notice)
+      {
+          if (window.parent && window.parent!=window && window.parent.setNotice){
+              window.parent.setNotice(notice);
+          }else{
+            alert(notice);
+          }
+      }
+      function setError(notice)
+      {
+          if (window.parent && window.parent!=window && window.parent.setError){
+              window.parent.setError(notice);
+          }else{
+              alert(notice);
+          }
+      }
+    <% if flash[:notice] %>
+        setNotice('<%=flash[:notice]%>');
+      <%flash[:notice] = nil%>
+    <% end %>
+    <% if flash[:error] %>
+        setError('<%=flash[:error]%>');
+      <%flash[:error] = nil%>
+    <% end %>
+    </script>
+  </head>
+
+  <body style="height:100%">   
+    
+<table style="width:100%;height:100%;table-layout:fixed">
+      <tr style="width:100%;height:100%">
+        <td id='update_main'  valign='top' style="width:100%;height:100%;display:none;">
+          <table style="width:100%;height:100%;table-layout:fixed">
+            <tr>
+              <TD valign="top" height="50%" width="6px">
+                <TABLE width="100%" border="0" cellspacing="0" cellpadding="0" class="Main_ContentPane_Left">
+                  <TR><TD class="Main_ToolBar_bg_left" valign="top"></TD></TR>
+                  <TR><TD class="Main_Client_bg_left"></TD></TR>
+                  <TR><TD class="Main_Bottom_bg_left"></TD></TR>
+                </TABLE>
+              </TD>
+              <td valign=top style="width:100%;height:99%;">
+                <DIV class="Main_ContentPane_ToolBar" id="paramToolBar">
+                  <table class="Main_ContentPane_ToolBar Main_ToolBar_bg" id="tdToolBar">
+                    <tr>    
+                      <td class="Main_ToolBar_Separator_cell" id="separator">
+                        <IMG src="/img/blank.gif" class="Main_ToolBar_Separator">
+                      </td>
+                      <td id="separator"></td>
+                      <td id="links" align="left" ></td>
+                      <td style="padding-left:4px;text-align:left"><span id="path" style="font-size:14px"></span></td>
+                      <td style="padding-left:4px;text-align:right"><span id="right_text" style="font-size:14px;color:orange;"></span></td>
+                      </tr>
+                  </table>
+                </DIV>
+                
+                <DIV id="client" style="overflow:auto;">
+                  
+                  <%= @content_for_layout  %>
+                  
+                </DIV>
+              </td>
+              <td width="6px">
+                <TABLE width="100%" border="0" cellspacing="0" cellpadding="0" class="Main_ContentPane_Right" id="tdrightSeparator">
+                  <TR><TD class="Main_ToolBar_bg_right" valign="top"></TD></TR>
+                  <TR><TD class="Main_Client_bg_right"></TD></TR>
+                  <TR><TD class="Main_Bottom_bg_right"></TD></TR>
+                </TABLE>  
+              </td>
+            </tr>
+            <tr height=2  class="Main_ContentPane_Left"><td colspan=4 align=center></td></tr>
+          </table>
+          <script>
+            $('#update_main').Appear();
+          </script>
+        </td>
+      </tr>
+    </table>  
+  </body>
+</html>
+
+

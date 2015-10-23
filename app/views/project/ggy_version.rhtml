@@ -1,0 +1,16 @@
+<%= javascript_include_tag 'Grid/GridE' %>
+<style>
+#client{padding:0px;}
+</style>
+
+<div style="width:100%;height:100%;" id='GridTutorialReplace'> 
+  <bdo layout_url="/xml/gridstyle_tzgh.xml" Data_Url="/project/tzgh_data" Upload_Url="/project/upload_tzgh"> </bdo>
+</div>
+
+<script>
+function save()
+{
+    Grids["BudgetStructureGrid"].Save();
+}
+add_tab_button("/img/iconSave.png", "保存", "javascript:save()");  
+</script>

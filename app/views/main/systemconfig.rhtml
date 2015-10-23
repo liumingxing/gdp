@@ -1,0 +1,26 @@
+<%= path "系统配置"%>
+
+<% form_tag({:action => 'update_systemconfig'}, {:multipart => true}) do %>
+<table width=60% class="list" border=1>
+  <tr>
+    <td>OA系统标题</td>
+    <td><%= text_field "config", 'title', :size=>40, :class=>"required"%></td>
+  </tr> 
+  <tr>
+    <td>Logo图片</td>
+    <td><%= file_field "config", "logo", :size=>40,  :class=>"required"%>
+        <%=image_button "删除LOGO", "/main/delete_logo"%>
+    </td>
+  </tr>
+  <tr>
+    <td>登陆次数</td>
+    <td><%= text_field "config", 'visitedtimes', :size=>40, :class=>"required"%></td>
+  </tr> 
+  
+</table>
+
+<% end %>
+
+<script>
+  add_submit("保存");
+</script>

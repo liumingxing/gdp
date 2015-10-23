@@ -1,0 +1,69 @@
+<%= path "合同分析"%>
+
+<table  height=100% width=100%>
+    <tr>
+        <td valign="top">
+            <% if params[:tree] %>
+                <div class="clsTreeDiv" style="height:100%">
+                <script>
+                <% project = Project.find(session[:pid])%>
+                 var data={"-1_0":"text:<%=project.name%>;hint:<%=project.name%>",
+                 <% nodes = Hygh.find(:all, :conditions=>"project_id = #{session[:pid]} and itemtype = 1")%>
+                 <% nodes.each do |t| %>
+                     "<%=t.parent_id||0%>_<%=t.id%>":"text:<%=t.name.gsub("\n", '\n')%>;url:/analysis/feiyong/<%=t.id%>?tree=tree",
+                 <% end%>
+                    "-100":"100"}
+                </script>
+                    
+                <%= render :partial => "share/tree", :locals => {:array=>[], :usecheckbox => false, :expandlevel => 3} %>
+                </div>
+            <% end %>
+        </td>
+        <td valign="top">
+            <table class="list" id="table" border="1" width=99%>
+              <tr class="head">
+                <th>费用名称</th>
+                <th>目标值</th>
+                <th>合同金额</th>
+                <th>变更金额</th>
+                <th>实际结算额</th>
+                <th>累计支付额</th>
+              </tr>
+              
+              <% sum1 = sum2 = sum3 = sum4 = sum5 = 0%>
+            <% for contract in @contracts %>
+              <%= color_row %>
+                <td><%= contract.name%></td>
+                <td align="right"><%=h money contract.target_amount %></td>
+                <td align="right"><%=h money contract.contract_amount %></td>
+                <td align="right"><%=h money contract.change_amount %></td>
+                <td align="right"><%=h money contract.clearing_amount %></td>
+                <td align="right"><%=h money contract.total_pay_amount %></td>
+              </tr>
+              
+              <% sum1 += contract.target_amount%>
+              <% sum2 += contract.contract_amount%>
+              <% sum3 += contract.change_amount%>
+              <% sum4 += contract.clearing_amount%>
+              <% sum5 += contract.total_pay_amount%>
+            <% end %>
+              <tr>
+                <th>--合计</th>
+                <th align="right"><%= money sum1%></th>
+                <th align="right"><%= money sum2%></th>
+                <th align="right"><%= money sum3%></th>
+                <th align="right"><%= money sum4%></th>
+                <th align="right"><%= money sum5%></th>
+              </tr>
+            </table>
+        </td>
+    </tr>
+</table>            
+
+<script>
+    <% if !params[:tree]%>
+        add_link("显示导航", "/analysis/feiyong?tree=true")
+    <% else %>
+        add_link("关闭导航", "/analysis/feiyong")
+    <% end %>
+</script>

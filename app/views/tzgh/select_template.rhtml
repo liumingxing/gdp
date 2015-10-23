@@ -1,0 +1,48 @@
+<%= javascript_include_tag 'jquery' %>
+
+<style>
+*{padding:0px;margin:0px;}
+</style>
+
+<% form_tag({:action => 'import_template', :id=>params[:id]}, {:onsubmit => "return myform_onsubmit()", :target=>"content"}) do %>
+    <div style="margin-bottom:4px">
+       <span style="font-size:12px">请选择投资控制模板：</span>
+	   <select id="tzmb" onchange="sel_change()">
+	       <option value="">--请选择--</option>
+	       <%=options_from_collection_for_select(Tztemplate.find(:all), 'id', 'name', params[:id].to_s.to_i)%>
+	   </select>
+	   <%= submit_tag "导入"%>
+	</div>
+    <script>
+     var data={"-1_0":"text:投资控制模板;hint:投资控制模板",
+        <% @tztemplate.nodes.each do |t| %>
+               "<%=t.parent_id||0%>_<%=t.id%>":"text:<%=t.name.gsub("\n", '\n')%>;",
+        <% end %>
+        "-100":"100"}
+    </script>
+        
+    <%= render :partial => "share/tree", :locals => {:array=>[], :usecheckbox => true, :expandlevel => 2} %>
+<% end %>
+
+<script>
+function myform_onsubmit()
+{
+    var ids = GetCheckBox(trade);
+    if (ids.length ==0) {
+         alert("您怎么一个都没选啊");
+         return false;
+    } else {
+         ids = ids.replace(", 0, ", "0, ");
+    }
+    $("#checked_values").val(ids);
+}
+
+function sel_change()
+{
+    if (!$("#tzmb").val())
+        return;
+    
+    window.location = "/tzgh/select_template/" + $("#tzmb").val() + "?pid=<%= params[:pid]%>"
+}
+
+</script>

@@ -1,0 +1,14 @@
+<% form_remote_tag(:update=>"detail_#{@workitem.itemtype}", :url=>{:action=>"update_subitem", :id=>params[:id], :t=>@workitem.itemtype}, :html=>{:multipart=>true}) do%>
+        <%= render :partial=>"subitem_#{@workitem.itemtype}"%>
+        <%= submit_tag "保存"%>
+<% end %>
+
+<script>
+  var file_num = 0;
+  function add_file()
+  {
+    file_num += 1;
+    
+    $("#files").append('<input id="attach' + file_num + '_path_temp" name="attach' + file_num + '[path_temp]" type="hidden" /><input id="attach' + file_num + '_path" name="attach'+file_num+'[path]" size="30" type="file" /><br>')
+  }
+</script>

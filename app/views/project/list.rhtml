@@ -1,0 +1,27 @@
+<%= path "项目列表"%>
+
+<table class="list" id="table" border="1" width=500px>
+  <tr class="head">
+    <th>项目名称</th>
+    <th>建筑类型</th>
+    <th colspan=2>操作</th>
+  </tr>
+  
+<% for project in @projects %>
+  <%= color_row(project.id)%>
+    <td><%= link_to project.name, :action=>"show", :id=>project %></td>
+    <td><%=h project.jzlx %></td>
+    <td><%= link_to "参与人", :action=>"participate", :id=>project%></td>
+    <td><%= link_to "权限", :action=>"right", :id=>project%></td>
+  </tr>
+<% end %>
+</table>
+
+
+<%= will_paginate @projects %>
+
+<script>
+add_tab_button("/img/iconNew.png", "添加", "/project/new/");   
+add_sep();
+add_dynamic_delete_button("/project/destroy/");   
+</script>

@@ -1,0 +1,33 @@
+<table width="98%" class="list" border="1"%>
+    <tr>
+        <th>任务名称</th>
+        <td><%= @budget.name%></td>
+        <th>责任人</th>
+        <td><%= @budget.fz_user.name if @budget.fz_user%></td>
+    </tr>
+</table>
+
+
+<% form_tag({:action=>"upload_file", :budget_id => @budget.id}, :multipart => true) do%>
+
+    上传新文件：<%= file_column_field "file", "path" %>
+    <%= submit_tag "上传"%>
+<% end %>
+<table class="list" id="table" border="1"  width=98%>
+    <tr class="head">
+        <th>文件名称</th>
+        <th>上传人</th>
+        <th>上传日期</th>
+        <th colspan=3>操作</th>
+    </tr>
+    <% for file in @budget.files%>
+        <%= color_row%>
+            <% @file = file%>
+            <td><%= file["path"]%></td>
+            <td><%= file.user.name%></td>
+            <td><%= file.created_at.to_s(:db)%></td>
+            <td><%= link_to '下载', url_for_file_column('file', 'path'), :target=>"_blank"%></td>
+        </tr>
+    <% end %>
+</table>
+

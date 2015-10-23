@@ -1,0 +1,25 @@
+<table class="ft" border="1">
+<tr>
+	<th><%=$CONTRACT_OPERATE[params[:t]]%>编号</th>
+	<td><%= text_field 'workitem', 'sn'  %></td>
+</tr>
+
+<tr>
+	<th><%=$CONTRACT_OPERATE[params[:t]]%>名称</th>
+	<td><%= text_field 'workitem', 'name', :validate=>"required:true", :title=>"签定名称"  %></td>
+</tr>
+
+<tr>
+	<th>查看范围</th>
+	<td>
+	<%= radio_button("workitem", "scope", "项目参与人")%>项目参与人
+	<%= radio_button("workitem", "scope", "任务参与人")%>任务参与人
+</tr>
+
+<tr>
+	<th>完成状态</th>
+	<td>
+	<%= radio_button("workitem", "finished", "0")%>未完成
+	<%= radio_button("workitem", "finished", "1")%>完成
+</tr>
+</table>

@@ -1,0 +1,24 @@
+<table class="ajax_form" >
+        <tr>
+            <td colspan=8 align=right> <a href="#" onclick="$('#form_div').html('')">关闭</a></td>
+        </tr>
+        <tr>
+            <td>名称：</td>
+            <td><%= text_field "unit", "name", :size=>14%></td>
+            <td>单位：</td>
+            <td><%= select "unit", "unit", Dictionary.find_by_name("计量单位").items.collect {|p| [p.name, p.name]}, {:include_blank => true} %></td>
+            <td>数量：</td>
+            <td><%= text_field "unit", "num", :size=>4%></td>
+        </tr>
+        <tr>
+            <td>单价：</td>
+            <td><%= text_field "unit", "price", :size=>14%></td>
+            <td>备注：</td>
+            <td colspan=3><%= text_field "unit", "desc"%></td>
+        </tr>
+        <tr>
+            <td colspan=8 align=right><%= submit_tag "保存" %> </td>
+        </tr>
+    </table>
+    
+    <%= hidden_field_tag "unit[feetype]", "其他费"%>

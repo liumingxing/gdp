@@ -1,0 +1,21 @@
+<%= path "合约规划模板"%>
+
+<table class="list" border="1" width=500px>
+  <tr class="head">
+    <th>名称</th>
+    <th colspan=3>操作</th>
+  </tr>
+  
+<% for contract_template in @contract_templates %>
+  <%= color_row%>
+    <td><%=h contract_template.name %></td>
+    
+    <td><%= link_to '显示', :action => 'show', :id => contract_template %></td>
+    <td><%= link_to '修改', :action => 'edit', :id => contract_template %></td>
+    <td><%= link_to '删除', { :action => 'destroy', :id => contract_template }, :confirm => '确认删除吗?', :method => :post %></td>
+  </tr>
+<% end %>
+</table>
+
+
+<%= will_paginate @contract_templates %>

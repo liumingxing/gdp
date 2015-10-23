@@ -1,0 +1,3 @@
+<% form_tag :action => 'create_pay', :id=>params[:id], :field=>"pay_amount" do %>
+  <%= render :partial=>"pay", :locals=>{:title=>"实际支付", :field=>"pay_amount"}%>
+<% end %>

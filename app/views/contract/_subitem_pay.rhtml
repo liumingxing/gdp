@@ -1,0 +1,33 @@
+<table class="ft" border="1" width=700px;>
+<tr>
+	<th width=175px>摘要名称：</th>
+	<td width=200px><%= text_field 'subitem', 'name', :validate=>"required:true", :title=>"摘要名称"%></td>
+	<th width=175px>支付类型：</th>
+	<td width=200px><%= text_field 'subitem', 'paytype'%></td>
+</tr>
+
+<tr>
+	<th>审定日期：</th>
+	<td><%= text_field 'subitem', 'pay_date', :onfocus=>"WdatePicker()"%></td>
+	<th>本月审批金额：</th>
+	<td><%= text_field 'subitem', 'pay_amount'%>元</td>
+</tr>
+
+<tr>
+	<th>止上月累计审批支付：</th>
+	<td></td>
+	<th>经手人：</th>
+	<td><%= text_field 'subitem', 'principal'%></td>
+</tr>
+
+<tr>
+	<th>支付事由：</th>
+	<td colspan=3><%= text_area 'subitem', 'pay_reason', :rows=>5, :cols=>60%></td>
+</tr>
+
+<tr>
+	<th>备注：</th>
+	<td colspan=3><%= text_area 'subitem', 'memo', :rows=>5, :cols=>60%></td>
+</tr>
+
+</table>

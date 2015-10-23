@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<Grid>
+   <Cfg id='grid1' SearchExpand='1' Undo='1' MainCol='name' MaxHeight='1'  MaxWidth='1' ConstHeight='1' ConstWidth='1' IdChars='0123456789' NumberId='1' LastId='1' AppendId='1' ShowDeleted='0' DateStrings='1' Adding='1' FullId='1'
+      IdNames='id' CaseSensitiveId='0'/>
+   <LeftCols>
+      <C Width='250' Type='Text' CanEdit='0'/>
+   </LeftCols>
+   <Cols>
+      <C Name="name" Type="Text" Width="200" /> 
+      <C Name="itemtype" Type="Enum" Enum="|分类|合同|费用" EnumKeys="|1|2|3"/> 
+      <C Name="desc" Type="Lines" Width="200"  AcceptEnters="1"/> 
+    </Cols>
+    <Def>
+       <D Name="R" CanDrag="1" AcceptChild="1" CanEdit="1"/> 
+       <D Name="Node" CanDrag="1" AcceptChild="1" CanEdit="1"/> 
+    </Def>
+    <Header name="主题"  desc="范围" itemtype="节点类型"/> 
+    <Toolbar Styles='1' Cells='Save,Add,Reload,Repaint,Print,Export,ExpandAll,CollapseAll,Undo,Redo,Sort'/>
+    <MenuCfg ShowDeleted='0' AutoSort='0' AutoUpdate='1' Separator1='0' MouseHover='1' ShowDrag='1' ShowPanel='1' ShowIcons='0'/>
+    <Panel Copy='1' Move='0' Select='1' Delete='1'/>
+</Grid>

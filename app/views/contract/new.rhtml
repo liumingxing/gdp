@@ -1,0 +1,10 @@
+<%= path "新建" + {1=>"合同", 2=>"费用"}[params[:t].to_i]%>
+
+<% form_tag :action => 'create', :category_id => params[:category_id], :t=>params[:t] do %>
+  <%= render :partial => "form#{params[:t]}" %>
+  <%= submit_tag "保存"%>
+<% end %>
+
+<script>
+  add_tab_button("/img/iconBack.png", "返回", "/contract/list?t=<%=params[:t]%>&category_id=<%=params[:category_id]%>");  
+</script>

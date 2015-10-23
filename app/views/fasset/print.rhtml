@@ -1,0 +1,9 @@
+<%=@table.to_s(:style)%>
+
+<%= @table.to_s(:show, @asset) %>
+
+<script>
+<% @items.each_with_index{|item, index|%>
+    $('#float<%=@float_index%>').before("<%=@table.float_row_to_s(@float_index, index+1, :show, item).to_s.delete("\n")%>")
+  <% } %>
+</script>

@@ -1,0 +1,142 @@
+<%= javascript_include_tag 'Grid/GridE' %>
+<%= javascript_include_tag 'splitter' %>
+
+<%= path $BUDGET_TYPE[params[:t]] + "审核"%>
+<%= right_text "当前版本号:#{Project.find(session[:pid]).current_version(params[:t]).text}"%>
+
+<style>
+#client{
+  padding:0px;
+}
+
+.ajax_form
+{
+    background-color:#ffe;
+    margin-bottom: 6px;
+}
+
+.ajax_form td
+{
+    padding: 2px;
+}
+
+#MySplitter {
+	height: 100%;
+	width: 100%;
+}
+
+#TopPane {
+	overflow: auto;
+	height: 300px;
+	min-height: 200px;
+	max-height: 500px;
+}
+
+#BottomPane {
+	
+	overflow: auto;
+}
+
+#MySplitter .hsplitbar {
+	height: 6px;
+	background: #cca url(/img/hgrabber.gif) no-repeat center;
+}
+#MySplitter .hsplitbar.active, #MySplitter .hsplitbar:hover {
+	background: #e88 url(/img/hgrabber.gif) no-repeat center;
+}
+</style>
+<script type="text/javascript">
+$().ready(function() {
+	$("#MySplitter").splitter({
+		type: "h", 
+		sizeTop: true,	/* use height set in stylesheet */
+		accessKey: "P"
+	});
+	
+	
+});
+</script>
+
+<div id="MySplitter">
+
+	<div id="TopPane">
+        <div style="width:100%;height:100%;" id='GridTutorialReplace'> 
+          <bdo layout_url="/budget/style_bz?file=gridstyle_sh.xml" Data_Url="/budget/get_data?t=<%=params[:t]%>" Upload_Url="/budget/upload_data?t=<%=params[:t]%>"> </bdo>
+        </div>
+	</div>
+	
+	<div id="BottomPane">
+		<div id="detail">
+		
+		</div>
+	</div>
+</div>
+
+<script>
+function save()
+{
+    Grids["grid"].Save();
+}
+
+add_tab_button("/img/iconSave.png", "保存", "javascript:save()");  
+</script>
+
+<script>
+window.onunload = save;
+
+var grid = Grids["grid"];
+var _lastRow = null; // 主表当前选中行
+
+// 响应TreeGrid得到焦点事件
+Grids.OnFocus = function(grid, row, col, orow, ocol, pagepos) {
+    if (row && (row.id == "Header" || row.id == "Toolbar" || row.id == "Footer" || row.id == "Filter")) return;
+            
+    if (_lastRow != null) 
+        grid.SelectRow(_lastRow, 0);
+    
+    _lastRow = row;
+    grid.SelectRow(row);
+    var budgetItemID = grid.GetValue(row, "id");
+    var titles = GetTitles(grid, row);
+            
+    if (budgetItemID == "" && !isNaN(parseInt(budgetItemID))) 
+        isNewRow = true;
+    else 
+        isNewRow = false;
+    
+    var feetype = GetBudgetFeeType(grid, row);
+    
+    $("#detail").load("/budget/budget_unit?readonly=true&id=" + budgetItemID);
+    return;
+}
+
+// 构造树结构的Titles
+function GetTitles(grid, row) {
+           var result = "";
+           if(row == null || row.id == "") result = "";
+           var idArr = row.id.split("$");
+           var count = idArr.length;
+           var i = 0;
+           var rowid = "";
+           for(i = 0; i<count; i++) {
+               if(i == 0) {
+                  rowid = idArr[i];
+                  result = grid.GetValue(grid.GetRowById(rowid), "Title");
+               }
+               else {
+                   rowid = rowid + "$" + idArr[i];
+                   result = result + "$" + grid.GetValue(grid.GetRowById(rowid), "Title");
+               }
+           }
+           return escape(result);
+}
+
+// 根据给定行查找根节点的BudgetFeeTypeID
+function GetBudgetFeeType(grid, row) {
+           var result = "";
+           if(row == null || row.id == "") result = "";
+           var idArr = row.id.split("$");
+           return grid.GetRowById(idArr[0])["feetype"];
+} 
+
+</script>

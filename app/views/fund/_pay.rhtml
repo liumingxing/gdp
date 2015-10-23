@@ -1,0 +1,24 @@
+<table class="ft" border="1" width=500px>
+    <tr class="exebar">
+        <th>年份</th>
+        <th>月份</th>
+        <th><%=title%></th>
+    </tr>
+    <% now = Time.new%>
+    <% 0.upto(3) do |i|%>
+    <tr>
+        <th><%= now.year + (now.month+i)/12 %>年</th>
+    	<th width=100px><%= (now.month+i)%12 %>月</th>
+    	<td><%= text_field "plan#{i+1}", field %> 元</td>
+    </tr>
+    <% end %>
+    <tr>
+        <th><%= select_year(Time.new, :start_year => Time.new.year-10, :end_year => Time.new.year)%>年</th>
+        <th><%= select_month(Time.new-1.months, :use_month_numbers => true)%>月</th>
+        <td><%= text_field_tag "other", "", :size=>30%> 元</td>
+    </tr>
+  </table>
+  <div class="submit_div">
+  <%= submit_tag "保存" %> &nbsp;&nbsp;&nbsp; 
+  <a href="#" onclick="window.parent.close_dialog()">取消</a>
+</div>

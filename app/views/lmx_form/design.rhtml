@@ -1,0 +1,549 @@
+<%= path "电子表单设计"%>
+
+<%= stylesheet_link_tag "/javascripts/ext3.2.1/resources/css/ext-all.css" %>
+<%= javascript_include_tag 'ext3.2.1/adapter/ext/ext-base.js' %>
+<%= javascript_include_tag 'ext3.2.1/ext-all-debug.js' %>
+<%= javascript_include_tag 'jquery_dialog' %>
+<style>
+<!-- 兼容firefox -->
+.x-btn button {
+    font:12px '宋体';
+}
+
+.x-grid3-row td, .x-grid3-summary-row td {
+    font:12px '宋体';
+}
+
+.x-panel-header {
+    font-size:12px;
+}
+
+.dinput{width:100%;}
+</style>
+
+<table width=100% height=100%>
+    <tr>
+        <td style="overflow:auto" valign='top'>
+          <div id="toolbar"></div>
+            <div id="lmx_form" style="margin-top:2px;height:96%;">
+            <%= render :partial=>"table", :locals=>{:refresh=>false}%>
+            </div>
+          </div>
+          <div id="get_attributes">
+          </div>
+        </td>
+        <td width=160px  valign='top'>
+            <div id="prop-grid"></div>
+        </td>
+    </tr>
+</table>
+
+<script>
+  add_tab_button("/img/iconBack.png", "返回", "/lmx_form/list");  
+</script>
+
+<script>
+var cell_types  = [['integer', '整型'], ['float', '浮点'], ['text', '文本'], ['textarea', '大文本'],  ['date', '日期'], ['datetime', '时间'], ['select', '下拉选择'], ['check', '复选框'], ['button', '按钮']];
+var bools   = [['false', '否'], ['true', '是']];
+var aligns      = [['left', '左'], ['center', '中'], ['right', '右']];
+var valigns     = [['top', '上'], ['middle', '中'], ['right', '下']];
+var word_wraps  = [['normal', '否'], ['break-word', '是']];
+
+var propsGrid  = null;
+Ext.onReady(function(){   
+    propsGrid = new Ext.grid.PropertyGrid({
+        title: '单元格属性',
+        hideHeaders: true,
+        renderTo: 'prop-grid',
+        width: 200,
+        autoHeight: true,
+        propertyNames: {
+            tested: 'QA',
+            borderWidth: 'Border Width'
+        },
+        customEditors: {
+            '开始时间':    new Ext.grid.GridEditor(new Ext.form.TimeField({selectOnFocus:true})),
+            '单元格类型':  new Ext.grid.GridEditor(new Ext.form.ComboBox({store: cell_types,triggerAction: 'all'})),
+            '只读':       new Ext.grid.GridEditor(new Ext.form.ComboBox({store: bools,triggerAction: 'all'})),
+            '显示千分位':  new Ext.grid.GridEditor(new Ext.form.ComboBox({store: bools,triggerAction: 'all'})),
+            '水平对齐':  new Ext.grid.GridEditor(new Ext.form.ComboBox({store: aligns,triggerAction: 'all'})),
+            '垂直对齐':  new Ext.grid.GridEditor(new Ext.form.ComboBox({store: valigns,triggerAction: 'all'})),
+            '自动折行':  new Ext.grid.GridEditor(new Ext.form.ComboBox({store: word_wraps,triggerAction: 'all'})),
+            '存储到数据库':  new Ext.grid.GridEditor(new Ext.form.ComboBox({store: bools,triggerAction: 'all'})),
+            '必填':  new Ext.grid.GridEditor(new Ext.form.ComboBox({store: bools,triggerAction: 'all'}))
+        },
+        
+        source: {
+                单元格名称: 'aa',
+                单元格描述: 'bb',
+                文本: '',
+                存储到数据库: '',
+                单元格类型: '数字',
+                选择项: '',
+                必填: '否',
+                只读: '否',
+                显示千分位: '否',
+                保留小数位: 2,
+                前置字符串: '',
+                后置字符串: '',
+                前景色: 'black',
+                背景色: 'white',
+                字体: '13px 宋体',
+                水平对齐: '左',
+                垂直对齐: '中',
+                自动折行: '否',
+                背景图片: '',
+                上边框: '1px solid black',
+                右边框: '1px solid black',
+                下边框: '1px solid black',
+                左边框: '1px solid black'
+        },
+        viewConfig : {
+            forceFit: true,
+            scrollOffset: 2 // the grid will never have scrollbars
+        }
+    });
+    
+    propsGrid.on("afteredit", function(e){
+        var value = e.value;
+        var field = e.record.get('name');
+        $("#lmx_form").load("/lmx_form/set_cell_attribute/<%=@lmx_form.id%>?field="+encodeURI(field) + "&value=" + encodeURI(value) + "&row1="+rect_row1+"&row2="+rect_row2+"&col1="+rect_col1+"&col2="+rect_col2);
+    })
+    
+    propsGrid.on("beforepropertychange", function(source, recordId, value, oldValue){
+            var record = this.getStore().getById(recordId);
+                //把新值映射成文本
+                switch (value) {
+                      case "false":
+                        value = "否"
+                        break;
+                      case "true":
+                        value = "是"
+                        break;
+                      case "integer":
+                        value = "整型"
+                        break;
+                      case "float":
+                        value = "浮点"
+                        break;
+                      case "text":
+                        value = "文本"
+                        break;
+                      case "textarea":
+                        value = "大文本"
+                        break;
+                      case "date":
+                        value = "日期"
+                        break;
+                      case "datetime":
+                        value = "时间"
+                        break;
+                      case "select":
+                        value = "下拉选择"
+                        break;
+                      case "check":
+                        value = "复选框"
+                        break;
+                      case "button":
+                        value = "按钮"
+                        break;
+                      case "left":
+                        value = "左"
+                        break;
+                      case "center":
+                        value = "中"
+                        break;
+                      case "right":
+                        value = "右"
+                        break;
+                      case "top":
+                        value = "上"
+                        break;
+                      case "middle":
+                        value = "中"
+                        break;
+                      case "bottom":
+                        value = "下"
+                        break;
+                      case "normal":
+                        value = "否"
+                        break;
+                      case "break-word":
+                        value = "是"
+                        break;
+                }
+                
+                //令PropertyGrid暂停触发事件，以防止事件循环
+                this.suspendEvents();
+
+                record.set("value", value);//写入映射后的值
+                record.commit();//执行修改
+
+                //恢复事件
+                this.resumeEvents();
+
+                //阻止Property的自动更新
+                return false;
+    })
+
+    floatMenu = new Ext.menu.CheckItem({
+            text: "浮动行", 
+            handler: function(){$("#lmx_form").load("/lmx_form/set_float_row/<%=@lmx_form.id%>?row="+(rect_row1+1))}
+    });
+    var tb = new Ext.Toolbar({
+    renderTo: "toolbar",
+    width: "99%",
+    items: [
+        {
+            xtype: 'splitbutton',
+            text: '表格操作',
+            menu: {
+                items: [
+                    {
+                        text: '表标识',
+                        icon: '/img/anchor.png',
+                        handler: function(){
+                            Ext.MessageBox.prompt('表标识', '请输入表标识:', 
+                                function(btn, text){
+                                    $("#lmx_form").load("/lmx_form/set_table_attribute/<%=@lmx_form.id%>?field="+encodeURI("表标识") + "&value=" + encodeURI(text) + "&row1="+rect_row1+"&row2="+rect_row2+"&col1="+rect_col1+"&col2="+rect_col2);
+                                    table_code = text;
+                                }, 
+                                window, false, table_code);
+                        }
+                    },
+                    {
+                        text: '表名称',
+                        handler: function(){
+                            Ext.MessageBox.prompt('表名称', '请输入表名称:', 
+                                function(btn, text){
+                                    $("#lmx_form").load("/lmx_form/set_table_attribute/<%=@lmx_form.id%>?field="+encodeURI("表名称") + "&value=" + encodeURI(text) + "&row1="+rect_row1+"&row2="+rect_row2+"&col1="+rect_col1+"&col2="+rect_col2);
+                                    table_name = text;
+                                }, 
+                                window, false, table_name);
+                        }
+                    },
+                    {
+                        text : '脚本',
+                        handler : function(){
+                            JqueryDialog.Open1('脚本管理', "/lmx_form/script_manager/<%=@lmx_form.id%>", 600, 300);
+                        }
+                    },
+                    {
+                        text: '压缩表风格',
+                        handler: function(){
+                            $("#lmx_form").load("/lmx_form/pack_style/<%=@lmx_form.id%>");
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            xtype: 'splitbutton', // same as 'tbsplitbutton'
+            text: '行列操作',
+            menu: {
+                items: [
+                  floatMenu,
+                {
+                    text: '设置行高',
+                    handler: function(){
+                        Ext.MessageBox.prompt('设置行高', '请输入行高:', 
+                                function(btn, text){
+                                    $("#lmx_form").load("/lmx_form/set_table_attribute/<%=@lmx_form.id%>?field="+encodeURI("行高") + "&value=" + encodeURI(text) + "&row1="+rect_row1+"&row2="+rect_row2+"&col1="+rect_col1+"&col2="+rect_col2);
+                                    row_height = text;
+                                }, 
+                                window, false, row_height);
+                    }
+                },
+                {
+                    text: '设置列宽',
+                    handler: function(){
+                        Ext.MessageBox.prompt('设置列宽', '请输入列宽:', 
+                                function(btn, text){
+                                    $("#lmx_form").load("/lmx_form/set_table_attribute/<%=@lmx_form.id%>?field="+encodeURI("列宽") + "&value=" + encodeURI(text) + "&row1="+rect_row1+"&row2="+rect_row2+"&col1="+rect_col1+"&col2="+rect_col2);
+                                    col_width = text;
+                                }, 
+                                window, false, col_width);
+                    }
+                },
+                {
+                    text: '插入行',
+                    icon: '/img/table_row_insert.png',
+                    handler: function(){
+                        $("#lmx_form").load("/lmx_form/insert_row/<%=@lmx_form.id%>?field=row&" + "row="+current_select_row);
+                    }
+                },
+                {
+                    text: '删除行',
+                    icon: '/img/table_row_delete.png',
+                    handler: function(){
+                        $("#lmx_form").load("/lmx_form/delete_row/<%=@lmx_form.id%>?field=row&" + "row="+current_select_row);
+                    }
+                },
+                {
+                    text: '插入列',
+                    icon: '/img/table_col_insert.png',
+                    handler: function(){
+                        $("#lmx_form").load("/lmx_form/insert_row/<%=@lmx_form.id%>?field=col&" + "row="+current_select_col);
+                    }
+                },
+                {
+                    text: '删除列',
+                    icon: '/img/table_col_delete.png',
+                    handler: function(){
+                        $("#lmx_form").load("/lmx_form/delete_row/<%=@lmx_form.id%>?field=col&" + "row="+current_select_col);
+                    }
+                }]
+            }
+        },
+        '-',
+        {
+            icon: '/img/arrow_in.png',
+            tooltip: '合并单元格',
+            text: "合并",
+            handler: function(){
+                $("#lmx_form").load("/lmx_form/merge/<%=@lmx_form.id%>?" + "row1=" +rect_row1+ "&row2=" +rect_row2+ "&col1=" +rect_col1+ "&col2=" +rect_col2);
+            }
+        },
+        {
+            icon: '/img/arrow_out.png',
+            text: "拆分",
+            tooltip: '拆分单元格',
+            handler: function(){
+                $("#lmx_form").load("/lmx_form/split/<%=@lmx_form.id%>?" + "row="+current_select_row+"&col="+current_select_col);
+            }
+        },
+        '-',
+        {
+            icon: '/img/text_align_left.png',
+            handler: function(){
+                $("#lmx_form").load("/lmx_form/set_cell_attribute/<%=@lmx_form.id%>?field="+encodeURI("水平对齐") + "&value=left&row1="+rect_row1+"&row2="+rect_row2+"&col1="+rect_col1+"&col2="+rect_col2);
+            }
+        },
+        {
+            icon: '/img/text_align_center.png',
+            handler: function(){
+                $("#lmx_form").load("/lmx_form/set_cell_attribute/<%=@lmx_form.id%>?field="+encodeURI("水平对齐") + "&value=center&row1="+rect_row1+"&row2="+rect_row2+"&col1="+rect_col1+"&col2="+rect_col2);
+            }
+        },
+        {
+            icon: '/img/text_align_right.png',
+            handler: function(){
+                $("#lmx_form").load("/lmx_form/set_cell_attribute/<%=@lmx_form.id%>?field="+encodeURI("水平对齐") + "&value=right&row1="+rect_row1+"&row2="+rect_row2+"&col1="+rect_col1+"&col2="+rect_col2);
+            }
+        }
+    ]
+});
+
+    
+});
+ 
+ 
+ function onItemClick(item){
+        Ext.MessageBox.alert('Menu Click', item.text);
+    }
+
+</script>
+
+<script>
+var table_code = '<%=@table.code%>';    //表标识
+var table_name = '<%=@table.name%>';    //表名称
+var row_height = '';                    //当前行高
+var col_width = '';                     //当前列宽
+
+var rows = $("#lmx_form tbody").children().size();
+
+//当前选中单元格，0开始计数
+var current_select_row = 0;
+var current_select_col = 0;
+
+//当前选中的区域，0开始计数
+var rect_row1 = 0;   //上
+var rect_col1 = 0;   //左
+var rect_row2 = 0;   //右
+var rect_col2 = 0;   //下
+
+//清除风格
+function clear_class()
+{
+    $(".lmx_table td").each(function (){$(this).removeClass('selected_cell')})
+}
+
+//取得一个单元格 row_index 和 col_index 从0开始计数
+function get_cell(row_index, col_index)
+{
+    var row = $(".lmx_table tr").get(row_index);
+    var cell = $(row).children().get(col_index);
+    return $(cell);
+}
+
+//选择一个区域
+function select_area(row1, col1, row2, col2)
+{
+    clear_class();
+    
+    if (row1 > row2)
+    {
+        var t = row1;
+        row1 = row2;
+        row2 = t;
+    }
+    
+    if (col1 > col2)
+    {
+        var t = col1;
+        col1 = col2;
+        col2 = t;
+    }
+    rect_row1 = row1;
+    rect_row2 = row2;
+    rect_col1 = col1;
+    rect_col2 = col2;
+    for(var r=row1; r<=row2; r++)
+    {
+        for(var c=col1; c<=col2; c++)
+        {
+            cell = get_cell(r, c)
+            cell.addClass("selected_cell");
+        }
+    }
+}
+select_area(0,0,0,0);
+function parseform()
+{
+    //鼠标点击事件
+    $(".lmx_table td").bind("mousedown", function(){
+      current_select_col = $(this).parent().children().index($(this));
+      current_select_row = $(this).parent().parent().children().index($(this).parent());
+      $(this).addClass('selected_cell');
+      select_area(current_select_row, current_select_col, current_select_row, current_select_col);
+      $("#get_attributes").load("/lmx_form/get_attributes/<%=@lmx_form.id%>?row=" + current_select_row + "&col=" + current_select_col)
+    }); 
+    
+    //鼠标移动事件
+    $(".lmx_table td").bind("mousemove", function(event){
+        if (event.button == 1)
+        {
+            var col = $(this).parent().children().index($(this));
+            var row = $(this).parent().parent().children().index($(this).parent());
+            select_area(current_select_row, current_select_col, row, col);
+        }
+    });
+    
+    $(".ruler").bind("click", function(){
+        col = $(this).parent().children().index($(this));
+        row = $(this).parent().parent().children().index($(this).parent());
+        if (row>0 && col> 0)
+            return;
+    
+        row_count = $(".lmx_table tr").size()
+        col_count = $(".lmx_table col").size()
+        
+        if (row==0 && col==0)
+        {
+            current_select_row = 0;
+            current_select_col = 0;
+            rect_row1 = 0;
+            rect_col1 = 0;
+            rect_row2 = row_count -1;
+            rect_col2 = col_count -1;
+        }
+        else if (row == 0)       //整列选择
+        {
+            current_select_row = 0;
+            current_select_col = col-1;
+            rect_row1 = 0;
+            rect_col1 = col-1;
+            rect_row2 = row_count -1;
+            rect_col2 = col-1;
+        }
+        else if (col == 0)      //整行选择
+        {   
+            current_select_row = row-1;
+            current_select_col = 0;
+            rect_row1 = row-1;
+            rect_col1 = 0;
+            rect_row2 = row-1;
+            rect_col2 = col_count-1;
+        }
+        select_area(rect_row1, rect_col1, rect_row2, rect_col2);
+        $("#get_attributes").load("/lmx_form/get_attributes/<%=@lmx_form.id%>?row=" + current_select_row + "&col=" + current_select_col)
+    })
+    
+    $(".lmx_table td").bind("keydown", function(){
+        if (event.keyCode == 37)            //left
+        {
+            if (current_select_col > 0)
+                current_select_col -= 1
+        }
+        else if (event.keyCode == 38)       //up    
+        {
+            if (current_select_row > 0)
+                current_select_row -= 1
+                
+            $(".dinput").blur();   
+            td = get_cell(current_select_row, current_select_col)
+            edit_td(td);
+        }
+        else if (event.keyCode == 39)       //right
+        {
+            if (current_select_col < $(".lmx_table col").size()-1)
+                current_select_col += 1
+        }
+        else if (event.keyCode == 40 || event.keyCode == 13)       //down
+        {
+            if (current_select_row < $(".lmx_table tr").size()-1)
+                current_select_row += 1
+                
+            $(".dinput").blur();   
+            td = get_cell(current_select_row, current_select_col)
+            edit_td(td);
+        }
+        
+        cell = get_cell(current_select_row, current_select_col)
+        while (cell.attr("style") == "DISPLAY: none" || cell.attr("style") == "display:none")
+        {
+            current_select_col -= 1
+            cell = get_cell(current_select_row, current_select_col)
+        }
+        
+        rect_row1 = current_select_row
+        rect_row2 = current_select_row
+        rect_col1 = current_select_col
+        rect_col2 = current_select_col
+        select_area(rect_row1, rect_col1, rect_row2, rect_col2);
+    })
+    
+    $(".lmx_table td").bind("dblclick", function(){
+        td = $(this)
+        edit_td(td);
+        return false;
+    })
+}
+parseform();
+
+function edit_td(td)
+{
+        text = $.trim(td.text())
+        td[0].innerHTML = "<input type='text' id='ddinput' class='dinput' value=" + text + "></input>"
+        td_dom = td.children()[0];
+        td_dom.value = text
+        td_dom.select();
+        td_dom.focus();
+        td.children().bind("blur", function(){
+            input   = $(this)
+            td      = input.parent()
+            value   = input.attr('value')
+            td.text(value);
+            var col = td.parent().children().index(td);
+            var row = td.parent().parent().children().index(td.parent());
+            
+            $("#get_attributes").load("/lmx_form/set_cell_attribute/<%=@lmx_form.id%>?refresh=false&field="+encodeURI('文本') + "&value=" + encodeURI(value) + "&row1="+row+"&row2="+row+"&col1="+col+"&col2="+col);
+        })
+        
+}
+
+function close_dialog()
+{
+    JqueryDialog.Close();
+}
+</script>

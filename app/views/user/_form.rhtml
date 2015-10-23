@@ -1,0 +1,41 @@
+<%= error_messages_for 'user' %>
+
+<table class="ft" border="1">
+<!--[form:user]-->
+<tr>
+	<td>公司名称</td>
+	<td><%= select 'user', 'company_id', Company.find(:all).collect{|c| [c.name, c.id]}%></td>
+</tr>
+
+<tr>
+	<td>登录名</td>
+	<td><%= text_field 'user', 'login', :validate=>"required:true", :title=>"登录名" %></td>
+</tr>
+
+<tr>
+	<td>真实名称</td>
+	<td><%= text_field 'user', 'name', :validate=>"required:true", :title=>"真实名称"  %></td>
+</tr>
+
+<tr>
+	<td>密码</td>
+	<td><%= password_field 'user', 'password', :validate=>"required:true", :title=>"密码"  %></td>
+</tr>
+
+<tr>
+	<td>角色</td>
+	<td>
+	<% for role in Role.find(:all)%>
+     <%= check_box_tag "user[role_ids][]", role.id, @user.role_ids.include?(role.id)%><%=role.name%>&nbsp;
+    <% end %>
+	</td>
+</tr>
+
+<tr>
+	<td>部门</td>
+	<td><%= select 'user', 'department_id', Department.find(:all).collect{|c| ["( #{c.id} ) " + c.name, c.id]}, :include_blank=>true  %></td>
+</tr>
+
+<!--[eoform:user]-->
+
+</table>

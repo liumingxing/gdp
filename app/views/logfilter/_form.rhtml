@@ -1,0 +1,22 @@
+<%= error_messages_for 'logfilter' %>
+
+<!--[form:logfilter]-->
+<table class="ft" border="1">
+    <tr>
+        <td>控制器</td>
+        <td><%= text_field 'logfilter', 'controller'  %></td>
+    </tr>
+    <tr>
+        <td>方法</td>
+        <td><%= text_field 'logfilter', 'action'  %></td>
+    </tr>
+    <tr>
+        <td>描述</td>
+        <td><%= text_field 'logfilter', 'desc'  %></td>
+    </tr>
+    <tr>
+        <td colspan=2><%= check_box 'logfilter', 'log'  %>存入日志</td>
+    </tr>
+</table>
+<!--[eoform:logfilter]-->
+

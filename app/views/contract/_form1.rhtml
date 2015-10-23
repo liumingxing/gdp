@@ -1,0 +1,33 @@
+<table class="ft" border="1">
+<tr>
+	<th>项目名称：</th>
+	<td><%= text_field 'contract', 'name', :validate=>"required:true", :title=>"项目名称"  %></td>
+</tr>
+
+<tr>
+	<th>计划开始时间：</th>
+	<td><%= text_field 'contract', 'begintime', :onfocus=>"WdatePicker({maxDate:'#F{$dp.$D(\\\'contract_endtime\\\')}'})"  %></td>
+</tr>
+
+<tr>
+	<th>计划完成时间：</th>
+	<td><%= text_field 'contract', 'endtime', :onfocus=>"WdatePicker({minDate:'#F{$dp.$D(\\\'contract_begintime\\\')}'})"  %></td>
+</tr>
+
+<tr>
+	<th>合同类型：</th>
+	<td><%= select 'contract', 'contracttype', Dictionary.find_by_name("合同类型").items.collect{|i| [i.name, i.name]}, { :include_blank => true } %></td>
+</tr>
+
+<tr>
+	<th>变更支付方式：</th>
+	<td><%= select 'contract', 'paymethod', Dictionary.find_by_name("变更支付方式").items.collect{|i| [i.name, i.name]}, { :include_blank => true } %></td>
+</tr>
+
+<tr>
+	<th>承包范围：</th>
+	<td><%= text_area 'contract', 'contractscope', :rows=>7%></td>
+</tr>
+</table>
+
+<%= hidden_field_tag 'contract[iscontract]', 1%>

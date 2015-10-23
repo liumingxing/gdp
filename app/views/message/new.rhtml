@@ -1,0 +1,10 @@
+<%= path "发送消息"%>
+
+<% form_tag :action => 'create' do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag "发送" %>
+<% end %>
+
+<script>
+  add_tab_button("/img/iconBack.png", "返回", "/message/list");  
+</script>

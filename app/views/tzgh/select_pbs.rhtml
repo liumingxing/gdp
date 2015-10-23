@@ -1,0 +1,65 @@
+<%= javascript_include_tag 'jquery' %>
+
+<style>
+*{padding:0px; margin:0px;}
+</style>
+
+<% form_tag({}, {:method=>"get"}) do %>
+    <%= hidden_field_tag "id", params[:id]%>
+    <span style="font-size:12px">请选择建筑类型:</span>
+	   <select id="cate1" name="pbstype" onchange="this.form.submit();">
+	       <option value="">--请选择--</option>
+	       <%=options_from_collection_for_select(Dictionary.find(2).items, "name", "name", params[:pbstype])%>
+	   </select>
+	<span style="font-size:12px">请选择单项类型:</span>
+	   <select id="cate2" name="pbs" onchange="this.form.submit();">
+	       <option value="">--请选择--</option>
+	       <%=options_from_collection_for_select(@pbses, "id", "name", params[:pbs].to_s.to_i)%>
+	   </select>
+<% end %>	   
+
+<% form_tag({:action => 'import_pbs', :id=>params[:id]}, {:onsubmit => "return myform_onsubmit()", :target=>"content"}) do %>	   
+	<%= hidden_field_tag "pbs", params[:id]%>
+	<div style="margin-bottom:4px">
+    	<span style="font-size:12px">单项工程名称：</span>
+    	<%= text_field_tag "name", ""%>
+    	<%= submit_tag "导入"%>
+	</div>
+    <script>
+     var data={"-1_0":"text:投资控制模板;hint:投资控制模板",
+         <% @pbs.nodes.each do |t| %>
+               "<%=t.template.parent_id||0%>_<%=t.template.id%>":"text:<%=t.template.name.gsub("\n", '\n')%>;",
+        <% end if @pbs %>
+        "-100":"100"}
+    </script>
+        
+    <%= render :partial => "share/tree", :locals => {:array=>[], :usecheckbox => true, :expandlevel => 2} %>
+<% end %>
+
+<script>
+function myform_onsubmit()
+{
+    if ($("#name").val()=="")
+    {
+        alert("请输入工程名称");
+        return false;
+    }
+    var ids = GetCheckBox(trade);
+    if (ids.length ==0) {
+         alert("您怎么一个都没选啊");
+         return false;
+    } else {
+         ids = ids.replace(", 0, ", "0, ");
+    }
+    $("#checked_values").val(ids);
+}
+
+function sel_change()
+{
+    if (!$("#tzmb").val())
+        return;
+    
+    window.location = "/tzgh/select_template/" + $("#tzmb").val() + "?pid=<%= params[:pid]%>"
+}
+
+</script>

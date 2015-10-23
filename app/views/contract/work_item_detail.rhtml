@@ -1,0 +1,18 @@
+<% if @subitems.size == 0%>
+    <%= javascript_include_tag 'jquery/jquery.validate.js' %>
+    <% form_remote_tag :update=>"detail_#{@workitem.itemtype}", :url=>{:action=>"create_subitem", :id=>params[:id], :t=>@workitem.itemtype} do%>
+        <%= render :partial=>"subitem_#{@workitem.itemtype}"%>
+        <%= submit_tag "保存"%>
+    <% end %>
+<% elsif @subitems.size == 1%>
+    <%= javascript_include_tag 'application' %>
+    <% @subitem = @subitems[0] %>
+    <div class="show_detail">
+        <div style="margin:4px;">
+        <%= link_to_remote "编辑", :update=>"detail_#{@workitem.itemtype}", :url=>{:action=>"edit_subitem", :id=>@subitem.id, :t=>@workitem.itemtype}%>
+        </div>
+        <%= render :partial=>"subitem_#{@workitem.itemtype}"%>
+    </div>
+<% else%>
+
+<% end %>

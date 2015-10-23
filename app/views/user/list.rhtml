@@ -1,0 +1,22 @@
+<%= javascript_include_tag 'xtree' %>
+<%= javascript_include_tag 'xloadtree' %>
+<%= javascript_include_tag 'xmlextras' %>
+
+<%= path "用户管理"%>
+  
+<table width=100% height=100%>
+  <tr>
+    <td width=24% valign=top>
+      <script>
+        <%= show_departmenttree '/user/list_detail', 'users' %>
+      </script>
+    </td>
+    <td valign=top height=100%>
+      <iframe SCROLLING=yes  FRAMEBORDER="0" height="100%" width="100%" id="users" name="users" class=""></iframe>
+    </td>
+  </tr>  
+</table>
+
+<script>
+users.location = '/user/list_detail/-1';
+</script>

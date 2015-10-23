@@ -1,0 +1,14 @@
+<% t = 1%>
+<% t = 2 if @contract.iscontract==0%>
+
+<%= path "修改"+{1=>"合同", 2=>"费用"}[t] %>
+
+
+<% form_tag :action => 'update', :id => @contract, :t=>t do %>
+  <%= render :partial => "form#{t}" %>
+<% end %>
+
+<script>
+  add_submit("保存");
+  add_tab_button("/img/iconBack.png", "返回", "/contract/list/<%=params[:category_id]%>?t=<%=t%>&category_id=<%=@contract.category_id%>");  
+</script>

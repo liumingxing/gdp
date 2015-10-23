@@ -1,0 +1,32 @@
+<?xml version='1.0' ?>
+<Grid>
+    <Cfg Editing='0' ExportType='Expanded,Outline' Sorting='0' id='grid1'  
+    MainCol='name' MaxHeight='1'  MaxWidth='1' ConstWidth='0' IdNames='id' IdChars='0123456789' 
+    NumberId='1' LastId='1' AppendId='1' ShowDeleted='0' DateStrings='1' Adding='0' FullId='1' CaseSensitiveId='0' />
+    <Cols>
+        <C Name='name' Width='250' Type='Text'/>
+        <C Name='jzgcf' Width='80' Type='Float' Format='0.00'/>
+        <C Name='azgcf' Width='80' Type='Float' Format='0.00'/>
+        <C Name='sbgzf' Width='80' Type='Float' Format='0.00'/>
+        <C Name='qtfy' Width='80' Type='Float' Format='0.00'/>
+        <C Name='Sum' Width='80'  Type='Float' Formula='jzgcf+azgcf+sbgzf+qtfy' Format='0.00'/>
+        <C Name='unit' Width='80' Type='Text'/>
+        <C Name='num'  Width='80' Type='Float'/>
+    `   <C Name='jjzb' Width='80' Type='Float' RelWidth='0' Format='0.00' />
+        <C Name='state' Type='Text' Width='80'/>
+        <C Name='shyj' CanEdit='0' Type='Lines' Width='200'  AcceptEnters='1' RelWidth='1'/>               
+   </Cols>
+   <Def>
+        <D Name='Node'  CanSelect='0'  CanDrag='0' AcceptChild='0'  CanFilter='0' CanEdit='0' name='合计' CDef='R' AcceptDef='R' Calculated='1' SumFormula='sum()' jzgcfFormula='sum()' sbgzfFormula='sum()' azgcfFormula='sum()' qtfyFormula='sum()'  ProjectHtmlPrefix='&lt;B>' ProjectHtmlPostfix='&lt;/B>'/>
+   </Def>
+   <Foot>
+        <I Kind='Space' RelHeight='100'/>
+        <I Def='Node' name='合计' ProjectCanEdit='0' />
+   </Foot>
+   <Root CDef='Node' AcceptDef='Node' />
+   <Header  name='工程费用名称' jzgcf='建筑工程费' sbgzf='设备购置费' azgcf='安装工程费' qtfy='其他费用' Sum='合计' state='状态'  unit='单位' num='数量' jjzb='经济指标'  shyj='审核意见'/>
+   <Head><I Kind='Filter' Title=''/></Head>
+   <Toolbar Styles='1' Space='-1' Visible='1' Cells='Print,Export,ExpandAll,CollapseAll,Columns'/>
+   <MenuCfg ShowDeleted='0' AutoSort='0' AutoUpdate='0' Separator1='0' MouseHover='1' ShowDrag='0' ShowPanel='0' ShowIcons='0'/>
+   <Panel Copy='0' Move='0' Select='1' Delete='0'/>
+</Grid>

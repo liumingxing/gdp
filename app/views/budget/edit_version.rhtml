@@ -1,0 +1,15 @@
+
+<% form_tag :action => 'update_version', :id=>params[:id], :t=>params[:t] do%>
+  <table class="ft" border="1">
+    <tr>
+        <td>名称：</td>
+        <td><%= text_field "version", "text"%></td>
+    </tr>
+  </table>
+<% end %>
+
+
+<script>
+  add_submit("保存");
+  add_tab_button("/img/iconBack.png", "返回", "/budget/version/t=<%=params[:t]%>");  
+</script>

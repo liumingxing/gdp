@@ -1,0 +1,8 @@
+<select id=<%=params[:did]%> name=<%=params[:name]%> >
+    <% if @province%>
+        <option value="">--请选择--</option>
+        <% for city in @province.direct_children%>
+            <option value="<%=city.text%>"><%=city.text%></option>
+        <% end %>
+    <% end %>
+</select>

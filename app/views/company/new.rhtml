@@ -1,0 +1,10 @@
+<%= path "新建公司"%>
+
+<% form_tag :action => 'create' do %>
+  <%= render :partial => 'form' %>
+<% end %>
+
+<script>
+  add_tab_button("/img/iconBack.png", "返回", "/company/list");  
+  add_submit("保存");
+</script>

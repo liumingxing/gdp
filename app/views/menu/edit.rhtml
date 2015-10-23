@@ -1,0 +1,19 @@
+<%=link_to_remote '新建子节点', :update=>'editdiv', :url=>{:action=>'new', :parent=>@menu}%>
+&nbsp;&nbsp;
+
+<%=link_to '调整子节点顺序', {:action=>'reorder', :id=>@menu} if @menu.children.size > 0%>
+<% form_remote_tag( :update=>"form_update", :url=>"/menu/update/#{@menu.id}") do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag '保存', :class=>"submit" %>&nbsp; | &nbsp;
+  <%= link_to_remote '删除', :update=>"editdiv", :url=>{:action=>'destroy', :id=>@menu}, :confirm=>"确定删除该节点吗？", :method => :post%>
+<% end %>
+
+<br/>
+<%= link_to_remote "分配给所有中心人员", :update=>"form_update", :url=>{:action=>"to_all_user", :id=>@menu, :type=>"1"} if @menu.root.id == 69 %>
+<%= link_to_remote "分配给所有采购人", :update=>"form_update", :url=>{:action=>"to_all_user", :id=>@menu, :type=>"2"} if @menu.root.id == 70 %>
+<%= link_to_remote "分配给所有供应商", :update=>"form_update", :url=>{:action=>"to_all_user", :id=>@menu, :type=>"3"} if @menu.root.id == 67 %>
+<br/><br/>
+<div id='form_update'>
+
+</div>
+

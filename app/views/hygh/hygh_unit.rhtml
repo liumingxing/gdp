@@ -1,0 +1,30 @@
+<%= javascript_include_tag 'jquery_dialog' %>
+
+<div style="margin:4px;">
+<a href="#" onclick="JqueryDialog.Open1('引用概算项', '/hygh/insert_budget_dlg/<%=@hygh.id%>?t=2', 800, 400)">引用概算项</a>
+<a href="#" onclick="JqueryDialog.Open1('引用概算项', '/hygh/insert_budget_dlg/<%=@hygh.id%>?t=3', 800, 400)">引用预算项</a>
+</div>
+
+
+
+<table id="table" class="list" border="1" width=99%>
+    <tr class="head">
+        <th>名称</th>
+        <th>造价</th>
+        <th>数据来源</th>
+    </tr>
+    <% for unit in @units%>
+        <%= color_row%>
+            <td><%= unit.name %></td>
+            <td align="right"><%= money unit.cost%></td>
+            <td></td>
+        </tr>
+    <% end %>
+</table>
+
+<% if params[:add]%>
+<script>
+var grid = Grids["grid1"];
+grid.SetValue(_curRow, "mbcb", <%= @hygh.unit_cost_sum%>, 1);
+</script>
+<% end %>

@@ -1,0 +1,53 @@
+<table class="ft" border="1">
+<tr>
+	<th>费用项名称：</th>
+	<td><%= text_field 'contract', 'name', :validate=>"required:true", :title=>"费用项名称"  %></td>
+</tr>
+
+<tr>
+	<th>费用项金额：</th>
+	<td><%= text_field 'contract', 'contract_amount'%>元</td>
+</tr>
+
+<tr>
+	<th>变更金额：</th>
+	<td><%= text_field 'contract', 'change_amount'%>元</td>
+</tr>
+
+<tr>
+	<th>结算金额：</th>
+	<td><%= text_field 'contract', 'clearing_amount'%>元</td>
+</tr>
+
+<tr>
+	<th>累计已支付：</th>
+	<td></td>
+</tr>
+
+<tr>
+	<th>支付比率：</th>
+	<td><%= text_field 'contract', 'pay_rate'%>%</td>
+</tr>
+
+<tr>
+	<th>预留金额：</th>
+	<td><%= text_field 'contract', 'detention_amount'%>元</td>
+</tr>
+
+<tr>
+	<th>质保金额：</th>
+	<td><%= text_field 'contract', 'warranty_amount'%>元</td>
+</tr>
+
+<tr>
+	<th>公司名称：</th>
+	<td><%= text_field 'contract', 'company_name'%></td>
+</tr>
+
+<tr>
+	<th>备注：</th>
+	<td><%= text_area 'contract', 'contractscope', :rows=>7%></td>
+</tr>
+</table>
+
+<%= hidden_field_tag 'contract[iscontract]', 0%>

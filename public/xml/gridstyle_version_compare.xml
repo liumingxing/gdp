@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<Grid>
+   <Cfg id='grid1' StandardFilter='2' SearchExpand='1' MainCol='name' MaxHeight='1' Sorting='0' MaxWidth='1' ConstHeight='1' ConstWidth='1' IdChars='0123456789' NumberId='1' LastId='1' AppendId='1' ShowDeleted='0' DateStrings='1' Adding='1' FullId='1'
+      IdNames='id' CaseSensitiveId='0'/>
+   <LeftCols>
+      <C Width='250' Type='Text' CanEdit='0'/>
+   </LeftCols>
+   <Cols>
+      <C Name="name" Type="Text" Width="300" CanEdit='0' />
+      <C Name="sum1" Type="Float" Width="170" CanEdit='0'  Format=',0.00' /> 
+      <C Name="sum2" Type="Float" Width="170" CanEdit='0' Format=',0.00' />
+      <C Name="sub12" Type="Float" Width="170" CanEdit='0' Format=',0.00' /> 
+   </Cols>
+   <Def>
+       <D Name='Node'  CanDrag='1' AcceptChild='1' CanEdit='1' CDef='R' AcceptDef='R' Calculated='1' 
+				sum1Formula='sum()' sum2Formula='sum()' sub12Formula='sum()'/>
+   </Def>
+   <Foot>
+      <I Kind='Space' RelHeight='100'/>
+      <I Def='Node' name='合计' ProjectCanEdit='0'  CanEdit='0' CanSelect='0' CanDrag='0' CanDelete='0' CanCopy='0'/>
+   </Foot>
+   <Root CDef='Node' AcceptDef='Node' />
+    <Header name="费用名称" sum1="合计1" sum2="合计2" sub12="差额" /> 
+    <Head><I Kind='Filter' name=''/></Head>
+    <Toolbar Visible='1' Space='-1' Styles='1' Cells='Reload,ExpandAll,CollapseAll,Print,Export'/>
+    <MenuCfg ShowDeleted='0' AutoSort='0' AutoUpdate='0' Separator1='0' MouseHover='1' ShowDrag='0' ShowPanel='1' ShowIcons='0'/>
+    <Panel Copy='0' Move='0' Select='0' Delete='0'/>
+</Grid>

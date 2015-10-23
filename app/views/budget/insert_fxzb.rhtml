@@ -1,0 +1,41 @@
+<%= javascript_include_tag 'Grid/GridE' %>
+
+<% form_tag({}, {:method=>"get", :onsubmit=>"return check()"}) do %>
+    <span>请选择建筑类型：</span>
+    <select name="jzlx" onchange="form.submit();">
+        <option value="">--请选择--</option>
+        <%=options_from_collection_for_select(Dictionary.find_by_name("建筑类型").items, 'name', 'name', params[:jzlx])%>
+    </select>
+    <span>请选择单项类型：</span>
+    <select name="dxlx" onchange="form.submit();">
+        <option value="">--请选择--</option>
+        <%=options_from_collection_for_select(@dxlx, 'id', 'name', params[:dxlx].to_s.to_i)%>
+    </select>
+    
+    <%= hidden_field_tag "id", params[:id]%>
+    <%= hidden_field_tag "ids", ""%>
+    <%= submit_tag "选择"%>    
+<% end %>
+
+<div style="width:100%;height:100%; margin-top:4px;" id='grid'> 
+      <bdo layout_url="/xml/gridstyle_select_pbs.xml" Data_Url="/pbs/get_pricedata?id=<%=params[:dxlx]%>"> </bdo>
+</div>
+
+<script>
+ function check()
+ {
+    var rows = Grids["grid1"].GetSelRows();
+    if(rows.length == 0){
+        alert('请选择要插入的单项工程结构');
+        return false;
+    }
+    result = "";
+    for(var i=0; i<rows.length; i++)
+    {
+        row = rows[i];
+        result += row["id"] + ",";
+    }
+    $("#ids").val(result);
+    return true;
+ }
+</script>

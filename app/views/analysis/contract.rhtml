@@ -1,0 +1,101 @@
+<%= path "合同分析"%>
+
+<table  height=100% width=100%>
+    <tr>
+        <td valign="top">
+            <% if params[:tree] %>
+                <div class="clsTreeDiv" style="height:100%">
+                <script>
+                <% project = Project.find(session[:pid])%>
+                 var data={"-1_0":"text:<%=project.name%>;hint:<%=project.name%>",
+                 <% nodes = Hygh.find(:all, :conditions=>"project_id = #{session[:pid]} and itemtype = 1")%>
+                 <% nodes.each do |t| %>
+                     "<%=t.parent_id||0%>_<%=t.id%>":"text:<%=t.name.gsub("\n", '\n')%>;url:/analysis/contract/<%=t.id%>?tree=tree",
+                 <% end%>
+                    "-100":"100"}
+                </script>
+                    
+                <%= render :partial => "share/tree", :locals => {:array=>[], :usecheckbox => false, :expandlevel => 3} %>
+                </div>
+            <% end %>
+        </td>
+        <td valign="top">
+            <table class="list" id="table" border="1" width=99%>
+              <tr class="head">
+                <th>合同名称</th>
+                <th>目标值</th>
+                <th>合同额</th>
+                <th>变更金额</th>
+                <th>预计结算额</th>
+                <th>实际结算额</th>
+                <th>止付金额</th>
+                <th>计划止付额</th>
+                <th>已完工量</th>
+                <th>累计支付额</th>
+                <th>本月计划支付</th>
+                <th>本月审批支付</th>
+                <th>开工日期</th>
+                <th>竣工日期</th>
+                <th>承包单位</th>
+                <th>状态</th>
+              </tr>
+              
+              <% sum1 = sum2 = sum3 = sum4 = sum5 = sum6 = sum7 = sum8 = sum9 = sum10 = sum11 = 0%>
+            <% for contract in @contracts %>
+              <%= color_row %>
+                <td><%= link_to contract.name, :controller=>"contract", :action=>"show", :id=>contract %></td>
+                <td align="right"><%=h money contract.target_amount %></td>
+                <td align="right"><%=h money contract.contract_amount %></td>
+                <td align="right"><%=h money contract.change_amount %></td>
+                <td align="right"><%=h money contract.contract_amount + contract.change_amount %></td>
+                <td align="right"><%=h money contract.total_pay_amount %></td>
+                <td align="right"><%=h money contract.stop_pay_amount.to_f + contract.change_amount.to_f %></td>
+                <td align="right"><%=h money contract.stop_pay_amount %></td>
+                <td align="right"><%=h money contract.total_complete %></td>
+                <td align="right"><%=h money contract.pay_before_this_month %></td>
+                <td align="right"><%=h money contract.plan_amount %></td>
+                <td align="right"><%=h money contract.audit_amount %></td>
+                <td><%= contract.begintime.to_date%></td>
+                <td><%= contract.endtime.to_date%></td>
+                <td><%= contract.company_name%></td>
+                <td align="right"><%= contract.state %></td>
+              </tr>
+              <% sum1 += contract.target_amount.to_f%>
+              <% sum2 += contract.contract_amount.to_f%>
+              <% sum3 += contract.change_amount.to_f%>
+              <% sum4 += contract.contract_amount + contract.change_amount%>
+              <% sum5 += contract.total_pay_amount%>
+              <% sum6 += contract.stop_pay_amount.to_f + contract.change_amount.to_f%>
+              <% sum7 += contract.stop_pay_amount.to_f%>
+              <% sum8 += contract.total_complete%>
+              <% sum9 += contract.pay_before_this_month%>
+              <% sum10 += contract.plan_amount.to_f%>
+              <% sum11 += contract.audit_amount.to_f%>
+            <% end %>
+                <th>--合计</th>
+                <th align="right"><%= money  sum1 %></th>
+                <th align="right"><%= money  sum2 %></th>
+                <th align="right"><%= money  sum3 %></th>
+                <th align="right"><%= money  sum4 %></th>
+                <th align="right"><%= money  sum5 %></th>
+                <th align="right"><%= money  sum6 %></th>
+                <th align="right"><%= money  sum7 %></th>
+                <th align="right"><%= money  sum8 %></th>
+                <th align="right"><%= money  sum9 %></th>
+                <th align="right"><%= money  sum10 %></th>
+                <th align="right"><%= money  sum11 %></th>
+                <th align="right"></th>
+                <th align="right"></th>
+                <th align="right"></th>
+                <th align="right"></th>
+            </table>
+        </td>
+    </tr>
+</table>
+<script>
+    <% if !params[:tree]%>
+        add_link("显示导航", "/analysis/contract?tree=true")
+    <% else %>
+        add_link("关闭导航", "/analysis/contract")
+    <% end %>
+</script>

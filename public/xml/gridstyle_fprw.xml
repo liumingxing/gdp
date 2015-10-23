@@ -1,0 +1,29 @@
+<Grid>
+	<Cfg id="treegrid" StandardFilter="2" SearchExpand="1" ShowVScroll="1" Undo="1" Sorting="0" MainCol="name" MaxHeight="1" 
+		MaxWidth="1" ConstWidth="1" IdNames="id" IdChars="0123456789" NumberId="1" LastId="1" AppendId="1" 
+		ShowDeleted="0" DateStrings="1" Adding="1" FullId="1" CaseSensitiveId="0"/>
+	<Cols>
+		<C Name="name" Width="250" Type="Text"/>
+		<C Name="fzr" Type="Enum" Width="80" Enum="||baiy|shenl|曹仕雄| 王全杰|项炳军|徐小平|赵礼卫" EnumKeys="||23|24|5|6|2|22|21" IconAlign="Right"/>
+		<C Name="shr" Type="Enum" Width="80" Enum="||baiy|shenl|曹仕雄| 王全杰|项炳军|徐小平|赵礼卫" EnumKeys="||23|24|5|6|2|22|21" IconAlign="Right"/>
+		<C Name="jhsj" Type="Date" Format="yyyy-M-d" EditFormat="yyyy-M-d"/>
+		<C Name="wcsj" Type="Date" Format="yyyy-M-d" EditFormat="yyyy-M-d"/>
+		<C Name="desc" Type="Lines" Width="300" AcceptEnters="1" RelWidth="1"/>
+	</Cols>
+	<Def>
+		<D Name="R" Kind="Data" TITLE="新费用项"/>
+		<D Name="Node" CanDrag="1" AcceptChild="1" CanEdit="1" TITLE="新费用类" CDef="R" AcceptDef="R" PROJECTHtmlPrefix="<B>" PROJECTHtmlPostfix="</B>"/>
+		<D Name="RNode" CanDrag="0" AcceptChild="0" CanEdit="0"/>
+	</Def>
+	<Root CDef="Node" AcceptDef="Node"/>
+	<Header name="工程费用名称" jhsj="计划完成时间" wcsj="实际完成时间" desc="说明" fzr="负责人" shr="审核人"/>
+	<Head>
+		<I Kind="Filter" title="" fzr="" fzrButton="Defaults" fzrDefaults="|*RowsVariable|*FilterOff" shrButton="Defaults" shrDefaults="|*RowsVariable|*FilterOff"/>
+	</Head>
+	<Foot>
+		<I Kind="Space" RelHeight="100"/>
+	</Foot>
+	<Toolbar Styles="1" Space="-1" Cells="Repaint,Print,Export,Undo,Redo,Sort,Calc,ExpandAll,CollapseAll,ZoomIn,ZoomOut,ZoomFit,Columns"/>
+	<MenuCfg ShowDeleted="0" AutoSort="0" AutoUpdate="1" Separator1="0" MouseHover="1" ShowDrag="1" ShowPanel="1" ShowIcons="0"/>
+	<Panel Copy="1" Move="0" Select="1" Delete="1"/>
+</Grid>

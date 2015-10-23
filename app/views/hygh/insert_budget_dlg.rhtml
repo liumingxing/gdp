@@ -1,0 +1,28 @@
+<%= javascript_include_tag 'Grid/GridE' %>
+
+<% form_tag({:action=>"insert_budget", :id=>params[:id]}, {:onsubmit=>"return check()"}) do %>
+<%= submit_tag "选择"%>    
+<div style="width:100%;height:100%;" id='GridTutorialReplace'> 
+   <bdo layout_url="/xml/gridstyle_insertbudget.xml" Data_Url="/budget/get_data?t=<%=params[:t]%>"> </bdo>
+</div>
+<%= hidden_field_tag "ids", ""%>
+<% end %>
+
+<script>
+ function check()
+ {
+    var rows = Grids["grid1"].GetSelRows();
+    if(rows.length == 0){
+        alert('请选择要插入的项目');
+        return false;
+    }
+    result = "";
+    for(var i=0; i<rows.length; i++)
+    {
+        row = rows[i];
+        result += row["id"] + ",";
+    }
+    $("#ids").val(result);
+    return true;
+ }
+</script>

@@ -1,0 +1,29 @@
+<% form_tag({:action => 'import_initial', :t=>params[:t]}, {:onsubmit => "return myform_onsubmit()"}) do %>	   
+    <span>没有初始数据，从投资规划中导入初始数据。</span>
+    <script>
+     var data={"-1_0":"text:投资控制模板;hint:投资控制模板",
+         <% @tzghs.each do |t| %>
+               "<%=t.parent_id||0%>_<%=t.id%>":"text:<%=t.name.gsub("\n", '\n')%>;",
+        <% end%>
+        "-100":"100"}
+    </script>
+        
+    <%= render :partial => "share/tree", :locals => {:array=>[], :usecheckbox => true, :expandlevel => 3} %>
+   
+    <br/>
+    &nbsp;&nbsp;<%= submit_tag " 导入 "%>
+<% end %>
+
+<script>
+function myform_onsubmit()
+{
+    var ids = GetCheckBox(trade);
+    if (ids.length ==0) {
+         alert("您选择投资规划项");
+         return false;
+    } else {
+         ids = ids.replace(", 0, ", "0, ");
+    }
+    $("#checked_values").val(ids);
+}
+</script>

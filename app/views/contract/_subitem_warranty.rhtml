@@ -1,0 +1,33 @@
+<table class="ft" border="1" width=700px;>
+<tr>
+	<th width=175px>摘要名称：</th>
+	<td width=200px><%= text_field 'subitem', 'name', :validate=>"required:true", :title=>"摘要名称"%></td>
+	<th width=175px>保修条款：</th>
+	<td width=200px><%= text_field 'subitem', 'warranty_terms'%></td>
+</tr>
+
+<tr>
+	<th>保修金额：</th>
+	<td><%= text_field 'subitem', 'warranty_amount'%>元</td>
+	<th>付款方式：</th>
+	<td><%= text_field 'subitem', 'pay_method'%></td>
+</tr>
+
+<tr>
+	<th>开始时间：</th>
+	<td><%= text_field 'subitem', 'begin_date', :onfocus=>"WdatePicker()"%></td>
+	<th>结算时间：</th>
+	<td><%= text_field 'subitem', 'end_date', :onfocus=>"WdatePicker()"%></td>
+</tr>
+
+<tr>
+	<th>经手人：</th>
+	<td colspan=3><%= text_field 'subitem', 'principal'%></td>
+</tr>
+
+<tr>
+	<th>备注：</th>
+	<td colspan=3><%= text_area 'subitem', 'memo', :rows=>5, :cols=>60%></td>
+</tr>
+
+</table>

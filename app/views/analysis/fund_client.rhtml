@@ -1,0 +1,83 @@
+            <% from = Time.new %>
+            <% if params[:date]%>
+                <% from = Time.mktime(params[:date][:year], params[:date][:month])%>
+            <% end %>
+            
+            <% cover = params[:cover].to_i%>
+            <% cover = 1 if cover <= 1%>
+            
+            <% form_tag '', :method=>"get" do %>
+                <select name="dtype">
+                    <%= options_for_select [%w(资金计划明细 plan_amount), %w(审定支付明细 audit_amount), %w(实际支付明细 pay_amount)], params[:dtype]%>
+                </select>
+                从<%= select_year from %>年 <%=select_month from, :use_month_numbers =>true%>月开始的
+                <%= text_field_tag "cover", params[:cover]||3, :size=>2%> 个月
+                <%= hidden_field_tag "id", params[:id]%>
+                <%= submit_tag "查看"%>
+            <% end %>
+            
+            <% if params[:dtype]%>
+            
+            <% sum1 = sum2 = sum3 = sum4 = sum5 = sum6 = sum7 = 0%>
+            <table class="list" id="table" border="1" width=100%>
+              <tr>
+                <th rowspan=2>项目名称</th>
+                <th rowspan=2>实际成本</th>
+                <th rowspan=2>支付金额</th>
+                <th rowspan=2>预计支付总额</th>
+                <th rowspan=2>累计审定支付</th>
+                <th rowspan=2>剩余金额</th>
+                <th rowspan=2>累计实际支付</th>
+                <th rowspan=2>至本月欠款数</th>
+                <th colspan=<%=cover%>><%=@title%></th>
+              </tr>
+              <tr>
+                <% h = {}%>
+                <% 0.upto(cover-1) do |i|%>
+                    <% m = from + i.months %>
+                    <th><%=m.year%>/<%=m.month%></th>
+                    <% h[i] = 0%>
+                <% end %>
+              </tr>
+              
+            <% for contract in @contracts %>
+              <%= color_row %>
+                <td><%= link_to contract.name, :controller=>"fund", :action=>"plan_detail", :id=>contract%></td>
+                <td align="right"><%= money contract.clearing_amount%></td>
+                <td align="right"><%= money contract.stop_pay_amount%></td>
+                <td align="right"><%= money contract.contract_amount + contract.change_amount%></td>
+                <td align="right"><%= money contract.total_audit_amount%></td>
+                <td align="right"><%= money contract.contract_amount + contract.change_amount - contract.total_audit_amount%></td>
+                <td align="right"><%= money contract.total_pay_amount%></td>
+                <td align="right"><%= money contract.total_audit_amount - contract.total_pay_amount%></td>
+                <% 0.upto(cover-1) do |i|%>
+                    <% m = from + i.months %>
+                    <td align="right"><%= money contract.x_amount(params[:dtype], m)%></td>
+                    <% h[i] += contract.x_amount(params[:dtype], m).to_f%>
+                <% end %>
+              </tr>
+              
+              <% sum1 += contract.clearing_amount.to_f %>
+              <% sum2 += contract.stop_pay_amount.to_f %>
+              <% sum3 += contract.contract_amount + contract.change_amount %>
+              <% sum4 += contract.total_audit_amount.to_f %>
+              <% sum5 += contract.contract_amount + contract.change_amount - contract.total_audit_amount %>
+              <% sum6 += contract.total_pay_amount %>
+              <% sum7 += contract.total_audit_amount - contract.total_pay_amount %>
+            <% end %>
+                <tr>
+                    <th>--合计</th>
+                    <th align="right"><%= money sum1%></th>
+                    <th align="right"><%= money sum2%></th>
+                    <th align="right"><%= money sum3%></th>
+                    <th align="right"><%= money sum4%></th>
+                    <th align="right"><%= money sum5%></th>
+                    <th align="right"><%= money sum6%></th>
+                    <th align="right"><%= money sum7%></th>
+                    <% 0.upto(cover-1) do |i|%>
+                        <th align="right"><%= money h[i]%></th>
+                    <% end %>
+                </tr>
+            </table>
+            
+            <% end %>

@@ -1,0 +1,21 @@
+<table class="ft" border=1>
+<tr>
+    <td>
+    &nbsp;&nbsp;条目名称：&nbsp;
+    </td>
+    <td>
+    <%= text_field 'item', 'name'  %>
+    </td>
+</tr>
+<tr>
+    <td>
+    &nbsp;&nbsp;条目代码：&nbsp;
+    </td>
+    <td>
+    <%= text_field 'item', 'code'  %>
+    </td>
+</tr>
+</table>
+
+
+<%= hidden_field 'item', 'dictionary_id'  %>

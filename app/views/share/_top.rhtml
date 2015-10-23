@@ -1,0 +1,90 @@
+<% config = SystemConfig.find(:first) %>
+<table class="clsLogo" cellpadding="0" cellspacing="0" border=0>
+  <tr>
+    <td align='center' width=290 class=logo>
+        <% @config = config%>
+        <%= image_tag(url_for_file_column("config", "logo"), :height=>"50px") if config && config.logo %>
+    </td>
+   
+    <td  height=100% align="center" width=380px class=logotitle>
+      <span id='title'><FONT style="FONT-SIZE: 30pt; FILTER: glow(color=black); WIDTH: 100%; COLOR: #e4dc9b; LINE-HEIGHT: 150%; FONT-FAMILY: 华文彩云"><B><%= config.title %></B></FONT></span>
+    </td>
+    <td align=right valign=bottom>
+      <table border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td align="right">
+            <% form_tag :controller=>"main", :action => 'style' do %>
+            <font color=white>界面风格</font>
+            <select id=style name=style onchange="submit();">
+              <option value='Blue' <%="selected=true" if current_user.style=='Blue'%> >蓝</option>  
+              <option value='Pink' <%="selected=true" if current_user.style=='Pink'%> >粉</option>
+              <option value='Red' <%="selected=true" if current_user.style=='Red'%> >红</option>         
+            </select>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <td valign="buttom">
+            <font color=white>欢迎您:<%= current_user.department.name if current_user.department%> <%=current_user.name%></font>
+            
+            <a href='/login/index'><img src="/img/nav_logoff.gif" alt='注销登录' border="0" align="absmiddle" width="25" height="25" title='退出系统'></a>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+<table id='toolbar' width='100%' border="0" cellpadding="0" height=25>
+  <tr height=20 class="head">
+    <td align='left' width="200px"><span class='whitespan'>&nbsp;今天是:<%=Time.new().strftime("%Y-%m-%d")%> 星期<%= {1=>'一', 2=>'二', 3=>'三', 4=>'四', 5=>'五', 6=>'六', 0=>'日'}[Time.new().strftime("%w").to_i]%></span></td>
+    <td color=black>
+      &nbsp;
+      <marquee width="100%" height=20.0  behavior="scroll" scrollAmount=2 direction="left" onMouseOver="this.stop();" onMouseOut="this.start()">
+        <%@notices=Notice.find(:all, :order => "id desc" )%>
+        <% for @new in @notices%>
+          <%= link_to( @new.title, {:controller => 'Notice', :action => 'show', :id => @new},{:target=>'content'})%>
+          &nbsp;&nbsp;&nbsp;
+        <% end%>
+      </marquee>
+    </td>
+    <td width="100px" align='right' style="padding:2px">
+        <select id='projects' onchange="window.location='/main/index/' + this.options[this.selectedIndex].value">
+            <option value="">系统管理</option>
+            <%= options_from_collection_for_select(Project.find(:all), "id", "name", params[:id].to_s.to_i)%>
+        </select>
+    </td>
+  </tr>
+</table>
+
+<bgsound   src="#"   id=music   loop=1   autostart="true"/>
+
+<script language="javascript">
+    function setNotice1(notice)
+    {
+        var element = document.getElementById('notice');
+        element.innerHTML = "<fieldset align='center' id='notice1'>" + notice + "</fieldset>";
+        setTimeout('new Effect.Fade(\'notice1\')', 4250);
+    }
+    function setError1(notice)
+    {
+        var element = document.getElementById('notice');
+        element.innerHTML = "<fieldset align='center' id='notice1'><span style='color=red;'>" + notice + "</span></fieldset>";
+        setTimeout('new Effect.Fade(\'notice1\')', 4250);
+    }
+    
+    function setNotice(notice)
+    {
+        jQuery.messager.show(notice);
+    }
+    function setError(notice)
+    {
+        jQuery.messager.show(notice, true);
+    }
+<% if flash[:notice] %>
+      setNotice('<%=flash[:notice]%>');
+<% end %>
+<% if flash[:error] %>
+      setError('<%=flash[:error]%>');
+<% end %>
+</script>

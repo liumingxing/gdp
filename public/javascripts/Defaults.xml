@@ -1,0 +1,348 @@
+<Grid>
+   
+	<!-- Basic grid configuration -->
+   <Cfg
+      DefaultsVersion="60601"
+      
+		AutoVersion="1" SuppressCfg="0"
+      
+		Editing="1" Adding="1" Deleting="1"	ShowDeleted="1" Selecting="1"	Copying="1"
+		Dragging="1" Dropping="1" ShowDrag="1" DragObject="1" ExpandOnDrag="1" ScrollOnDrag="1"
+      ColResizing="1" ColMoving="1"
+		Sorting="1"	Sorted="1" AutoSort="0" SortIcons="1" MaxSort="3"
+		Grouping="1" Grouped="1" MaxGroupLength="1000" GroupChangeMoved="1" GroupMoveFree="1"
+		Filtering="1" Filtered="1"
+		Searching="1" Searched="1" SearchFocused="3" SearchNotFound="1" SearchExpand="1"
+		Calculated="1"
+      DetailOn="1"
+      CopyPasteTree="0" CopyPasteInternal="0"
+      CopySelected="1" CopyFocused="1" CopyCols="1" CopyEdit="1"
+      Pasting="1" PasteSelected="1" PasteFocused="8" PasteCols="4" PasteTree="2"
+      
+		Paging="0" PageLength="20" PageLengthDiv="1" AllPages="1" PageTime="200" MaxPages="20"
+		ChildPaging="2" RemoveCollapsed="0" 
+      ChildParts="" ChildPartLength="20" ChildPartMin="3"
+		
+		LastId="" IdPrefix="" IdPostfix="" IdChars="_ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" SetIds="1" CaseSensitiveId="1"
+      AutoUpdate="0"
+      ReloadChanged="5"
+		CacheTimeout="10"
+		ExportFormat="1" ExportType="Indent,Expanded" ExportRows="500"
+		PrintRows="50" 
+      ExpandAllLoaded="0" ExpandAllLevels="3"
+      
+      AbsoluteCursors="5" BorderCursors="2"
+      FocusWholeRow="0" TabStop="1"
+		Hover="2"
+      ExactSize="1"
+
+      NoActionEscape="1"
+		StoreOriginalValues="1"
+		SynchroCount="100"
+      MessageWidth="140"
+		NoTreeLines="0" HideRootTree="0"
+      TipStart="500"
+      Silent="1"
+      BoolChars=" X?"
+      DefaultsAlphabetWhite=" !&quot;#$%&amp;'()*+,-./:;&lt;=>?@[\]^_{|}"
+      ScrollLeftLap="1" ScrollTopLap="1"
+      LeftCanResize="1" RightCanResize="1"
+      
+      FastPanel="1" FastColumns="1" FastMerge="1"
+      Style="Modern" StyleLap="1"
+	SelectingCells="1" ExportType="Expanded,Outline"
+		/>
+
+	<!-- Keys and mouse actions -->
+   <Actions
+      OnDragOverCell="CursorDrag"
+      OnMouseOverContent="ShowHint" OnMouseOverCaption="ShowHint"
+      OnMouseOverHeaderLeft="CursorResize" OnMouseOverHeaderRight="CursorResize" OnMouseOverPagerHeaderRight="CursorResize"
+      OnMouseOverHScrollLeft="CursorResize" OnMouseOverHScrollRight="CursorResize"
+      OnMouseOverButton="CursorPointer"
+      OnMouseOverPanel="CursorPointer"
+      OnMouseOverSide="CursorPointer"
+      OnMouseOverSideDefaults="CursorPointer"
+      OnMouseOverPanelMove="CursorMove" OnMouseOverHeaderMove="CursorMove"
+      OnMouseOverPanelOff="CursorDefault" OnMouseOverHeaderOff="CursorDefault"
+      OnMouseOverSpaceOff="CursorDefault"
+      OnMouseOverEditable="CursorText" 
+      OnMouseOverEditBool="CursorPointer" OnMouseOverEditEnum="CursorPointer" OnMouseOverEditRadio="CursorPointer"
+      OnMouseOverSort="CursorPointer" OnMouseOverSortUp="CursorPointer" OnMouseOverSortDown="CursorPointer"
+      OnMouseOverExpand="CursorPointer" OnMouseOverTree="CursorDefault"
+      OnMouseOverNoFocus="CursorDefault" OnMouseOverReadOnly="CursorDefault" OnMouseOverNothing="CursorDefault"
+      OnMouseOverResize="CursorResizeGrid"
+      
+      OnClickCell="ChangeFocus OR Focus AND StartEdit"
+      OnClickEditEnum="Focus AND StartEdit"
+      OnDblClickCell="Focus AND StartEdit"
+      OnKey="!StartEdit" OnBackspace="!StartEdit"
+      OnClickNoFocus="FocusRow,0"
+      OnRightClickCell="ShowPopupMenu" 
+      OnCtrlClickCell="SelectCell OR DeselectCell OR SelectRow OR DeselectRow,1"
+		OnShiftClickCell="InvertCellRangeFirst OR InvertRowRangeFirst,1"
+      
+      OnClickSort="SortAsc OR SortDesc" OnClickSortUp="SortAsc" OnClickSortDown="SortDesc"
+  		OnCtrlClickSort="SortAscAdd OR SortDescAdd" OnCtrlClickSortUp="SortAscAdd" OnCtrlClickSortDown="SortDescAdd"
+
+      OnClickButtonSave="Validate AND Save"
+		OnClickButtonReload="Reload"
+		OnClickButtonRepaint="Repaint"
+		OnClickButtonCalc="CalcOn OR CalcOff"
+		OnClickButtonSort="SortOn OR SortOff"
+		OnClickButtonPrint="Print"
+		OnClickButtonExport="Export"
+		OnClickButtonExpandAll="ExpandAll"
+		OnClickButtonCollapseAll="CollapseAll"
+      OnClickButtonUndo="Undo"
+      OnClickButtonRedo="Redo"
+		OnClickButtonAdd="CopyMenuF OR AddRowF OR AddRowEnd"
+		OnClickButtonAddChild="CopyMenuF OR AddChildEndF"
+		OnClickButtonCfg="ShowCfg"
+		OnClickButtonColumns="ShowColumns"
+		OnClickButtonHelp="ShowHelp"
+      OnClickButtonDebug="ShowDebug"
+      OnClickButton="Button"
+		OnDblClickResize="GridResizeDefault"
+      
+      OnClickButtonCorrect="CorrectAllDependencies"
+      OnClickButtonZoomFit="ZoomFitAll"
+      OnClickButtonZoomIn="ZoomIn"
+      OnClickButtonZoomOut="ZoomOut"
+
+      OnClickSideDefaults="Focus,ShowDefaults"
+      OnClickSideDate="Focus,ShowCalendar"
+      OnClickSideFilter="Focus,ShowFilterMenu"
+      OnClickExpand="Focus,Expand OR Collapse"
+      OnDblClickExpand="1"
+      OnClickPanelSelect="SelectRow OR DeselectRow"
+		OnClickPanelDelete="DeleteRow OR UndeleteRow"
+      OnClickPanelCopy="CopyMenu"
+      OnClickSideIcon="IconClick"
+      OnClickSideButton="ButtonClick"
+      OnClickSidePopup="ButtonClick"
+   	OnClickPanelGrouped="GroupOn OR GroupOff"
+   	OnClickPanelFiltered="FilterOn OR FilterOff"
+		OnClickPanelSearched="SearchOn OR SearchOff"
+
+      OnClickHeaderSelect="DeselectAll OR SelectAll" 
+		OnCtrlClickHeaderSelect="InvertAll"
+		OnClickHeaderDelete="UndeleteSelected OR DeleteSelected"
+      OnClickHeaderCopy="CopyMenuF OR AddRowF OR AddRowEnd"
+      
+      OnClickEditBool="Focus,ChangeBool"
+      OnClickEditRadio="Focus,ChangeRadio"
+      OnClickLink="Focus,ShowLink"
+      
+      OnClickOutside="Blur"
+      OnClickPagerPage="ShowPage"
+
+      OnDragHeaderLeft="ColResize"
+		OnDragHeaderRight="ColResize"
+      OnDragPagerHeaderRight="ColResize"
+      OnDragHeader="ColMove"
+      OnDragDropCol="DropColMove"
+      OnDragPanelMove="DragRow"
+      OnDragPanelSelect="InvertOddRows"
+      OnDragRow="DragSelected OR DragRow"
+      OnDragResize="GridResize"
+		OnCtrlDragRow="InvertCellsFirst OR InvertRowsFirst"
+      OnShiftDragRow="FillCells"
+      OnDragHScrollLeft="SectionResize"
+      OnDragHScrollRight="SectionResize"
+
+      OnDragGantt="DragGantt"
+      OnCtrlClickGantt="DeleteGanttConstraint OR DeleteGanttFlag OR DeleteGanttPoint OR DeleteGanttFlow OR DeleteGanttMain OR DeleteGanttDependency OR DeleteGanttBase OR DeleteGanttFinish"
+      OnDblClickGantt="EditGanttFlag OR EditGanttResource OR EditGanttText OR EditGanttFlowText OR EditGanttRun OR EditGanttDependencyLag OR NewGanttMilestone OR NewGanttFlag OR NewGanttPoint"
+      OnCtrlRightClickGantt="SetGanttPercent" 
+      OnRightClickGantt="GanttMenu,1"
+      OnDragGanttHeader="ZoomGantt,1" OnClickGanttHeader="ZoomHeader OR ZoomIn" OnRightClickGanttHeader="UndoZoom OR ZoomOut,1"
+
+      OnCtrlEnter="ExpandF OR CollapseF"
+		OnEnter="ChangeBoolF OR ChangeRadioRightF OR StartEdit OR ShowLinkF OR ShowDefaultsF OR ShowCalendarF OR EditGanttResourceF"
+		OnF2="StartEdit"
+		
+      OnTab="TabRight?1:!Grid.TabStop" OnShiftTab="TabLeft?1:!Grid.TabStop"
+		OnUp="GoUp,1" OnDown="GoDown,1" OnLeft="GoLeft,1" OnRight="GoRight,1"
+		OnHome="GoFirst,1" OnEnd="GoLast,1" OnPageUp="PageUp,1" OnPageDown="PageDown,1"
+      
+      OnTabEnum="TabRightEdit AND StartEdit?1:!Grid.TabStop" OnShiftTabEnum="TabLeftEdit AND StartEdit?1:!Grid.TabStop"
+      OnTabEdit="TabRightEdit AND StartEdit?1:!Grid.TabStop" OnShiftTabEdit="TabLeftEdit AND StartEdit?1:!Grid.TabStop"
+		OnUpEdit="GoUpEdit AND StartEdit,1" OnDownEdit="GoDownEdit AND StartEdit,1" OnLeftEdit="ChangeRadioLeft" OnRightEdit="ChangeRadioRight"
+		OnEnterEdit="AcceptEdit,1" OnEscEdit="CancelEdit"
+		OnCtrlEnterEdit="AcceptEdit" OnAltEnterEdit="AcceptEdit"
+		OnSpaceEdit="ChangeBoolF"
+      
+      OnSpace="SelectRowF OR DeselectRowF" OnCtrlSpace="SelectAll OR DeselectAll"
+		OnDel="DeleteRowF OR UndeleteRowF" OnCtrlDel="UndeleteSelected OR DeleteSelected"
+		OnIns="AddRowF" OnCtrlIns="AddChildEndF"
+		OnCtrlDown="ShowDefaultsF OR ShowFilterMenuF OR ShowCalendarF OR ButtonClickF"
+      OnCtrlZ="Undo" OnCtrlY="Redo"
+		OnCtrlC="Copy,0" OnCtrlX="Exclude,0" OnCtrlV="Paste,0"
+      
+  		KeyCodes1="Space=32,Enter=13,Esc=27,Backspace=8,Tab=9"
+		KeyCodes2="Tilde=192,Minus=189,Equal=187,Backslash=220,LeftBracket=219,RightBracket=221"
+		KeyCodes3="Semicolon=186,Apostrophe=222,Comma=188,Point=190,Slash=191"
+		KeyCodes4="F1=112,F2=113,F3=114,F4=115,F5=116,F6=117,F7=118,F8=119,F9=120,F10=121,F11=122,F12=123"
+		KeyCodes5="Ins=45,Del=46,Home=36,End=35,PageUp=33,PageDown=34,Up=38,Down=40,Left=37,Right=39,Pause=19"
+		KeyCodes6="NumDivide=111,NumStar=106,NumMinus=109,NumPlus=107,NumPoint=110"
+		KeyCodes7="Num0=96,Num1=97,Num2=98,Num3=99,Num4=100,Num5=101,Num6=102,Num7=103,Num8=104,Num9=105"
+		KeyCodes8="CapsLock=20,ScrollLock=145,NumLock=144"
+      
+		EdgeSize="5" DragSize="5" ClickSize="5"
+      />
+   
+	<!-- Default rows and column -->
+	<Def>
+		<!-- Default row for all rows except Space and Header -->
+		<D Name="R" Kind="Data"	CDef="R"
+			CanFocus="1" CanEdit="1" CanDelete="1" CanSelect="1"
+         CanDrag="1" AcceptChild="1" CanExpand="1"
+			CanFilter="1" CanGroup="1" CanSort="1"
+			CanCopy="1" CanCopyPaste="1" CanExport="1" CanPrint="1"
+			HoverCell="Border,Color" HoverRow="Border,Background"	FocusCell="Border,Color,Class" FocusRow="Border,Background"
+			Deleted="0"	Selected="0" Changed="0" Added="0" Moved="0"
+			Visible="1"	Expanded="1"
+			Calculated="0"	Recalc="3"
+			MaxChildren="10000" MaxChildrenDiff="20"
+			/>
+      
+		<!-- Default row for fixed rows -->
+		<D Name="Fixed" Def="R"
+			CanDelete="0" CanSelect="0" CanDrag="0" CanFilter="0" CanCopy="0"	AcceptChild="0"
+			/>
+
+      <!-- Default row created when grouping -->
+      <D Name="Group" Def="R" Group="1"
+         CanEdit="0"	CanFilter="0" CanDrag="0" CanCopy="0" CanDelete="0"
+			Expanded="0" NoUpload="1"
+			/>
+      
+		<!-- Default row for all space rows -->
+		<D Name="Solid" Def=""
+         Visible="1"
+			CalcOrder=""
+         CanFocus="1" CanDelete="0" CanSelect="0" CanDrag="0" CanFilter="0" CanCopy="0" CanPrint="1"
+			AcceptDef=""
+			HoverCell="Color" HoverRow="" FocusCell="Border,Color,Class" FocusRow=""
+			/>
+
+      <!-- Default header row -->
+      <D Name="Header" Def=""
+         Visible="1" Wrap="0"
+   		CanEdit="0" CanFocus="0" CanFilter="0" AcceptChild="0" CanExport="1" CanCopyPaste="3" CanPrint="2"
+   		Deleted="0" Selected="0" Changed="0" Added="0" Moved="0"
+		   Expanded="0" Calculated="0"
+		   HoverCell="Color" HoverRow="Background" FocusCell="Border,Color,Class" FocusRow=""
+         />
+	</Def>
+
+   <DefCols>
+      <!-- Default column -->
+      <D Name="C"
+			Visible="1" Type="Text" Format="" EditFormat=""
+			CanResize="1" CanMove="2" CanFilter="1" CanSort="1" CanHide="1"
+			CanCopyPaste="1" CanExport="1" CanPrint="1" CanGroup="1" CanSearch="1" CanDrag="1"
+         GroupEmpty="2" GroupSingle="1" GroupSole="1" GroupDeleted="1"
+         CaseSensitive="1"
+			WidthPad="20"
+         ShowHint="1"
+         EmptyValue=""
+			/>
+      
+      <!-- Default column for type Gantt -->
+      <D Name="Gantt" Def="C" MenuName="Gantt chart"
+         CanSort="0" CanEdit="0" CanResize="0" CanFilter="0" CanCopyPaste="0" CanGroup="0" CanSearch="0" WidthPad="" ShowHint="0" CanDrag="0"
+         GanttOrder="Chart,Constraints,Run,Main,Flow,Mark,Dependency,Format,Flags,Points" GanttObject="Main" GanttFormatObject="Last"
+         GanttWidth="18" GanttUnits="d" GanttLeft="0" GanttRight="0" MaxWidth="10000"
+         GanttDataUnits="d" GanttEndLast="1" GanttMaxExclude="150000" GanttResourcesAssign="4" GanttPointsShift="3"
+         GanttHover="1" GanttEdit="All" GanttResizeDelete="1" GanttAdding="1" GanttDeleting="1" GanttConstraintsAll="0"
+         GanttSmoothZoom="1" GanttHideExclude="0" GanttBase="" GanttBaseCanEdit="2" GanttFinish="" GanttFinishCanEdit="1"
+         GanttCheck="2" GanttCheckExclude="1" GanttStrict="1" GanttBasePreferred="0" GanttEditStartMove="1" GanttMinSlack="0" GanttErrSlack="0" GanttSeparateSlack="0" GanttShowBounds="1"
+         GanttCheckDependencies="2" GanttCorrectDependencies="2" GanttIncorrectDependencies="1" GanttCorrectDependenciesFixed="0" GanttAllDependencies="1"
+         GanttRunNew="0.0001,Box" GanttRunNewStart="0.0001,Box" GanttRunResize="Resize" GanttRunMove="Slide" GanttRunAdjust="Shift"
+         />
+   </DefCols>
+
+	<!-- First Header row = column captions -->
+   <Header Kind="Header" Def="Header" id="Header"
+	   CanDrag="0" CanCopy="1" CanSelect="1" CanDelete="1" CanExport="1"
+      />
+   
+   <!-- Root settings -->
+   <Root 
+      CDef="R"
+      CanSort="1"
+      FocusCell="Border" FocusRow="Border,Background"
+      AddParent="0"
+      />
+
+   <!-- Row left panel -->
+	<Panel 
+		Def="" Visible="1" Move="0" Select="1" Delete="1" Copy="0" CanPrint="0"
+      CanHide="1" CanResize="0" CanMove="0" CanDrag="1" CanExport="0" CanCopyPaste="0"
+		HoverCell="Color" HoverRow="Background"
+      CopyMenu="CopyRow,CopyTree,CopyEmpty,CopySelected,CopySelectedTree,CopySelectedEmpty,CopySelectedChildEnd,CopySelectedTreeChildEnd,CopySelectedEmptyChildEnd,AddRow,AddChildEnd"
+		/>
+
+	<!-- Right side pager -->
+	<Pager 
+		Visible="1" Caption="Pager" Width="100" MinWidth="20" CanResize="1" CanHide="1" Hover="1"
+		/>
+
+	<!-- Bottom toolbar -->
+   <Toolbar id="Toolbar" CanEdit="0" CanFocus="0" CanPrint="0"
+      Cells="Correct,Save,Reload,Repaint,Print,Export,Undo,Redo,Add,AddChild,Sort,Calc,ExpandAll,CollapseAll,ZoomIn,ZoomOut,ZoomFit,Columns,Cfg,Help,Debug,StyleTitle,StyleStandard,StyleLight,StyleOffice,StyleModern,StyleBorders,StyleRobust,StylePlain,StyleColors,Empty,Formula,Resize"
+      SaveOnEnter="Validate AND Save" SaveVisibleFormula="(Grid.Data.Upload.Url || Grid.Data.Upload.Tag || Grid.Data.Upload.Data) &amp;&amp; !Grid.Detail?1:0"
+      ReloadOnEnter="Reload" ReloadVisibleFormula="!Grid.Detail"
+      RepaintOnEnter="Repaint" RepaintVisibleFormula="Grid.Paging&amp;&amp;Grid.AllPages"
+      PrintOnEnter="Print"
+      ExportOnEnter="Export" ExportVisibleFormula="!!Grid.Data.Export.Url"
+      UndoVisibleFormula="Grid.Undo?1:0" UndoFormula="Grid.CanUndo()" UndoOnEnter="Undo"
+      RedoVisibleFormula="Grid.Undo?1:0" RedoFormula="Grid.CanRedo()" RedoOnEnter="Redo"
+      AddOnEnter="CopyMenuF OR AddRowF OR AddRowEnd" AddVisibleFormula="Grid.Adding"
+      AddCopyMenu="CopyRow,CopyTree,CopyEmpty,CopySelected,CopySelectedTree,CopySelectedEmpty,CopySelectedEnd,CopySelectedTreeEnd,CopySelectedEmptyEnd,AddRow,AddRowEnd"
+      AddChildOnEnter="CopyMenuF OR AddChildEndF" AddChildVisibleFormula="Grid.Adding &amp;&amp; !!Grid.MainCol"
+      AddChildCopyMenu="CopySelectedChildEnd,CopySelectedTreeChildEnd,CopySelectedEmptyChildEnd,AddChildEnd"
+      SortOnEnter="SortOn OR SortOff" SortVisibleFormula="Grid.Sorting" SortFormula="Grid.Sorted?1:0"
+      CalcOnEnter="CalcOn OR CalcOff" CalcVisibleFormula="Grid.Calculating" CalcFormula="Grid.Calculated?1:0"
+      ExpandAllOnEnter="ExpandAllLoaded" ExpandAllVisibleFormula="!!Grid.MainCol"
+      CollapseAllOnEnter="CollapseAll" CollapseAllVisibleFormula="!!Grid.MainCol"
+      ColumnsOnEnter="ShowColumns"
+      CfgOnEnter="ShowCfg"
+      HelpOnEnter="ShowHelp"
+      DebugOnEnter="ShowDebug" DebugVisibleFormula="!!Grid.DebugFlags.length"
+
+      CorrectVisibleFormula="Grid.HasDependencies()" CorrectFormula="Grid.HasDependencies()?(ganttdependencyerrors()?1:0):0" CorrectOnEnter="CorrectAllDependencies"
+      ZoomInVisibleFormula="Grid.HasGantt()" ZoomInFormula="Grid.CanZoomIn()" ZoomInOnEnter="ZoomIn"
+      ZoomOutVisibleFormula="Grid.HasGantt()" ZoomOutFormula="Grid.CanZoomOut()" ZoomOutOnEnter="ZoomOut"
+      ZoomFitVisibleFormula="Grid.HasGantt()" ZoomFitOnEnter="ZoomFitAll"
+            
+      StyleTitle="&lt;span style='color:#999;'>Style:&lt;/span>" StyleTitleWidth="-2" StyleTitleType="Html" StyleTitleNoColor="1" StyleTitleCanFocus="0"
+      StyleStandardIcon="Standard" StyleStandardSwitch="1"
+      StyleStandardFormula="Grid.Style=='GS'" StyleStandardOnClick="Grid.SetStyle('GS',0,1);return 1" StyleStandardOnEnter="Grid.SetStyle('GS',0,1)"
+      StyleLightIcon="Light" StyleLightSwitch="1"
+      StyleLightFormula="Grid.Style=='GL'" StyleLightOnClick="Grid.SetStyle('GL',0,1);return 1" StyleLightOnEnter="Grid.SetStyle('GL',0,1)"
+      StyleOfficeIcon="Office" StyleOfficeSwitch="1"
+      StyleOfficeFormula="Grid.Style=='GO'" StyleOfficeOnClick="Grid.SetStyle('GO',0,1);return 1" StyleOfficeOnEnter="Grid.SetStyle('GO',0,1)"
+      StyleModernIcon="Modern" StyleModernSwitch="1"
+      StyleModernFormula="Grid.Style=='GM'" StyleModernOnClick="Grid.SetStyle('GM',0,1);return 1" StyleModernOnEnter="Grid.SetStyle('GM',0,1)"
+      StyleBordersIcon="Borders" StyleBordersSwitch="1"
+      StyleBordersFormula="Grid.Style=='GB'" StyleBordersOnClick="Grid.SetStyle('GB',0,1);return 1" StyleBordersOnEnter="Grid.SetStyle('GB',0,1)"
+      StyleRobustIcon="Robust" StyleRobustSwitch="1"
+      StyleRobustFormula="Grid.Style=='GR'" StyleRobustOnClick="Grid.SetStyle('GR',0,1);return 1" StyleRobustOnEnter="Grid.SetStyle('GR',0,1)"
+      StylePlainIcon="Plain" StylePlainSwitch="1"
+      StylePlainFormula="Grid.Style=='GP'" StylePlainOnClick="Grid.SetStyle('GP',0,1);return 1" StylePlainOnEnter="Grid.SetStyle('GP',0,1)"
+      StyleColorsIcon="Colors" StyleColorsSwitch="1"
+      StyleColorsFormula="Grid.Style=='GC'" StyleColorsOnClick="Grid.SetStyle('GC',0,1);return 1" StyleColorsOnEnter="Grid.SetStyle('GC',0,1)"
+      EmptyRelWidth="1" EmptyNoColor="1"
+      FormulaWidth="-2" FormulaNoColor="1" FormulaCanFocus="0" FormulaType="Html" FormulaWrap="0"
+      ResizeWidth="7" ResizeType="Html" ResizeVisibleFormula="!!Grid.ResizingMain"
+      Styles="1" Tag="" Visible="1"
+      />
+
+   <!-- Configuration menu -->
+   <MenuCfg
+	   Items="GanttCorrectDependencies,GanttCheckDependencies,GanttCheckExclude,GanttStrict,GanttCorrectDependenciesFixed,GanttHideExclude,GanttBaseProof,GanttBasePreferred,GanttMinSlack,GanttErrSlack,GanttSeparateSlack,GanttSeparator1,ShowDeleted,AutoSort,SortClick,AutoUpdate,CheckUpdates,Separator1,MouseHover,ShowDrag,ShowPanel,ShowPager,ShowAllPages"
+		/>
+</Grid>

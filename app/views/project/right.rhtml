@@ -1,0 +1,32 @@
+<%= path "项目权限"%>
+
+<% form_tag :action => 'update_right', :id=>params[:id] do %>
+    <table class="ft" border="1">
+    <tr>
+        <th width=50px>姓名</th>
+        <% for item in Dictionary.find_by_name("项目权限").items%>
+         <th><%= item.name%></th>
+        <% end%>
+    </tr>
+    <% for user in @project.users%>
+      <tr>
+        <th><%= user.name %></th>
+        <% for item in Dictionary.find_by_name("项目权限").items%>
+         <td>
+            <% if item.name == "项目监控人"%>
+               <select name="project[<%=user.id%>][<%=item.name%>]">
+                    <%= options_for_select ([["", ""], ["监控人", "监控人"]], @project.right_of(user.id, "项目监控人"))%>
+                </select>
+            <% else%>
+                <select name="project[<%=user.id%>][<%=item.name%>]">
+                    <%= options_for_select ([["", ""],  ["负责人", "负责人"], ["参与人", "参与人"]], @project.right_of(user.id, item.name))%>
+                </select>
+            <% end %>
+         </td>
+        <% end%>
+      </tr>
+    <% end %>
+    </table>  
+    
+    <%= submit_tag "保存" %>
+<% end %>

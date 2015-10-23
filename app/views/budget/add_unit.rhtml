@@ -1,0 +1,7 @@
+<% form_remote_tag( :update=>"detail", :url=>"/budget/create_unit/#{params[:id]}") do %>
+    <% if @budget.feetype == "其他费用"%>
+        <%= render :partial=>"unit_form2"%>
+    <% else%>
+        <%= render :partial=>"unit_form1"%>
+    <% end %>
+<% end %>

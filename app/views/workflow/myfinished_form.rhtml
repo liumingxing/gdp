@@ -1,0 +1,27 @@
+<%= path "已结束的#{@flow.name}"%>
+<table class="list" id="table" border="1" width=100%>
+  <tr class="clsTrHeader">
+    <th>标题</th>
+    <th>流程类型</th>
+    <th>流程发起人</th>
+    <th>现在状态</th>
+    <th>提交时间</th>
+    <th>上次处理时间</th>
+  </tr>
+  <% for form in @forms%>
+    <%=color_row%>
+    <!--
+    <td align="center"><input type="checkbox" name="forms[]" value="<%=form.id%>" </td>
+    -->
+    <td><%=link_to form.flow_name, :action=>'show_form', :flowid=>form.flow_id, :formid=>form.id%></td>
+    <td><%=Workflow.find(form.flow_id).name%></td>
+    <td><%=User.find(form.user_id).name%></td>
+    <td><%=form._state%></td>
+    <td><%=form.created_at.to_s(:db)%></td>
+    <td><%=form.updated_at.to_s(:db)%></td>
+  </tr>
+<% end%>
+</table>
+
+<%= will_paginate @forms%>
+

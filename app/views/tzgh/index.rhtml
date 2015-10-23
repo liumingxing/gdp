@@ -1,0 +1,106 @@
+<%= javascript_include_tag 'Grid/GridE' %>
+<%= stylesheet_link_tag "/javascripts/Grid/Office/Grid.css" %>
+<%= javascript_include_tag 'jquery_dialog' %>
+
+<style>
+#client{padding:0px;}
+
+.ui-dialog .ui-dialog-content {
+    background:none repeat scroll 0 0 transparent;
+    border:0 none;
+    overflow:auto;
+    padding: 2px;
+}
+</style>
+
+<div style="width:100%;height:100%;" id='grid'> 
+  <bdo layout_url="/xml/gridstyle_tzgh.xml" Data_Url="/tzgh/get_data" Upload_Url="/tzgh/upload_data"> </bdo>
+</div>
+
+<div id="dialog-modal" title="导入结构模板（只增不减）" style="display:none;">
+	<div style="width:600px; height:400px">
+	   <iframe SCROLLING="yes" height="490px" width="590px" frameborder="0"  id="template" name="template" ></iframe>
+	</div>
+</div>
+
+<script>
+var grid = Grids["treegrid"];
+var row_id = '';
+
+
+
+add_js_link("导入结构模板", "javascript:JqueryDialog.Open1('导入结构模板', '/tzgh/select_template', 600, 300);", 'btnImport');
+add_js_link("新建单项工程", "javascript:new_pbs();", 'btnNew');
+
+function save()
+{
+    Grids["treegrid"].Save();
+}
+
+function new_pbs()
+{
+    if (row_id == "")
+    {
+        alert("请先选择投资控制结构项");
+        return false;
+    }
+    
+    JqueryDialog.Open1('新建单项工程', '/tzgh/select_pbs?id='+row_id, 600, 300)
+}
+
+add_tab_button("/img/iconSave.png", "保存", "javascript:save()");  
+
+// 响应TreeGrid OnFocus 事件
+Grids.OnFocus = function(grid, row, col, orow, ocol, pagepos) {
+            if (row && (row.id == "Header" || row.id == "Toolbar" || row.id == "Footer")) return;
+            
+            titles = GetTitles(grid, row);
+            row_id = grid.GetValue(row, "id");
+            PBSID = grid.GetValue(row, "pbs_id");
+            PBSNodeID = grid.GetValue(row, "pbs_node_id");
+            // 处理修改按钮
+            if (PBSID && !PBSNodeID) {
+                 $("#btnModi").show();
+            } else {
+                $("#btnModi").hide();
+            }
+            
+            // 处理添加按钮，必须是工程费用中的末级节点才能插入，去掉 本判断 grid.GetFirstVisible(row) == undefined &&
+            var feeType = GetFeeType(grid, row);    
+            if (!PBSID && !PBSNodeID && feeType == "工程费用") {
+                $("#btnNew").show();
+            } else {
+                $("#btnNew").hide();
+            }
+            return true;
+}
+
+// 根据给定行查找根节点的feetype
+function GetFeeType(grid, row) {
+           var result = "";
+           if (row == null || row.id == "") result = "";
+           var idArr = row.id.split("$");
+           return grid.GetRowById(idArr[0])["feetype"];
+} 
+
+// 构造树结构的Titles
+function GetTitles(grid, row) {
+           var result = "";
+           if(row == null || row.id == "") result = "";
+           var idArr = row.id.split("$");
+           var count = idArr.length;
+           var i = 0;
+           var rowid = "";
+           for(i = 0; i < count; i++) {
+               if(i == 0) {
+                  rowid = idArr[i];
+                  result = grid.GetValue(grid.GetRowById(rowid), "name");
+               }
+               else {
+                   rowid = rowid + "$" + idArr[i];
+                   result = result + "$" + grid.GetValue(grid.GetRowById(rowid), "name");
+               }
+           }
+           return result;
+}
+</script>

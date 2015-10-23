@@ -1,0 +1,187 @@
+<%= javascript_include_tag 'Grid/GridE' %>
+<%= javascript_include_tag 'splitter' %>
+
+<%= path "合约规划"%>
+<style>
+#client{
+  padding:0px;
+}
+
+.ui-dialog .ui-dialog-content {
+    background:none repeat scroll 0 0 transparent;
+    border:0 none;
+    overflow:auto;
+    padding: 2px;
+}
+
+.ajax_form
+{
+    background-color:#ffe;
+    margin-bottom: 6px;
+}
+
+.ajax_form td
+{
+    padding: 2px;
+}
+
+#MySplitter {
+	height: 100%;
+	width: 100%;
+}
+
+#TopPane {
+	overflow: auto;
+	height: 300px;
+	min-height: 200px;
+	max-height: 500px;
+}
+
+#BottomPane {
+	
+	overflow: auto;
+}
+
+#MySplitter .hsplitbar {
+	height: 6px;
+	background: #cca url(/img/hgrabber.gif) no-repeat center;
+}
+#MySplitter .hsplitbar.active, #MySplitter .hsplitbar:hover {
+	background: #e88 url(/img/hgrabber.gif) no-repeat center;
+}
+</style>
+
+<script type="text/javascript">
+$().ready(function() {
+	$("#MySplitter").splitter({
+		type: "h", 
+		sizeTop: true,	/* use height set in stylesheet */
+		accessKey: "P"
+	});
+	
+	
+});
+</script>
+
+<div id="MySplitter">
+
+	<div id="TopPane">
+        <div style="width:100%;height:100%;" id='grid'> 
+          <bdo layout_url="/hygh/get_style" Data_Url="/hygh/get_data" Upload_Url="/hygh/upload_data"> </bdo>
+        </div>
+	</div>
+	
+	<div id="BottomPane">
+		<div id="detail">
+		
+		</div>
+	</div>
+</div>
+
+<script>
+add_tab_button("/img/iconSave.png", "保存", "javascript:save()");  
+add_js_link("新建总分类", "javascript:add_cata(false);", 'btnAddRoot');
+add_js_link("新建子分类", "javascript:add_cata(true);", 'btnAddChild');
+add_js_link("新建合同项", "javascript:add_ht(true);", 'btnAddHetong');
+add_js_link("新建费用项", "javascript:add_ht(false);", 'btnAddFeiyong');
+
+
+function save()
+{
+    Grids["grid1"].Save();
+}
+
+window.onunload = save;
+
+var _curRow = null; // 主表当前行
+
+function close_dialog_and_refresh()
+{
+    JqueryDialog.Close();
+    var grid = Grids["grid1"];
+    var hygh_id = grid.GetValue(_curRow, "id");
+    $("#detail").load("/hygh/hygh_unit?add=true&id=" + hygh_id);
+}
+
+// 插入分类/子分类
+// @param: isSub-- 是否插入子分类
+function add_cata(isSub) {
+   var grid = Grids["grid1"];
+
+   if (!_curRow || grid.GetValue(_curRow, "itemtype") != "1") {
+       alert("请选择一个合约规划分类节点");
+       return;
+   } 
+
+   if(!isSub) { // 插入分类
+        var row = grid.AddRow(null, null, true);
+        grid.SetValue(row, "itemtype", 1);
+   } else { // 插入子分类 
+        var row = grid.AddRow(_curRow, null, true);
+        grid.SetValue(row, "itemtype", 1);
+        grid.ChangeDef(_curRow, "ClassNode", 1);
+        grid.ChangeDef(row, "LeafClassNode", 1);
+   }
+}
+
+// 插入合同项或合同费用
+// @param:isContract -- 是否合同项
+function add_ht(isContract) {
+   var grid = Grids["grid1"];
+   if (!_curRow) {
+       alert("请选择一个节点");
+       return;
+   }
+   var row = null;
+   if(grid.GetValue(_curRow, "itemtype") == "1") // 如果当前行是分类节点，则直接在改节点下插入
+       row = grid.AddRow(_curRow, null, true);
+   else
+       row = grid.AddRow(GetParentRow(_curRow), GetNextSibling(_curRow), true);
+   
+   if(isContract) {
+       grid.SetValue(row, "name", "新合同项");
+       grid.SetValue(row, "itemtype", 2); 
+       grid.SetValue(row, "isht", 1);
+   } else {
+      grid.SetValue(row, "name", "新费用项");
+      grid.SetValue(row, "itemtype", 2);
+      grid.SetValue(row, "isht", 0);
+   }
+   
+   grid.ChangeDef(row, "LeafNode", 1);
+   grid.RefreshRow(row);
+}
+
+Grids.OnFocus = function(grid, row, col, orow, ocol, pagepos) {
+    _moveRow = row;
+    // ingore detail grid's click event
+    if (grid.id == "ContractPlanItem_UnitGrid") return;
+    
+    _curRow = row;
+    
+    var hygh_id = grid.GetValue(row, "id");
+    $("#detail").load("/hygh/hygh_unit?id=" + hygh_id);
+}
+
+// 获取当前行的直接父节点
+function GetParentRow(row) {
+    var index = row.id.lastIndexOf('$');
+    if(index == -1) return null;
+            
+    var pid = row.id.substring(0, index-1);
+    return Grids["grid1"].GetRowById(pid);
+}
+
+// 获取当前行的下一个兄弟节点
+function GetNextSibling(row) {
+   if (!row || !row.id) return null;
+   var length = row.id.split('$').length;
+            
+   var tRow = Grids["grid1"].GetNext(row);
+   if(tRow.id.split('$').length == length) {
+      return tRow;
+   } else {
+      return row;
+   }
+}
+</script>

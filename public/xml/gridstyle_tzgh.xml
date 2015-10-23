@@ -1,0 +1,22 @@
+<Grid>
+	<Cfg id="treegrid" SearchExpand="1" Undo="1" MainCol="name" MaxHeight="1" ConstHeight="1" ConstWidth="1" 
+	   Sorting="0" SelectingCells="1" ExportType="Expanded,Outline" IdChars="0123456789" NumberId="1" LastId="1" AppendId="1"
+	   ShowDeleted="0" DateStrings="1" Adding="1" FullId="1" IdNames="id" CaseSensitiveId="0"/>
+	<Actions DragCell="SelectCells" DownCell="ClearSelection" ClickCell="Focus" DblClickCell="Focus AND StartEdit" ClickLink="Focus AND ShowLink"/>
+	<LeftCols>
+		<C Width="250" Type="Text" CanEdit="0"/>
+	</LeftCols>
+	<Cols>
+		<C Name="name" Width="350" Type="Text"/>
+		<C Name="feetype" Width="100" Type="Enum" Enum="|工程费用|其他费用" EnumKeys="|工程费用|其他费用" IconAlign="Right"/>
+		<C Name="feescope" Width="350" Type="Text"/>
+	</Cols>
+	<Def>
+		<D Name="Node" CanDrag="1" AcceptChild="1" CanEdit="1"/>
+	</Def>
+	<Header name="主题" feescope="成本项目范围" feetype="费用类型"/>
+	<Toolbar Styles="1" Space="-1" Visible="1" 
+			Cells="Add,AddChild,Reload,Repaint,Print,Export,Undo,Redo,ExpandAll,CollapseAll"/>
+	<MenuCfg ShowDeleted="1" AutoSort="0" AutoUpdate="1" Separator1="0" MouseHover="1" ShowDrag="1" ShowPanel="1" ShowIcons="1"/>
+	<Panel Copy="1" Move="0" Select="1" Delete="1"/>
+</Grid>

@@ -1,0 +1,42 @@
+<%= path "资金分析"%>
+
+<table  height=100% width=100%>
+    <tr>
+        <% if params[:tree] %>
+        <td valign="top" width=200px>
+                <div class="clsTreeDiv" style="height:100%;">
+                <script>
+                <% project = Project.find(session[:pid])%>
+                 var data={"-1_0":"text:<%=project.name%>;hint:<%=project.name%>",
+                 <% nodes = Hygh.find(:all, :conditions=>"project_id = #{session[:pid]} and itemtype = 1")%>
+                 <% nodes.each do |t| %>
+                     "<%=t.parent_id||0%>_<%=t.id%>":"text:<%=t.name.gsub("\n", '\n')%>;url:/analysis/fund/<%=t.id%>?tree=tree",
+                 <% end%>
+                    "-100":"100"}
+                </script>
+                    
+                <%= render :partial => "share/tree", :locals => {:array=>[], :usecheckbox => false, :expandlevel => 3} %>
+                </div>
+        </td>
+        <% end %>
+        <td valign="top">
+            <iframe SCROLLING="auto"  FRAMEBORDER="0" height="100%" style="width:100%" id="form" name="fund" ></iframe>
+            
+            <script>
+                <% if params[:id]%>
+                    fund.location = "/analysis/fund_client/<%=params[:id]%>";
+                <% else %>
+                    fund.location = "/analysis/fund_client";
+                <% end%>
+            </script>
+       </td>
+    </tr>
+</table>     
+
+<script>
+    <% if !params[:tree]%>
+        add_link("显示导航", "/analysis/fund?tree=true")
+    <% else %>
+        add_link("关闭导航", "/analysis/fund")
+    <% end %>
+</script>

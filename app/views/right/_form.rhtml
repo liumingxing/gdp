@@ -1,0 +1,13 @@
+<%= error_messages_for 'right' %>
+
+<table class="ft" border="1">
+<tr>
+	<td>权限名称</td>
+	<td><%= text_field 'right', 'name', :validate=>"required:true", :title=>"权限名称"  %></td>
+</tr>
+
+<tr>
+	<td>权限描述</td>
+	<td><%= text_field 'right', 'description'  %></td>
+</tr>
+</table>

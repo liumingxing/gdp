@@ -1,0 +1,66 @@
+<%= javascript_include_tag 'jquery_dialog' %>
+
+<%= path "资金计划详情"%>
+
+<table class="list" border="1" width=45% style="float:left">
+    <tr class="head">
+        <th>年份</th>
+        <th>月份</th>
+        <th>计划支付</th>
+        <th>审定支付</th>
+        <th>实际支付</th>
+    </tr>
+    <% sum1=sum2=sum3=0%>
+    <%for plan in @contract.plans%>
+    <tr>
+        <th><%= plan.year %>年</th>
+        <th><%= plan.month %>月</th>
+        <td align="right"><%= money plan.plan_amount %></td>
+        <td align="right"><%= money plan.audit_amount %></td>
+        <td align="right"><%= money plan.pay_amount %></td>
+    </tr>
+    <% sum1 += plan.plan_amount.to_f%>
+    <% sum2 += plan.audit_amount.to_f%>
+    <% sum3 += plan.pay_amount.to_f%>
+    <% end %>
+    <tr>
+        <th colspan=2>--合计</th>
+        <td align="right"><%= money sum1%></td>
+        <td align="right"><%= money sum2%></td>
+        <td align="right"><%= money sum3%></td>
+    </tr>
+</table>
+
+<script>
+    add_tab_button("/img/iconBack.png", "返回", "javascript:window.history.back(-1);");  
+    add_js_link("编制计划", "javascript: JqueryDialog.Open1('编制计划', '/fund/new_plan/<%=params[:id]%>', 500, 200);");
+    
+    
+    <% if @contract.iscontract == 0%>
+        add_js_link("审定支付", "javascript:JqueryDialog.Open1('审定支付', '/fund/new_audit/<%=params[:id]%>', 500, 200);");
+    <% end %>
+    
+    add_js_link("实际支付", "javascript:JqueryDialog.Open1('实际支付', '/fund/new_audit/<%=params[:id]%>', 500, 200);");
+    <% if @contract.iscontract == 1%>
+        add_link("查看合同", "/contract/show/<%=params[:id]%>");
+    <% end %>
+</script>
+
+<table class="ft" border="1" width=54%>
+    <tr><th width=100px>所属分类</th><td><%= @contract.contracttype%></td><td width=200px></td></tr>
+    <tr><th>合同名称</th><td><%= @contract.name%></td><td></td></tr>
+    <tr><th>计划支付额</th><td><%=  money @contract.contract_amount + @contract.change_amount%></td><td>结算未完成：止付金额<br/>结算完成：结算额-质保金 </td></tr>
+    <tr><th>止上月累计支付</th><td><%= money @contract.pay_before_this_month%> </td><td></td></tr>
+    <tr><th>本月支付</th><td><%=  money @contract.audit_pay_of_this_month%></td><td></td></tr>
+    <tr><th>剩余金额</th><td><%=  money @contract.contract_amount + @contract.change_amount - @contract.audit_pay_of_this_month%></td><td>计划支付额-止上月累计支付-本月支付 </td></tr>
+    <tr><th>未计划金额</th><td><%= money @contract.contract_amount + @contract.change_amount - @contract.audit_pay_of_this_month - @contract.total_plan_amount%></td><td>剩余金额-月计划总额</td></tr>
+    <tr><th>合同金额</th><td><%= money @contract.contract_amount%></td><td></td></tr>
+    <tr><th>变更金额</th><td><%= money @contract.change_amount%></td><td></td></tr>
+    <tr><th>预结算金额</th><td><%= money @contract.contract_amount + @contract.change_amount%></td><td>合同金额+变更金额 </td></tr>
+    <tr><th>结算金额</th><td><%= money @contract.clearing_amount%></td><td></td></tr>
+    <tr><th>支付比率</th><td><%= @contract.pay_rate%>%</td><td></td></tr>
+    <tr><th>止付金额</th><td><%=  money @contract.stop_pay_amount%></td><td></td></tr>
+    <tr><th>质保金额</th><td><%=  money @contract.warranty_amount%></td><td></td></tr>
+    <tr><th>公司名称</th><td><%= @contract.company_name%></td><td></td></tr>
+    <tr><th>备注</th><td><%= @contract.memo%></td><td></td></tr>
+</table>

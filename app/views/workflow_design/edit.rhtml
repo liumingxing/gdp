@@ -1,0 +1,11 @@
+<%= path "修改工作流"%>
+
+<% form_tag :action => 'update', :id => @workflow do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag '保存' %>
+<% end %>
+
+<script>
+  add_tab_button("/img/iconBack.png", "返回", "/workflow_design/list");  
+</script>
+

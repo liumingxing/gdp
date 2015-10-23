@@ -1,0 +1,8 @@
+<div style="text-align:right"><%= link_to '返回', :action => 'list' %></div>
+<div style="text-align:center">
+    <h1 class="fck_title"><%=@ytwg_news.title%></h1>
+    <div class="fck_author">(<%=User.find(@ytwg_news.user_id).truename%>)</div>
+</div>
+<div class="fck_body"><%=@ytwg_news.content%></div>
+
+

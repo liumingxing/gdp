@@ -1,0 +1,27 @@
+<%= error_messages_for 'lmx_form' %>
+
+<table class="ft" border="1">
+<!--[form:lmx_form]-->
+<tr>
+	<th>表单代码</th>
+	<td><%= text_field 'lmx_form', 'code', :validate=>"required:true", :title=>"表单代码"  %></td>
+</tr>
+
+<tr>
+	<th>表单名称</th>
+	<td><%= text_field 'lmx_form', 'name', :validate=>"required:true", :title=>"表单名称"  %></td>
+</tr>
+
+<tr>
+	<th>行数</th>
+	<td><%= text_field_tag 'rows', '5', :validate=>"required:true", :title=>"表单列数"  %></td>
+</tr>
+
+<tr>
+	<th>列数</th>
+	<td><%= text_field_tag 'cols', '4', :validate=>"required:true", :title=>"表单行数"  %></td>
+</tr>
+
+<!--[eoform:lmx_form]-->
+
+</table>

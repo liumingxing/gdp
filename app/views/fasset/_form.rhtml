@@ -1,0 +1,38 @@
+  <%= @table.to_s(:edit, @asset) %>
+  <%= hidden_field_tag "sub_count", @items.size %>
+  <div class="for_edit" style="margin-top: 10px;text-align:right; width:<%=@width%>">
+    <%= link_to_function "添加明细", "add_item();"%>
+    <%= link_to_function "删除明细", "delete_item();"%>
+  </div>
+  
+<script>
+  var item_index = <%=@items.size%>;
+  function add_item()
+  {
+    item_index += 1;
+    var rurl = '/fasset/add_item?form=<%=params[:form]%>&item_index=' + item_index;
+    $.ajax({async:false, success:function(request){$('#float<%=@float_index%>').before(request);}, url:rurl});
+    $("#sub_count").attr("value", item_index);
+    $('.lmx_table input').bind('change', calc)
+  }
+
+  function delete_item()
+  {
+    if (item_index == 1)
+      return;
+    else
+    {
+      $("#float<%=@float_index%>").prev().remove();
+      item_index -= 1;
+      $("#sub_count").attr("value", item_index);
+    }
+  }
+  
+  if (item_index == 0)
+      add_item();
+  
+  <% @items.each_with_index{|item, index|%>
+    $('#float<%=@float_index%>').before("<%=@table.float_row_to_s(@float_index, index+1, :edit, item).to_s.delete("\n")%>")
+  <% } %>
+  $('.lmx_table input').bind('change', calc)
+</script>  

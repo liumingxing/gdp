@@ -1,0 +1,26 @@
+<%= path "条目管理->#{Dictionary.find(params[:id]).name}"%>
+
+<table class="list" id="table" width=400px border=1>
+  <tr class="head">
+    <th>条目名称</th>
+    <th>条目代码</th>
+    <th colspan=2>操作</th>
+  </tr>
+<% for item in @items %>
+  <%= color_row(item.id)%>
+    <td><%=h item.name %></td>
+    <td><%=h item.code %></td>
+    <td><%= link_to '修改', :action => 'edit_item', :id => item %></td>
+    <td><%= link_to '删除', { :action => 'destroy_item', :id => item }, :confirm => '确定删除吗?', :method => :post %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<script>
+  add_tab_button("/img/iconNew.png", "添加条目", "/dictionary/new_item/<%=params[:id]%>");  
+  add_tab_button("/img/iconBack.png", "返回代码字典列表", "/dictionary/list");   
+  add_sep();
+  add_dynamic_delete_button("/dictionary/destroy_item/");    
+</script>

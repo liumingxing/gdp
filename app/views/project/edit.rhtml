@@ -1,0 +1,10 @@
+<%= path "项目修改"%>
+
+<% form_tag :action => 'update', :id => @project do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag '保存' %> |
+    <%= link_to '浏览', :action => 'show', :id => @project %> |
+    <a href="javascript:history.back(); ">返回</a>
+<% end %>
+
+

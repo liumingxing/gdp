@@ -1,0 +1,12 @@
+<% if params[:t] == "fix_user"%>
+    <select id='limit' name='limit'>
+        <%= options_for_select User.find(:all).collect{|u| [u.name, u.id]}%>
+    </select>
+<% elsif params[:t] == "select_user"%>
+    无
+<% else %>
+    <select id='limit' name='limit'>
+      <option value=''></option>
+      <%= options_for_select Right.find(:all).collect{|r| [r.name, r.name]}%>
+    </select>
+<% end %>

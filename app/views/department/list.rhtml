@@ -1,0 +1,36 @@
+<%= javascript_include_tag 'xtree' %>
+<%= javascript_include_tag 'xloadtree' %>
+<%= javascript_include_tag 'xmlextras' %>
+
+<%= path "部门管理"%>
+<table width=100%>
+  <tr>
+    <td width=35% valign=top>
+        <script language="javascript">
+        <%=show_departmenttree('/department/list')%>
+        </script>
+    </td>
+    <td valign=top>
+        <% if @department%>
+          <% form_tag :action => 'update', :id => @department do%>
+          <%= render :partial => 'form' %>
+          <%= submit_tag "保存"%>
+          <% end %>
+        <% else %>
+          <% form_tag :action => 'create' do%>
+            <%= render :partial => 'form' %>
+          <% end %>
+        <% end%>
+    </td>
+   </tr>
+</table>
+
+
+<script>
+
+    add_tab_button("/img/iconNew.png", "新建部门", "/department/new");  
+    <% if @department %>
+        add_delete_button("/department/destroy/<%=@department.id%>");  
+    <% end %>
+
+</script>

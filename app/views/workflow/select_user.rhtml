@@ -1,0 +1,18 @@
+<%= path "选择节点负责人"%>
+<br/>
+
+<% form_tag :action=>"write_form", :flowid=>@flow.id do%>
+    <table width="200px">
+        <% for state in @select_user_states%>
+            <tr height="30px">
+                <th><%= state.name %></th>
+                <td>
+                <select name="users[<%=state.name%>]">
+                    <%= options_for_select User.find(:all).collect{|u| [u.name, u.id]}%>
+                </select>
+                </td>
+            </tr>
+        <% end %>
+    </table>
+    &nbsp;&nbsp;&nbsp;<%= submit_tag "提交"%>
+<% end %>

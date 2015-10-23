@@ -1,0 +1,19 @@
+<%= javascript_include_tag 'Grid/GridE' %>
+<%= stylesheet_link_tag "/javascripts/Grid/Office/Grid.css" %>
+
+<style>
+#client{padding:0px;}
+</style>
+
+<div style="width:98%;height:100%;" id='grid'> 
+  <bdo layout_url="/xml/gridstyle_pbsproperty.xml" Data_Url="/pbs/get_propertydata/<%=params[:id]%>" Upload_Url="/pbs/upload_propertydata/<%=params[:id]%>"> </bdo>
+</div>
+
+<script>
+function save()
+{
+    Grids["treegrid"].Save();
+}
+add_tab_button("/img/iconBack.png", "返回", "/pbs/index"); 
+add_tab_button("/img/iconSave.png", "保存", "javascript:save()");  
+</script>

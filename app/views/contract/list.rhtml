@@ -1,0 +1,30 @@
+<%= path({1=>"合同", 2=>"费用"}[params[:t].to_i] + "管理")%>
+
+<table width=100% height=100%>
+<tr>
+  <td width=25%>
+    <div class="clsTreeDiv" style="height:100%">
+        <script>
+        <% project = Project.find(session[:pid])%>
+         var data={"-1_0":"text:<%=project.name%>;hint:<%=project.name%>",
+             <% @nodes.each do |t| %>
+                   "<%=t.parent_id||0%>_<%=t.id%>":"text:<%=t.name.gsub("\n", '\n')%>;url:/contract/contract_of/<%=t.id%>?t=<%=params[:t]%>;target:contract_list",
+            <% end%>
+            "-100":"100"}
+        </script>
+            
+        <%= render :partial => "share/tree", :locals => {:array=>[], :usecheckbox => false, :expandlevel => 3} %>
+    </div>
+  </td>
+  <td>
+    <iframe SCROLLING="auto"  FRAMEBORDER="0" height="100%" style="width:100%" id="form" name="contract_list" ></iframe>
+  </td>
+ </tr>
+</table>
+<script>
+<% if params[:category_id]%>
+    contract_list.location = "/contract/contract_of/<%=params[:category_id]%>?t=<%=params[:t]%>";
+<% else %>
+    contract_list.location = "/contract/contract_of?t=<%=params[:t]%>";
+<% end %>
+</script>

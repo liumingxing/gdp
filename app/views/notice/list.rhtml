@@ -1,0 +1,28 @@
+<table class="list" id="table" border="1" width=600px>
+  <tr class="head">
+  <% for column in %w(标题 发布时间 发布人) %>
+    <th><%= column %></th>
+  <% end %>
+  </tr>
+
+<% for ytwg_news in @ytwg_news %>
+  <%=color_row(ytwg_news.id)%>
+    <td width=50%><%= link_to ytwg_news.title, :action => 'show', :id => ytwg_news%></td>
+    <td><%=ytwg_news.publish_time.strftime("%Y-%m-%d %H:%M:%S")%></td>  
+    <td><%=User.find(ytwg_news.user_id).truename rescue nil%></td>
+  </tr>
+<% end %>
+</table>
+
+<%= will_paginate @ytwg_news  %>
+<br />
+
+<script>
+  add_tab_button("/img/iconNew.png", "添加", "/notice/new");  
+  
+  <% if checkright('通知发布')%>
+    add_dynamic_button("/img/iconEdit.png", "修改", "/notice/edit/");
+    add_sep();
+    add_dynamic_delete_button("/notice/destroy/");  
+  <% end %>
+</script>

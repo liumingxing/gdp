@@ -1,0 +1,37 @@
+<%= path "公司管理"%>
+
+<table id="table" class="list" border="1" width=100%>
+  <tr class="head">
+    <th>公司名称</th>
+    <th>公司类型</th>
+    <th>所在省份</th>
+    <th>地址</th>
+    <th>公司等级</th>
+    <th>联系方式</th>
+    <th>公司简介</th>
+  </tr>
+  
+<% for company in @companies %>
+  <%= color_row(company.id) %>
+    <td><%= link_to company.name, :action=>"show", :id=>company %></td>
+    <td><%=h company.company_type %></td>
+    <td><%=h company.area %></td>
+    <td><%=h company.address %></td>
+    <td><%=h company.grade %></td>
+    <td><%=h company.linker%> <%=h company.telephone%></td>
+    <td><%=h truncate(company.desc, :length => 14) %></td>
+  </tr>
+<% end %>
+</table>
+
+
+<%= will_paginate @companies %>
+
+<br />
+
+<script>
+  add_tab_button("/img/iconNew.png", "添加", "/company/new");  
+  add_dynamic_button("/img/iconEdit.png", "修改", "/company/edit/");
+  add_sep();
+  add_dynamic_delete_button("/company/destroy/");  
+</script>

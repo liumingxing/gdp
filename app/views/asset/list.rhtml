@@ -1,0 +1,53 @@
+<%= path "#{@lmx_form.name}管理" %>
+
+<table class="list" id="table" border="1" width=100%>
+  <tr class="head">
+    <th>标识</th>
+    <th>创建日期</th>
+    <th>最后更新日期</th>
+    <% index = 1 %>
+    <% @table.input_cells{ |cell, row, col|%>
+        <% break if index >8 %>
+        <% next if cell.attributes["title"].to_s.size == 0%>
+        <th><%=cell.attributes["title"] || cell.attributes["name"]%></th>
+        <% index += 1%>
+    <% }%>
+  </tr>
+  
+
+<% for asset in @assets %>
+  <%=color_row(asset.id)%>
+    <td align="center"><%= link_to asset.id, :action=>"show", :id=>asset.id, :form=>params[:form], :order=>params[:order] %></td>
+    <td><%= asset.created_at.to_date.to_s%></td>
+    <td><%= asset.updated_at.to_date.to_s%></td>
+    
+    <% for field in @fields do%>
+        <td <%="align='right'" if %w(integer float).include?(field[1]) %> >
+            <% if field[1] == 'datetime'%>
+                <%= asset[field[0]].to_s(:db) if asset[field[0]]%>
+            <% elsif field[1] == "check"%>
+                <%= {true=>"是", false=>"否", nil=>"否"}[asset[@table.db_name(cell, row, col)]]%>
+            <% elsif field[1] == "float"%>
+                <% if @table.get_cell_attribute(field[2], field[3], 'thousand')%>
+                    <%= number_with_delimiter( number_with_precision(asset[field[0]], :precision=>@table.get_cell_attribute(field[2], field[3], 'dot').to_i))%>
+                <% else%>
+                    <%= number_with_precision(asset[field[0]], :precision=>@table.get_cell_attribute(field[2], field[3], 'dot').to_i) %>
+                <% end %>
+            <% else %>
+                <%= asset[field[0]]%>
+            <% end %>
+        </td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+<%= will_paginate @assets  %>
+<br />
+
+<script>
+  add_tab_button("/img/iconNew.png", "添加", "/asset/new?form=<%=params[:form]%>&order=<%=params[:order]%>");  
+  add_dynamic_button("/img/iconEdit.png", "修改", "/asset/edit?form=<%=params[:form]%>&order=<%=params[:order]%>&id=");
+  add_sep();
+  add_dynamic_delete_button("/asset/destroy?form=<%=params[:form]%>&order=<%=params[:order]%>&id=");  
+</script>
